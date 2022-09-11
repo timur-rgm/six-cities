@@ -97,7 +97,7 @@ export default function Main(props: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array(props.placesCount).fill(0).map(() => <Card />)}
+                {Array(props.placesCount).fill(0).map((i) => <Card key={props.placesCount + i} />)}
               </div>
             </section>
             <div className="cities__right-section">
@@ -107,5 +107,5 @@ export default function Main(props: MainProps): JSX.Element {
         </div>
       </main>
     </div>
-  )
-};
+  );
+}

@@ -38,5 +38,5 @@ export default function Login(): JSX.Element {
         </div>
       </main>
     </div>
-  )
+  );
 }

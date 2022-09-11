@@ -329,5 +329,5 @@ export default function Offer(): JSX.Element {
         </div>
       </main>
     </div>
- )
+  );
 }
