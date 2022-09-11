@@ -4,10 +4,8 @@ type AppProps = {
   placesCount: number,
 }
 
-function App({placesCount}: AppProps): JSX.Element {
+export default function App({placesCount}: AppProps): JSX.Element {
   return (
     <Main placesCount={placesCount} />
   );
 }
-
-export default App;
