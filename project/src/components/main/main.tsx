@@ -4,7 +4,7 @@ type MainProps = {
   placesCount: number,
 }
 
-// Временно убрал деструктуризацию из-за создания массива
+// Временно убрал деструктуризацию в параметрах из-за создания массива
 export default function Main(props: MainProps): JSX.Element {
   const {placesCount} = props;
 
