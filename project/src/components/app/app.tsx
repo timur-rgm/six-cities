@@ -5,6 +5,7 @@ import Main from '../main/main';
 import Favorites from '../favorites/favorites';
 import Login from '../login/login';
 import Offer from '../offer/offer';
+import Error from '../error/error';
 
 type AppProps = {
   placesCount: number,
@@ -26,6 +27,7 @@ export default function App({placesCount}: AppProps): JSX.Element {
         <Route exact path={AppRoute.Favorites}>
           <Favorites />
         </Route>
+        <Route component={Error} />
       </Switch>
     </BrowserRouter>
   );

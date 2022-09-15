@@ -11,7 +11,5 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <App placesCount={Setting.PLACES_COUNT}/>
-  </React.StrictMode>,
+  <App placesCount={Setting.PLACES_COUNT}/>
 );
