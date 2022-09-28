@@ -7,12 +7,14 @@ import Login from '../login/login';
 import Offer from '../offer/offer';
 import Error from '../error/error';
 import PrivateRoute from '../private-route/private-route';
+import {OffersType} from '../../mocks/offers';
 
 type AppProps = {
   placesCount: number,
+  offers: OffersType,
 }
 
-export default function App({placesCount}: AppProps): JSX.Element {
+export default function App({placesCount, offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>

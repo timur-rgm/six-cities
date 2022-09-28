@@ -1,4 +1,4 @@
-type OffersType = [
+export type OffersType = [
   {
     id: number,
     image: string,
