@@ -1,81 +1,24 @@
-export type OffersType = [
-  {
-    id: number,
-    image: string,
-    title: string,
-    description: string,
-    isPremium: boolean,
-    type: string,
-    price: number,
-    isFavourite: boolean,
-    rate: number,
-    bedrooms: number,
-    maxAdults: number,
-    features: string[],
-    owner: {
-      avatar: string,
-      name: string,
-      isPro: boolean,
-    },
+export type OfferType = {
+  id: number,
+  image: string,
+  title: string,
+  description: string,
+  isPremium: boolean,
+  type: string,
+  price: number,
+  isFavourite: boolean,
+  rate: number,
+  bedrooms: number,
+  maxAdults: number,
+  features: string[],
+  owner: {
+    avatar: string,
+    name: string,
+    isPro: boolean,
   },
-  {
-    id: number,
-    image: string,
-    title: string,
-    description: string,
-    isPremium: boolean,
-    type: string,
-    price: number,
-    isFavourite: boolean,
-    rate: number,
-    bedrooms: number,
-    maxAdults: number,
-    features: string[],
-    owner: {
-      avatar: string,
-      name: string,
-      isPro: boolean,
-    },
-  },
-  {
-    id: number,
-    image: string,
-    title: string,
-    description: string,
-    isPremium: boolean,
-    type: string,
-    price: number,
-    isFavourite: boolean,
-    rate: number,
-    bedrooms: number,
-    maxAdults: number,
-    features: string[],
-    owner: {
-      avatar: string,
-      name: string,
-      isPro: boolean,
-    },
-  },
-  {
-    id: number,
-    image: string,
-    title: string,
-    description: string,
-    isPremium: boolean,
-    type: string,
-    price: number,
-    isFavourite: boolean,
-    rate: number,
-    bedrooms: number,
-    maxAdults: number,
-    features: string[],
-    owner: {
-      avatar: string,
-      name: string,
-      isPro: boolean,
-    },
-  },
-]
+}
+
+export type OffersType = OfferType[];
 
 export const offers: OffersType = [
   {
@@ -154,4 +97,4 @@ export const offers: OffersType = [
       isPro: true,
     },
   },
-];
+]

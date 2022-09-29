@@ -15,11 +15,15 @@ type AppProps = {
 }
 
 export default function App({placesCount, offers}: AppProps): JSX.Element {
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Root}>
-          <Main placesCount={placesCount} />
+          <Main
+            placesCount={placesCount}
+            offers={offers}
+          />
         </Route>
         <Route exact path={AppRoute.Login}>
           <Login />
