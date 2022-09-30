@@ -1,4 +1,4 @@
-import Card from '../card/card';
+import CardsList from '../cards-list/cards-list';
 import {OffersType} from '../../mocks/offers';
 
 type MainProps = {
@@ -6,7 +6,6 @@ type MainProps = {
   offers: OffersType,
 }
 
-// Временно убрал деструктуризацию в параметрах из-за создания массива
 export default function Main(props: MainProps): JSX.Element {
   const {placesCount, offers} = props;
 
@@ -98,14 +97,11 @@ export default function Main(props: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) =>
-                  <Card
-                    offer={offer}
-                    key={offer.id}
-                  />
-                )}
-              </div>
+              
+              <CardsList
+                offers={offers}
+              />
+
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
