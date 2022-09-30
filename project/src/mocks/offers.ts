@@ -33,9 +33,9 @@ export const offers: OffersType = [
     rate: 3,
     bedrooms: 1,
     maxAdults: 5,
-    features: ['Kitchen'],
+    features: ['Kitchen', 'Washing machine', 'Dishwasher', 'Fridge'],
     owner: {
-      avatar: 'https://picsum.photos/260/200',
+      avatar: 'https://picsum.photos/74/74',
       name: 'John',
       isPro: false,
     },

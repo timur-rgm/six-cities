@@ -8,13 +8,16 @@ import Offer from '../offer/offer';
 import Error from '../error/error';
 import PrivateRoute from '../private-route/private-route';
 import {OffersType} from '../../mocks/offers';
+import {ReviewsType} from '../../mocks/reviews';
 
 type AppProps = {
   placesCount: number,
   offers: OffersType,
+  reviews: ReviewsType,
 }
 
-export default function App({placesCount, offers}: AppProps): JSX.Element {
+export default function App({placesCount, offers, reviews}: AppProps): JSX.Element {
+  const [firtsOffer] = offers;
 
   return (
     <BrowserRouter>
@@ -29,7 +32,10 @@ export default function App({placesCount, offers}: AppProps): JSX.Element {
           <Login />
         </Route>
         <Route exact path={AppRoute.Offer}>
-          <Offer />
+          <Offer 
+            offer={firtsOffer}
+            reviews={reviews}
+          />
         </Route>
         <PrivateRoute
           exact
