@@ -7,29 +7,41 @@ import Login from '../login/login';
 import Offer from '../offer/offer';
 import Error from '../error/error';
 import PrivateRoute from '../private-route/private-route';
+import {OffersType} from '../../mocks/offers';
+import {ReviewsType} from '../../mocks/reviews';
 
 type AppProps = {
   placesCount: number,
+  offers: OffersType,
+  reviews: ReviewsType,
 }
 
-export default function App({placesCount}: AppProps): JSX.Element {
+export default function App({placesCount, offers, reviews}: AppProps): JSX.Element {
+  const [firtsOffer] = offers;
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Root}>
-          <Main placesCount={placesCount} />
+          <Main
+            placesCount={placesCount}
+            offers={offers}
+          />
         </Route>
         <Route exact path={AppRoute.Login}>
           <Login />
         </Route>
-        <Route exact path={AppRoute.Offer}>
-          <Offer />
+        <Route exact path="/offer/:1">
+          <Offer 
+            offer={firtsOffer}
+            reviews={reviews}
+          />
         </Route>
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          render={() => <Favorites />}
-          authorizationStatus={AuthorizationStatus.NoAuth}
+          render={() => <Favorites offers={offers} />}
+          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
         <Route component={Error} />
