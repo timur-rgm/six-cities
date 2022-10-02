@@ -79,7 +79,7 @@ export const offers: OffersType = [
     },
   },
   {
-    id: 3,
+    id: 4,
     image: 'https://picsum.photos/260/200',
     title: 'Beautiful & luxurious apartment at great location',
     description: 'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',

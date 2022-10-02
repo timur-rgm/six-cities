@@ -31,7 +31,7 @@ export default function App({placesCount, offers, reviews}: AppProps): JSX.Eleme
         <Route exact path={AppRoute.Login}>
           <Login />
         </Route>
-        <Route exact path={AppRoute.Offer}>
+        <Route exact path="/offer/:1">
           <Offer 
             offer={firtsOffer}
             reviews={reviews}

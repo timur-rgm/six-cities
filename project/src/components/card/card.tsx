@@ -1,24 +1,32 @@
+import {MouseEvent, useState, Fragment} from 'react';
+import {Link} from 'react-router-dom';
 import {OfferType} from '../../mocks/offers';
 
 type CardType = {
-  offer: OfferType;
+  offer: OfferType,
+  onArticleCLick: () => void;
 }
 
 export default function Card(props: CardType): JSX.Element {
-  const {offer} = props;
+  const {offer, onArticleCLick} = props;
   const {image, title, isPremium, type, price, rate} = offer;
 
   return (
-    <article className="cities__place-card place-card">
-      {isPremium &&
+    <article
+      onClick={onArticleCLick}
+      className="cities__place-card place-card"
+    >
+      {
+        isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div>}
+        </div>
+      }
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to="#">
           <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -40,7 +48,7 @@ export default function Card(props: CardType): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to="#">{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
