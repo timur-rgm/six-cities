@@ -16,6 +16,10 @@ export type OfferType = {
     name: string,
     isPro: boolean,
   },
+  coordinates: {
+    lat: number,
+    lng: number,
+  }
 }
 
 export type OffersType = OfferType[];
@@ -39,6 +43,10 @@ export const offers: OffersType = [
       name: 'John',
       isPro: false,
     },
+    coordinates: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198,
+    }
   },
   {
     id: 2,
@@ -57,6 +65,10 @@ export const offers: OffersType = [
       avatar: 'https://picsum.photos/260/200',
       name: 'Tom',
       isPro: false,
+    },
+    coordinates: {
+      lat: 52.369553943508,
+      lng: 4.85309666406198,
     },
   },
   {
@@ -77,6 +89,10 @@ export const offers: OffersType = [
       name: 'Joe',
       isPro: false,
     },
+    coordinates: {
+      lat: 52.3909553943508,
+      lng: 4.929309666406198
+    },
   },
   {
     id: 4,
@@ -95,6 +111,10 @@ export const offers: OffersType = [
       avatar: 'https://picsum.photos/260/200',
       name: 'Joe',
       isPro: true,
+    },
+    coordinates: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198
     },
   },
 ]
