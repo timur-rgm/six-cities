@@ -11,7 +11,7 @@ export default function useMap(mapRef: MutableRefObject<HTMLElement | null>): Ma
           lat: 52.3909553943508,
           lng: 4.85309666406198,
         },
-        zoom: 10
+        zoom: 11
       });
 
       const layer = new TileLayer(
@@ -26,7 +26,7 @@ export default function useMap(mapRef: MutableRefObject<HTMLElement | null>): Ma
 
       setMap(instance);
     }
-  })
+  }, [mapRef, map])
 
-  return null;
+  return map;
 }
