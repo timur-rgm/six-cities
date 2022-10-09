@@ -1,15 +1,16 @@
-import {OfferType} from '../../mocks/offers';
+import {OffersType} from '../../mocks/offers';
 import {ReviewsType} from '../../mocks/reviews';
 import Review from '../review/review';
+import Map from '../map/map';
 
 type OfferTypes = {
-  offer: OfferType,
+  offers: OffersType,
   reviews: ReviewsType,
 }
 
 export default function Offer(props: OfferTypes): JSX.Element {
-  const {offer, reviews} = props;
-  const {title, description, isPremium, type, price, rate, bedrooms, maxAdults, features, owner: {avatar, name, isPro}} = offer;
+  const {offers, reviews} = props;
+  const {title, description, isPremium, type, price, rate, bedrooms, maxAdults, features, owner: {avatar, name, isPro}} = offers[0];
 
   return (
     <div className="page">
@@ -143,7 +144,9 @@ export default function Offer(props: OfferTypes): JSX.Element {
               />
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map offers={offers}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
