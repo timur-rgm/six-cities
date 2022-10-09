@@ -1,22 +1,22 @@
-import {useState, MouseEvent} from 'react';
-import {useHistory} from 'react-router-dom';
-import Card from '../card/card';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {OffersType} from '../../mocks/offers';
+import OtherPlace from '../other-place/other-place';
 
-type CardsListType = {
+type OtherPlacesType = {
   offers: OffersType,
 }
 
-export default function CardsList(props: CardsListType): JSX.Element {
+export default function OtherPlacesList(props: OtherPlacesType) {
   const {offers} = props;
   const [offerId, setOfferId] = useState(1);
 
   let history = useHistory();
   
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="near-places__list places__list">
       {offers.map((offer) => 
-        <Card
+        <OtherPlace
           offer={offer}
           key={offer.id}
           onArticleCLick={() => {

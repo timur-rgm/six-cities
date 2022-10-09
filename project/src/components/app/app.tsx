@@ -17,7 +17,6 @@ type AppProps = {
 }
 
 export default function App({placesCount, offers, reviews}: AppProps): JSX.Element {
-  const [firtsOffer] = offers;
 
   return (
     <BrowserRouter>
@@ -33,7 +32,7 @@ export default function App({placesCount, offers, reviews}: AppProps): JSX.Eleme
         </Route>
         <Route exact path="/offer/:1">
           <Offer 
-            offer={firtsOffer}
+            offers={offers}
             reviews={reviews}
           />
         </Route>
