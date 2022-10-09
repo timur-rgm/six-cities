@@ -18,6 +18,7 @@ export default function ReviewList(props: ReviewListType): JSX.Element {
         {reviews.map((review, i) => 
           <Review
             review={review}
+            key={review.userName+i}
           />
         )}
       </ul>

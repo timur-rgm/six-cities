@@ -113,7 +113,7 @@ export default function Offer(props: OfferTypes): JSX.Element {
                 <ul className="property__inside-list">
                   {features.map((feature, i) => {
                     return (
-                      <li key="feature-i" className="property__inside-item">
+                      <li key={feature+i} className="property__inside-item">
                         {feature}
                       </li>
                     )
