@@ -1,3 +1,4 @@
+import { type } from 'os';
 import {OffersType} from '../mocks/offers';
 
 export enum ActionType {
@@ -14,3 +15,5 @@ export type WriteOffersActionType = {
   type: ActionType.WriteOffers,
   payload: OffersType,
 }
+
+export type Actions = ChangeCityActionType | WriteOffersActionType;
