@@ -1,4 +1,3 @@
-import { type } from 'os';
 import {OffersType} from '../mocks/offers';
 
 export enum ActionType {
