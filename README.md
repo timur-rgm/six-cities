@@ -1,2 +1,2 @@
-# six-cities
-SPA React
+# «Six cities»
+SPA React with Typescript
