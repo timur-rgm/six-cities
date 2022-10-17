@@ -148,7 +148,7 @@ export default function Offer(props: OfferTypes): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offers}/>
+            <Map />
           </section>
         </section>
         <div className="container">

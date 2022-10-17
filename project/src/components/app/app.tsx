@@ -11,21 +11,17 @@ import {OffersType} from '../../mocks/offers';
 import {ReviewsType} from '../../mocks/reviews';
 
 type AppProps = {
-  placesCount: number,
   offers: OffersType,
   reviews: ReviewsType,
 }
 
-export default function App({placesCount, offers, reviews}: AppProps): JSX.Element {
+export default function App({offers, reviews}: AppProps): JSX.Element {
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Root}>
-          <Main
-            placesCount={placesCount}
-            offers={offers}
-          />
+          <Main />
         </Route>
         <Route exact path={AppRoute.Login}>
           <Login />

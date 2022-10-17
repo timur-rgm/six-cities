@@ -8,13 +8,9 @@ import App from './components/app/app';
 import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
 
-const Setting = {
-  PLACES_COUNT: 5,
-};
-
 const store = createStore(
   reducer,
-  composeWithDevTools()
+  composeWithDevTools(),
 );
 
 const root = ReactDOM.createRoot(
@@ -24,7 +20,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <App
-      placesCount={Setting.PLACES_COUNT}
       offers={offers}
       reviews={reviews}
     />

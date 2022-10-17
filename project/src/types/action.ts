@@ -2,7 +2,9 @@ import {OffersType} from '../mocks/offers';
 
 export enum ActionType {
   ChangeCity = 'changeCity',
-  WriteOffers = 'writeOffers',
+  EnterOffers = 'enterOffers',
+  ChooseOffersByCity = 'chooseOffersByCity',
+  ResetState = 'resetState',
 }
 
 export type ChangeCityActionType = {
@@ -10,9 +12,17 @@ export type ChangeCityActionType = {
   payload: string,
 }
 
-export type WriteOffersActionType = {
-  type: ActionType.WriteOffers,
+export type EnterOffersActionType = {
+  type: ActionType.EnterOffers,
+  // payload: OffersType,
+}
+
+export type ChooseOffersByCityActionType = {
+  type: ActionType.ChooseOffersByCity,
   payload: OffersType,
 }
 
-export type Actions = ChangeCityActionType | WriteOffersActionType;
+export type Actions =
+  | ChangeCityActionType
+  | EnterOffersActionType
+  | ChooseOffersByCityActionType;
