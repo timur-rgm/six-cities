@@ -1,6 +1,6 @@
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-import {changeCity, enterOffers, chooseOffersByCity} from '../../store/action';
+import {changeCity, enterOffers, chooseOffersByCity, sortByPriceToLow} from '../../store/action';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
 import {Link} from 'react-router-dom';
@@ -15,6 +15,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
   onCityChange: changeCity,
   enterOffers: enterOffers,
   chooseOffersByCity: chooseOffersByCity,
+  sortByPriceToLow: sortByPriceToLow,
 }, dispatch)
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -27,7 +28,7 @@ type CitiesListType = {
 }
 
 function CitiesList(props: ConnectedComponentPropsType): JSX.Element {
-  const {cities, currentCity, offers, onCityChange, enterOffers, chooseOffersByCity} = props;
+  const {cities, currentCity, offers, onCityChange, enterOffers, chooseOffersByCity, sortByPriceToLow} = props;
 
   return (
     <ul className="locations__list tabs__list">

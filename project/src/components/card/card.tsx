@@ -1,22 +1,22 @@
 import {Link} from 'react-router-dom';
-import {GetActiveOfferIdType} from '../../types/action';
+import {SetActiveOfferIdType} from '../../types/action';
 import {OfferType} from '../../mocks/offers';
 
 type CardType = {
   offer: OfferType,
   onArticleCLick: () => void,
-  getActiveOfferId: (id: number) => GetActiveOfferIdType,
+  setActiveOfferId: (id: number) => SetActiveOfferIdType,
 }
 
 export default function Card(props: CardType): JSX.Element {
-  const {offer, onArticleCLick, getActiveOfferId} = props;
+  const {offer, onArticleCLick, setActiveOfferId} = props;
   const {id, image, title, isPremium, type, price, rate} = offer;
 
   return (
     <article
       onClick={onArticleCLick}
-      onMouseEnter={() => getActiveOfferId(id)}
-      onMouseOut={() => getActiveOfferId(0)}
+      onMouseEnter={() => setActiveOfferId(id)}
+      onMouseOut={() => setActiveOfferId(0)}
       className="cities__place-card place-card"
     >
       {

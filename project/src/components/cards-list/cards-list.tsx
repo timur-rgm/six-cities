@@ -1,7 +1,7 @@
 import {useHistory} from 'react-router-dom';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-import {getActiveOfferId} from '../../store/action';
+import {setActiveOfferId} from '../../store/action';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
 import Card from '../card/card';
@@ -12,7 +12,7 @@ const mapStateToProps = ({offers, activeOfferId}: State) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
-  getActiveOfferId: getActiveOfferId,
+  setActiveOfferId: setActiveOfferId,
 }, dispatch)
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -22,7 +22,7 @@ type PropsFromReduxType = ConnectedProps<typeof connector>;
 type ConnectedComponentPropsType = PropsFromReduxType & CardsListType;
 
 function CardsList(props: ConnectedComponentPropsType): JSX.Element {
-  const {offers, getActiveOfferId} = props;
+  const {offers, setActiveOfferId} = props;
 
   let history = useHistory();
   
@@ -33,7 +33,7 @@ function CardsList(props: ConnectedComponentPropsType): JSX.Element {
           offer={offer}
           key={offer.id}
           onArticleCLick={() => history.push(`/offer/${offer.id}`)}
-          getActiveOfferId={getActiveOfferId}
+          setActiveOfferId={setActiveOfferId}
         />
       )}
     </div>

@@ -35,7 +35,7 @@ function CityMap(props: ConnectedComponentPropsType): JSX.Element {
         map.current.remove();
       }
     };
-  }, [map, offers]);
+  }, [map, currentCity]);
 
   useEffect(() => {
     addMarkers();
