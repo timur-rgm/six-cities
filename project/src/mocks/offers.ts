@@ -19,7 +19,8 @@ export type OfferType = {
   coordinates: {
     lat: number,
     lng: number,
-  }
+  },
+  city: string,
 }
 
 export type OffersType = OfferType[];
@@ -44,9 +45,10 @@ export const offers: OffersType = [
       isPro: false,
     },
     coordinates: {
-      lat: 52.3909553943508,
-      lng: 4.85309666406198,
-    }
+      lat: 48.8634100,
+      lng: 2.2988000,
+    },
+    city: 'Paris',
   },
   {
     id: 2,
@@ -67,9 +69,10 @@ export const offers: OffersType = [
       isPro: false,
     },
     coordinates: {
-      lat: 52.369553943508,
-      lng: 4.85309666406198,
+      lat: 48.9634100,
+      lng: 2.3288000,
     },
+    city: 'Paris',
   },
   {
     id: 3,
@@ -93,6 +96,7 @@ export const offers: OffersType = [
       lat: 52.3909553943508,
       lng: 4.929309666406198
     },
+    city: 'Amsterdam',
   },
   {
     id: 4,
@@ -113,8 +117,9 @@ export const offers: OffersType = [
       isPro: true,
     },
     coordinates: {
-      lat: 52.3809553943508,
-      lng: 4.939309666406198
+      lat: 48.7934100,
+      lng: 2.4288000,
     },
+    city: 'Paris',
   },
 ]

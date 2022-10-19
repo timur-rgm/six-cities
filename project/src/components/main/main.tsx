@@ -1,14 +1,29 @@
+import {connect, ConnectedProps} from 'react-redux';
+import {bindActionCreators, Dispatch} from 'redux';
+import {changeCity} from '../../store/action';
+import {Actions} from '../../types/action';
+import {State} from '../../types/state';
+import CitiesList from '../cities-list/cities-list';
 import CardsList from '../cards-list/cards-list';
 import Map from '../map/map';
-import {OffersType} from '../../mocks/offers';
+import {Cities} from '../../const';
 
-type MainProps = {
-  placesCount: number,
-  offers: OffersType,
-}
+const mapStateToProps = ({city, offers}: State) => ({
+  currentCity: city,
+  offers: offers
+})
 
-export default function Main(props: MainProps): JSX.Element {
-  const {placesCount, offers} = props;
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
+  onCityChange: changeCity,
+}, dispatch)
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromReduxType = ConnectedProps<typeof connector>;
+type ConnectedComponentPropsType = PropsFromReduxType;
+
+function Main(props: ConnectedComponentPropsType): JSX.Element {
+  const {currentCity, offers} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -45,36 +60,9 @@ export default function Main(props: MainProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+              <CitiesList
+                cities={Cities}
+              />
             </ul>
           </section>
         </div>
@@ -82,7 +70,7 @@ export default function Main(props: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -98,15 +86,11 @@ export default function Main(props: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              
-              <CardsList
-                offers={offers}
-              />
-
+              <CardsList />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers}/>
+                <Map />
               </section>
             </div>
           </div>
@@ -115,3 +99,5 @@ export default function Main(props: MainProps): JSX.Element {
     </div>
   );
 }
+
+export default connector(Main);

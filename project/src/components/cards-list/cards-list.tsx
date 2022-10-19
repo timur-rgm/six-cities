@@ -1,13 +1,28 @@
+import {bindActionCreators, Dispatch} from 'redux';
+import {connect, ConnectedProps} from 'react-redux';
+import {changeCity, enterOffers, chooseOffersByCity} from '../../store/action';
+import {Actions} from '../../types/action';
+import {State} from '../../types/state';
 import {useState, MouseEvent} from 'react';
 import {useHistory} from 'react-router-dom';
 import Card from '../card/card';
 import {OffersType} from '../../mocks/offers';
 
 type CardsListType = {
-  offers: OffersType,
 }
 
-export default function CardsList(props: CardsListType): JSX.Element {
+const mapStateToProps = ({city, offers}: State) => ({
+  offers: offers,
+})
+
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({}, dispatch)
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromReduxType = ConnectedProps<typeof connector>;
+type ConnectedComponentPropsType = PropsFromReduxType & CardsListType;
+
+function CardsList(props: ConnectedComponentPropsType): JSX.Element {
   const {offers} = props;
   const [offerId, setOfferId] = useState(1);
 
@@ -27,3 +42,5 @@ export default function CardsList(props: CardsListType): JSX.Element {
     </div>
   )
 }
+
+export default connector(CardsList);
