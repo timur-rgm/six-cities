@@ -6,10 +6,6 @@ import {State} from '../../types/state';
 import {Link} from 'react-router-dom';
 import {CitiesType} from '../../const';
 
-type CitiesListType = {
-  cities: CitiesType,
-}
-
 const mapStateToProps = ({city, offers}: State) => ({
   currentCity: city,
   offers: offers,
@@ -26,24 +22,28 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 type ConnectedComponentPropsType = PropsFromReduxType & CitiesListType;
 
+type CitiesListType = {
+  cities: CitiesType,
+}
+
 function CitiesList(props: ConnectedComponentPropsType): JSX.Element {
   const {cities, currentCity, offers, onCityChange, enterOffers, chooseOffersByCity} = props;
 
   return (
     <ul className="locations__list tabs__list">
-      {cities.map(({name}, i) => 
+      {Object.keys(cities).map((name, i) => 
         <li
           className="locations__item"
           key={name+i}
         >
           <Link
+            to="/"
             className={name === currentCity ? "locations__item-link tabs__item tabs__item--active" : "locations__item-link tabs__item"} href="#"
             onClick={() => {  
               enterOffers();  
               onCityChange(name);
               chooseOffersByCity(offers);
             }}
-            to="/"
           >
             <span>{name}</span>
           </Link>
