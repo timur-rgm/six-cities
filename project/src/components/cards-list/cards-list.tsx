@@ -1,30 +1,28 @@
+import {useHistory} from 'react-router-dom';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-import {changeCity, enterOffers, chooseOffersByCity} from '../../store/action';
+import {getActiveOfferId} from '../../store/action';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
-import {useState, MouseEvent} from 'react';
-import {useHistory} from 'react-router-dom';
 import Card from '../card/card';
-import {OffersType} from '../../mocks/offers';
 
-type CardsListType = {
-}
-
-const mapStateToProps = ({city, offers}: State) => ({
+const mapStateToProps = ({offers, activeOfferId}: State) => ({
   offers: offers,
+  activeOfferId: activeOfferId,
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({}, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
+  getActiveOfferId: getActiveOfferId,
+}, dispatch)
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
+type CardsListType = {}
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 type ConnectedComponentPropsType = PropsFromReduxType & CardsListType;
 
 function CardsList(props: ConnectedComponentPropsType): JSX.Element {
-  const {offers} = props;
-  const [offerId, setOfferId] = useState(1);
+  const {offers, getActiveOfferId} = props;
 
   let history = useHistory();
   
@@ -34,9 +32,8 @@ function CardsList(props: ConnectedComponentPropsType): JSX.Element {
         <Card
           offer={offer}
           key={offer.id}
-          onArticleCLick={() => {
-            history.push(`/offer/${offer.id}`);
-          }}
+          onArticleCLick={() => history.push(`/offer/${offer.id}`)}
+          getActiveOfferId={getActiveOfferId}
         />
       )}
     </div>

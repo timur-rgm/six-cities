@@ -4,6 +4,7 @@ export enum ActionType {
   ChangeCity = 'changeCity',
   EnterOffers = 'enterOffers',
   ChooseOffersByCity = 'chooseOffersByCity',
+  GetActiveOfferId = 'getActiveOfferId',
   ResetState = 'resetState',
 }
 
@@ -14,7 +15,6 @@ export type ChangeCityActionType = {
 
 export type EnterOffersActionType = {
   type: ActionType.EnterOffers,
-  // payload: OffersType,
 }
 
 export type ChooseOffersByCityActionType = {
@@ -22,7 +22,13 @@ export type ChooseOffersByCityActionType = {
   payload: OffersType,
 }
 
+export type GetActiveOfferIdType = {
+  type: ActionType.GetActiveOfferId,
+  payload: number,
+}
+
 export type Actions =
   | ChangeCityActionType
   | EnterOffersActionType
-  | ChooseOffersByCityActionType;
+  | ChooseOffersByCityActionType
+  | GetActiveOfferIdType;

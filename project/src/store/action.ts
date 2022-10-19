@@ -1,7 +1,9 @@
-import { ActionType,
-         ChangeCityActionType,
-         EnterOffersActionType,
-         ChooseOffersByCityActionType} from '../types/action';
+import {
+  ActionType,
+  ChangeCityActionType,
+  EnterOffersActionType,
+  ChooseOffersByCityActionType,
+  GetActiveOfferIdType, } from '../types/action';
 import {OffersType} from '../mocks/offers';
 
 export const changeCity = (city: string): ChangeCityActionType => ({
@@ -11,10 +13,14 @@ export const changeCity = (city: string): ChangeCityActionType => ({
 
 export const enterOffers = (): EnterOffersActionType => ({
   type: ActionType.EnterOffers,
-  // payload: offers,
 });
 
 export const chooseOffersByCity = (offers: OffersType): ChooseOffersByCityActionType => ({
   type: ActionType.ChooseOffersByCity,
   payload: offers,
 });
+
+export const getActiveOfferId = (id: number): GetActiveOfferIdType => ({
+  type: ActionType.GetActiveOfferId,
+  payload: id,
+})

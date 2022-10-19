@@ -5,6 +5,7 @@ import {offers} from '../mocks/offers';
 const initialState = {
   city: 'Paris',
   offers: offers.filter((offer) => offer.city === 'Paris'),
+  activeOfferId: 0,
 }
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -15,6 +16,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, offers: offers};
     case ActionType.ChooseOffersByCity:
       return {...state, offers: state.offers.filter((offer) => offer.city === state.city)};
+    case ActionType.GetActiveOfferId:
+      return {...state, activeOfferId: action.payload};
     default:
       return state;
   }
