@@ -1,19 +1,22 @@
-import {MouseEvent, useState, Fragment} from 'react';
 import {Link} from 'react-router-dom';
+import {SetActiveOfferIdType} from '../../types/action';
 import {OfferType} from '../../mocks/offers';
 
 type CardType = {
   offer: OfferType,
-  onArticleCLick: () => void;
+  onArticleCLick: () => void,
+  setActiveOfferId: (id: number) => SetActiveOfferIdType,
 }
 
 export default function Card(props: CardType): JSX.Element {
-  const {offer, onArticleCLick} = props;
-  const {image, title, isPremium, type, price, rate} = offer;
+  const {offer, onArticleCLick, setActiveOfferId} = props;
+  const {id, image, title, isPremium, type, price, rate} = offer;
 
   return (
     <article
       onClick={onArticleCLick}
+      onMouseEnter={() => setActiveOfferId(id)}
+      onMouseOut={() => setActiveOfferId(0)}
       className="cities__place-card place-card"
     >
       {
@@ -22,7 +25,6 @@ export default function Card(props: CardType): JSX.Element {
           <span>Premium</span>
         </div>
       }
-
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to="#">
           <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />

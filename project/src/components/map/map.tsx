@@ -1,4 +1,4 @@
-import {useEffect, useRef, MutableRefObject} from 'react';
+import {useEffect, useRef, useState, MutableRefObject} from 'react';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {Cities} from '../../const';
@@ -7,24 +7,24 @@ import {State} from '../../types/state';
 import L, { Icon, Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const mapStateToProps = ({city, offers}: State) => ({
+const mapStateToProps = ({city, offers, activeOfferId}: State) => ({
   currentCity: city,
   offers: offers,
+  activeOfferId: activeOfferId,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({}, dispatch)
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
+type MapType = {}
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 type ConnectedComponentPropsType = PropsFromReduxType & MapType;
 
-type MapType = {}
-
 function CityMap(props: ConnectedComponentPropsType): JSX.Element {
-  const {currentCity, offers} = props;
+  const {currentCity, offers, activeOfferId} = props;
 
-  let map: MutableRefObject<Map | null > = useRef(null);
+  const map: MutableRefObject<Map | null > = useRef(null);
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -35,11 +35,11 @@ function CityMap(props: ConnectedComponentPropsType): JSX.Element {
         map.current.remove();
       }
     };
-  }, [map, offers]);
+  }, [map, currentCity]);
 
   useEffect(() => {
     addMarkers();
-  }, [currentCity, offers]);
+  }, [currentCity, offers, activeOfferId]);
 
   function renderMap() {
     if (mapRef.current) {
@@ -49,6 +49,7 @@ function CityMap(props: ConnectedComponentPropsType): JSX.Element {
           lng: Cities[currentCity].coordinates.lng
         },
         zoom: 10,
+        zoomControl: false,
       });
   
       L
@@ -75,7 +76,7 @@ function CityMap(props: ConnectedComponentPropsType): JSX.Element {
 
       offers.forEach((offer) => {
         const offerMarker = L.marker([offer.coordinates.lat, offer.coordinates.lng]);
-        offerMarker.setIcon(iconDefault).addTo(markersGroup);
+        offerMarker.setIcon(offer.id === activeOfferId ? iconActive : iconDefault).addTo(markersGroup);
       })
     }
   }

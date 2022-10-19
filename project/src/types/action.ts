@@ -1,10 +1,23 @@
 import {OffersType} from '../mocks/offers';
 
 export enum ActionType {
-  ChangeCity = 'changeCity',
   EnterOffers = 'enterOffers',
+  SetActiveOfferId = 'setActiveOfferId',
+  ChangeCity = 'changeCity',
   ChooseOffersByCity = 'chooseOffersByCity',
-  ResetState = 'resetState',
+  SortВуDefault = 'sortВуDefault',
+  SortByPriceToHigh = 'sortByPriceToHigh',
+  SortByPriceToLow = 'sortByPriceToLow',
+  SortByRateToLow = 'sortByRateToLow'
+}
+
+export type EnterOffersActionType = {
+  type: ActionType.EnterOffers,
+}
+
+export type SetActiveOfferIdType = {
+  type: ActionType.SetActiveOfferId,
+  payload: number,
 }
 
 export type ChangeCityActionType = {
@@ -12,17 +25,32 @@ export type ChangeCityActionType = {
   payload: string,
 }
 
-export type EnterOffersActionType = {
-  type: ActionType.EnterOffers,
-  // payload: OffersType,
-}
-
 export type ChooseOffersByCityActionType = {
   type: ActionType.ChooseOffersByCity,
   payload: OffersType,
 }
 
+export type SortВуDefaultType = {
+  type: ActionType.SortВуDefault,
+}
+
+export type SortByPriceToHighType = {
+  type: ActionType.SortByPriceToHigh,
+}
+
+export type SortByPriceToLowType = {
+  type: ActionType.SortByPriceToLow,
+}
+
+export type SortByRateToLowType = {
+  type: ActionType.SortByRateToLow,
+}
+
 export type Actions =
-  | ChangeCityActionType
   | EnterOffersActionType
-  | ChooseOffersByCityActionType;
+  | SetActiveOfferIdType
+  | ChangeCityActionType
+  | ChooseOffersByCityActionType
+  | SortByPriceToHighType
+  | SortByPriceToLowType
+  | SortByRateToLowType;
