@@ -10,11 +10,13 @@ import {createApi} from './services/api';
 import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
 
-// const api = createApi();
+const api = createApi();
 
 const store = createStore(
   reducer,
-  composeWithDevTools(),
+  composeWithDevTools(
+    applyMiddleware(thunk.withExtraArgument(api)),
+  ),
 );
 
 const root = ReactDOM.createRoot(
