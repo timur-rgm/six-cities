@@ -24,7 +24,7 @@ type PropsFromReduxType = ConnectedProps<typeof connector>;
 
 function Sorting(props: PropsFromReduxType): JSX.Element {
   const {offers, enterOffers, chooseOffersByCity, sortByPriceToLow, sortByPriceToHigh, sortByRateToLow} = props;
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <form className="places__sorting" action="#" method="get">

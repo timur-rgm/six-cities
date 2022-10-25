@@ -1,4 +1,5 @@
 import {OffersType} from '../mocks/offers';
+import {AuthorizationStatus} from '../const';
 
 export enum ActionType {
   EnterOffers = 'enterOffers',
@@ -8,7 +9,10 @@ export enum ActionType {
   SortВуDefault = 'sortВуDefault',
   SortByPriceToHigh = 'sortByPriceToHigh',
   SortByPriceToLow = 'sortByPriceToLow',
-  SortByRateToLow = 'sortByRateToLow'
+  SortByRateToLow = 'sortByRateToLow',
+  LoadOffers = 'loadOffers',
+  RequireAuthorization = 'requireAuthorization',
+  RequireLogout = 'requireLogout',
 }
 
 export type EnterOffersActionType = {
@@ -46,6 +50,20 @@ export type SortByRateToLowType = {
   type: ActionType.SortByRateToLow,
 }
 
+export type LoadOffersType = {
+  type: ActionType.LoadOffers,
+  payload: OffersType,
+}
+
+export type RequireAuthorizationType = {
+  type: ActionType.RequireAuthorization,
+  payload: AuthorizationStatus,
+}
+
+export type RequireLogoutType = {
+  type: ActionType.RequireLogout,
+}
+
 export type Actions =
   | EnterOffersActionType
   | SetActiveOfferIdType
@@ -53,4 +71,7 @@ export type Actions =
   | ChooseOffersByCityActionType
   | SortByPriceToHighType
   | SortByPriceToLowType
-  | SortByRateToLowType;
+  | SortByRateToLowType
+  | LoadOffersType
+  | RequireAuthorizationType
+  | RequireLogoutType;

@@ -1,11 +1,13 @@
 import {ActionType, Actions} from '../types/action';
 import {State} from '../types/state';
 import {offers} from '../mocks/offers';
+import {AuthorizationStatus} from '../const';
 
 const initialState = {
   city: 'Paris',
   offers: offers.filter((offer) => offer.city === 'Paris'),
   activeOfferId: 0,
+  authorizationStatus: AuthorizationStatus.Unknown,
 }
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -24,6 +26,13 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, offers: state.offers.slice(0).sort((a, b) => b.price - a.price)};
     case ActionType.SortByRateToLow:
       return {...state, offers: state.offers.slice(0).sort((a, b) => b.rate - a.rate)};
+    case ActionType.LoadOffers:
+      return {...state, offers: action.payload};
+    case ActionType.RequireAuthorization:
+      return {...state, authorizationStatus: action.payload};
+    case ActionType.RequireLogout:
+      return {...state, authorizationStatus: AuthorizationStatus.NoAuth};
+    
     default:
       return state;
   }
