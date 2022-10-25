@@ -8,7 +8,8 @@ export enum ActionType {
   SortВуDefault = 'sortВуDefault',
   SortByPriceToHigh = 'sortByPriceToHigh',
   SortByPriceToLow = 'sortByPriceToLow',
-  SortByRateToLow = 'sortByRateToLow'
+  SortByRateToLow = 'sortByRateToLow',
+  LoadOffers = 'loadOffers',
 }
 
 export type EnterOffersActionType = {
@@ -46,6 +47,11 @@ export type SortByRateToLowType = {
   type: ActionType.SortByRateToLow,
 }
 
+export type LoadOffersType = {
+  type: ActionType.LoadOffers,
+  payload: OffersType,
+}
+
 export type Actions =
   | EnterOffersActionType
   | SetActiveOfferIdType
@@ -53,4 +59,5 @@ export type Actions =
   | ChooseOffersByCityActionType
   | SortByPriceToHighType
   | SortByPriceToLowType
-  | SortByRateToLowType;
+  | SortByRateToLowType
+  | LoadOffersType;

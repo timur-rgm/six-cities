@@ -24,6 +24,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, offers: state.offers.slice(0).sort((a, b) => b.price - a.price)};
     case ActionType.SortByRateToLow:
       return {...state, offers: state.offers.slice(0).sort((a, b) => b.rate - a.rate)};
+    case ActionType.LoadOffers:
+      return {...state, offers: action.payload};
     default:
       return state;
   }

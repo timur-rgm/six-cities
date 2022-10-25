@@ -7,8 +7,10 @@ import {
   SetActiveOfferIdType,
   SortByPriceToHighType,
   SortByPriceToLowType,
-  SortByRateToLowType, } from '../types/action';
-import {OffersType} from '../mocks/offers';
+  SortByRateToLowType,
+  LoadOffersType,
+} from '../types/action';
+import {offers, OffersType} from '../mocks/offers';
 
 export const enterOffers = (): EnterOffersActionType => ({
   type: ActionType.EnterOffers,
@@ -43,4 +45,9 @@ export const sortByPriceToLow = (): SortByPriceToLowType => ({
 
 export const sortByRateToLow = (): SortByRateToLowType => ({
   type: ActionType.SortByRateToLow,
+})
+
+export const loadOffers = (offers: OffersType): LoadOffersType => ({
+  type: ActionType.LoadOffers,
+  payload: offers,
 })
