@@ -9,8 +9,11 @@ import {
   SortByPriceToLowType,
   SortByRateToLowType,
   LoadOffersType,
+  RequireAuthorizationType,
+  RequireLogoutType,
 } from '../types/action';
 import {offers, OffersType} from '../mocks/offers';
+import {AuthorizationStatus} from '../const';
 
 export const enterOffers = (): EnterOffersActionType => ({
   type: ActionType.EnterOffers,
@@ -50,4 +53,13 @@ export const sortByRateToLow = (): SortByRateToLowType => ({
 export const loadOffers = (offers: OffersType): LoadOffersType => ({
   type: ActionType.LoadOffers,
   payload: offers,
+})
+
+export const RequireAuthorization = (authStatus: AuthorizationStatus): RequireAuthorizationType => ({
+  type: ActionType.RequireAuthorization,
+  payload: authStatus,
+})
+
+export const RequireLogout = (): RequireLogoutType => ({
+  type: ActionType.RequireLogout,
 })
