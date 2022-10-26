@@ -1,5 +1,8 @@
+import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {OffersType} from '../mocks/offers';
 import {AuthorizationStatus} from '../const';
+import {State} from './state';
+import {AxiosInstance} from 'axios';
 
 export enum ActionType {
   EnterOffers = 'enterOffers',
@@ -75,3 +78,7 @@ export type Actions =
   | LoadOffersType
   | RequireAuthorizationType
   | RequireLogoutType;
+
+export type ThunkActionResultType<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
+
+export type ThunkAppDispatchType = ThunkDispatch<State, AxiosInstance, Actions>;
