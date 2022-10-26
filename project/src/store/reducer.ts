@@ -1,11 +1,12 @@
 import {ActionType, Actions} from '../types/action';
 import {State} from '../types/state';
-import {offers} from '../mocks/offers';
+// import {offers} from '../mocks/offers';
 import {AuthorizationStatus} from '../const';
 
 const initialState = {
   city: 'Paris',
-  offers: offers.filter((offer) => offer.city === 'Paris'),
+  // offers: offers.filter((offer) => offer.city === 'Paris'),
+  offers: [],
   activeOfferId: 0,
   authorizationStatus: AuthorizationStatus.Unknown,
 }
@@ -13,7 +14,7 @@ const initialState = {
 const reducer = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
     case ActionType.EnterOffers:
-      return {...state, offers: offers};
+      return {...state, offers: []};
     case ActionType.SetActiveOfferId:
       return {...state, activeOfferId: action.payload};
     case ActionType.ChangeCity:
