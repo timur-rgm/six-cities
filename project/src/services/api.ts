@@ -4,9 +4,9 @@ import axios, {
   AxiosError,
   AxiosRequestConfig,
 } from 'axios';
-import { getToken } from './token';
+import {getToken} from './token';
 
-const BACKEND_URL = 'https://12.react.pages.academy/six-cities';
+const BACKEND_URL = 'https://8.react.pages.academy/six-cities';
 const REQUEST_TIMUOUT = 5000;
 
 enum HttpCode {

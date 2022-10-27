@@ -8,10 +8,11 @@ import CitiesList from '../cities-list/cities-list';
 import CardsList from '../cards-list/cards-list';
 import Map from '../map/map';
 import {Cities} from '../../const';
+import {sortOffers} from '../../utils';
 
 const mapStateToProps = ({city, offers}: State) => ({
   currentCity: city,
-  offers: offers
+  offers: offers,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
@@ -71,7 +72,7 @@ function Main(props: ConnectedComponentPropsType): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
+              <b className="places__found">{offers.filter((offer) => offer.city === currentCity).length} places to stay in {currentCity}</b>
               <Sorting />
               <CardsList />
             </section>

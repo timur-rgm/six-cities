@@ -7,7 +7,6 @@ type OneReviewType = {
 export default function Review(props: OneReviewType) {
   const {review} = props;
   const {avatarSrc, userName, reviewRate, reviewDate, reviewText} = review;
-  console.log(props)
 
   return (
     <li className="reviews__item">

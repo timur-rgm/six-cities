@@ -1,28 +1,24 @@
 import {useEffect, useRef, useState, MutableRefObject} from 'react';
-import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {Cities} from '../../const';
-import {Actions} from '../../types/action';
+import {sortOffers} from '../../utils';
 import {State} from '../../types/state';
 import L, { Icon, Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const mapStateToProps = ({city, offers, activeOfferId}: State) => ({
+const mapStateToProps = ({city, offers, sortingType, activeOfferId}: State) => ({
   currentCity: city,
   offers: offers,
+  sortingType: sortingType,
   activeOfferId: activeOfferId,
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({}, dispatch)
+const connector = connect(mapStateToProps);
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type MapType = {}
 type PropsFromReduxType = ConnectedProps<typeof connector>;
-type ConnectedComponentPropsType = PropsFromReduxType & MapType;
 
-function CityMap(props: ConnectedComponentPropsType): JSX.Element {
-  const {currentCity, offers, activeOfferId} = props;
+function CityMap(props: PropsFromReduxType): JSX.Element {
+  const {currentCity, offers, sortingType, activeOfferId} = props;
 
   const map: MutableRefObject<Map | null > = useRef(null);
   const mapRef = useRef(null);
@@ -48,7 +44,7 @@ function CityMap(props: ConnectedComponentPropsType): JSX.Element {
           lat: Cities[currentCity].coordinates.lat,
           lng: Cities[currentCity].coordinates.lng
         },
-        zoom: 10,
+        zoom: 12,
         zoomControl: false,
       });
   
@@ -74,8 +70,11 @@ function CityMap(props: ConnectedComponentPropsType): JSX.Element {
         iconSize: [40, 40],
       });
 
-      offers.forEach((offer) => {
+      
+
+      offers.filter((offer) => offer.city === currentCity).forEach((offer) => {
         const offerMarker = L.marker([offer.coordinates.lat, offer.coordinates.lng]);
+        // console.log(offer.coordinates.lng);
         offerMarker.setIcon(offer.id === activeOfferId ? iconActive : iconDefault).addTo(markersGroup);
       })
     }

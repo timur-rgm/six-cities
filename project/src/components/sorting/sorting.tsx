@@ -1,21 +1,19 @@
 import {useState} from 'react';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-import {enterOffers, chooseOffersByCity, sortByPriceToHigh, sortByPriceToLow, sortByRateToLow} from '../../store/action';
+import {changeSorting} from '../../store/action';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
-
-const mapStateToProps = ({city, offers}: State) => ({
+import {SortingType} from '../../types/offers';
+ 
+const mapStateToProps = ({city, offers, sortingType}: State) => ({
   currentCity: city,
   offers: offers,
+  sortingType: sortingType,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
-  chooseOffersByCity: chooseOffersByCity,
-  enterOffers: enterOffers,
-  sortByPriceToHigh: sortByPriceToHigh,
-  sortByPriceToLow: sortByPriceToLow,
-  sortByRateToLow: sortByRateToLow,
+  changeSorting: changeSorting,
 }, dispatch)
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -23,7 +21,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 
 function Sorting(props: PropsFromReduxType): JSX.Element {
-  const {offers, enterOffers, chooseOffersByCity, sortByPriceToLow, sortByPriceToHigh, sortByRateToLow} = props;
+  const {sortingType, changeSorting} = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -34,7 +32,7 @@ function Sorting(props: PropsFromReduxType): JSX.Element {
         className="places__sorting-type"
         tabIndex={0}
       >
-        Popular
+        {sortingType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -49,34 +47,43 @@ function Sorting(props: PropsFromReduxType): JSX.Element {
 
         <li
           onClick={() => {
-            enterOffers();
-            chooseOffersByCity(offers);
+            changeSorting(SortingType.Popular);
+            setIsOpen(!isOpen);
           }}
-          className="places__option places__option--active"
+          className={`places__option ${sortingType === SortingType.Popular && `places__option--active`}`}
           tabIndex={0}
         >
           Popular
         </li>
         
         <li
-          onClick={() => sortByPriceToHigh()}
-          className="places__option"
+          onClick={() => {
+            changeSorting(SortingType.SortByPriceToHigh);
+            setIsOpen(!isOpen);
+          }}
+          className={`places__option ${sortingType === SortingType.SortByPriceToHigh && `places__option--active`}`}
           tabIndex={0}
         >
           Price: low to high
         </li>
         
         <li
-          onClick={() => sortByPriceToLow()}
-          className="places__option"
+          onClick={() => {
+            changeSorting(SortingType.SortByPriceToLow);
+            setIsOpen(!isOpen);
+          }}
+          className={`places__option ${sortingType === SortingType.SortByPriceToLow && `places__option--active`}`}
           tabIndex={0}
         >
           Price: high to low
         </li>
 
         <li
-          onClick={() => sortByRateToLow()}
-          className="places__option"
+          onClick={() => {
+            changeSorting(SortingType.SortByRateToLow);
+            setIsOpen(!isOpen);
+          }}
+          className={`places__option ${sortingType === SortingType.SortByRateToLow && `places__option--active`}`}
           tabIndex={0}
         >
           Top rated first
