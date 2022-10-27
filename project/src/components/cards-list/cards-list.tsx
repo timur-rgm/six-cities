@@ -5,9 +5,12 @@ import {setActiveOfferId} from '../../store/action';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
 import Card from '../card/card';
+import { sortOffers } from '../../utils';
 
-const mapStateToProps = ({offers, activeOfferId}: State) => ({
+const mapStateToProps = ({city, offers, sortingType, activeOfferId}: State) => ({
+  currentCity: city,
   offers: offers,
+  sortingType: sortingType,
   activeOfferId: activeOfferId,
 })
 
@@ -22,13 +25,13 @@ type PropsFromReduxType = ConnectedProps<typeof connector>;
 type ConnectedComponentPropsType = PropsFromReduxType & CardsListType;
 
 function CardsList(props: ConnectedComponentPropsType): JSX.Element {
-  const {offers, setActiveOfferId} = props;
+  const {currentCity, offers, sortingType, setActiveOfferId} = props;
 
   let history = useHistory();
   
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => 
+      {sortOffers(offers, sortingType).filter((offer) => offer.city === currentCity).map((offer) => 
         <Card
           offer={offer}
           key={offer.id}

@@ -1,10 +1,12 @@
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-import {changeCity, enterOffers, chooseOffersByCity, sortByPriceToLow} from '../../store/action';
-import {Actions} from '../../types/action';
+import {changeCity, loadOffers} from '../../store/action';
+import {Actions, ThunkAppDispatchType} from '../../types/action';
 import {State} from '../../types/state';
 import {Link} from 'react-router-dom';
 import {CitiesType} from '../../const';
+import { fetchOffersAction } from '../../store/api-actions';
+import { store } from '../..';
 
 const mapStateToProps = ({city, offers}: State) => ({
   currentCity: city,
@@ -13,9 +15,7 @@ const mapStateToProps = ({city, offers}: State) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
   onCityChange: changeCity,
-  enterOffers: enterOffers,
-  chooseOffersByCity: chooseOffersByCity,
-  sortByPriceToLow: sortByPriceToLow,
+  loadOffers: loadOffers,
 }, dispatch)
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -28,7 +28,7 @@ type CitiesListType = {
 }
 
 function CitiesList(props: ConnectedComponentPropsType): JSX.Element {
-  const {cities, currentCity, offers, onCityChange, enterOffers, chooseOffersByCity, sortByPriceToLow} = props;
+  const {cities, currentCity, offers, onCityChange, loadOffers} = props;
 
   return (
     <ul className="locations__list tabs__list">
@@ -40,11 +40,7 @@ function CitiesList(props: ConnectedComponentPropsType): JSX.Element {
           <Link
             to="/"
             className={name === currentCity ? "locations__item-link tabs__item tabs__item--active" : "locations__item-link tabs__item"} href="#"
-            onClick={() => {  
-              enterOffers();  
-              onCityChange(name);
-              chooseOffersByCity(offers);
-            }}
+            onClick={() => onCityChange(name)}
           >
             <span>{name}</span>
           </Link>
