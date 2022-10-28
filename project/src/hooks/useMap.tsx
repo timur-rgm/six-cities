@@ -1,5 +1,5 @@
-import { MutableRefObject, useEffect, useState } from 'react';
-import { Map, TileLayer } from "leaflet";
+import {MutableRefObject, useEffect, useState} from 'react';
+import {Map, TileLayer} from "leaflet";
 import {Cities} from '../const';
 
 export default function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: string): Map | null {

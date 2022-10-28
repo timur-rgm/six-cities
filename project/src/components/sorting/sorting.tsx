@@ -2,9 +2,9 @@ import {useState} from 'react';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {changeSorting} from '../../store/action';
+import {SortingType} from '../../const';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
-import {SortingType} from '../../types/offers';
  
 const mapStateToProps = ({city, offers, sortingType}: State) => ({
   currentCity: city,
@@ -37,57 +37,24 @@ function Sorting(props: PropsFromReduxType): JSX.Element {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
+
       <ul
-        className={
-          isOpen
-          ? 'places__options places__options--custom places__options--opened'
-          : 'places__options places__options--custom'
-        }
+        className={`places__options places__options--custom ${isOpen && `places__options--opened`}`}
       >
 
-        <li
-          onClick={() => {
-            changeSorting(SortingType.Popular);
-            setIsOpen(!isOpen);
-          }}
-          className={`places__option ${sortingType === SortingType.Popular && `places__option--active`}`}
-          tabIndex={0}
-        >
-          Popular
-        </li>
-        
-        <li
-          onClick={() => {
-            changeSorting(SortingType.SortByPriceToHigh);
-            setIsOpen(!isOpen);
-          }}
-          className={`places__option ${sortingType === SortingType.SortByPriceToHigh && `places__option--active`}`}
-          tabIndex={0}
-        >
-          Price: low to high
-        </li>
-        
-        <li
-          onClick={() => {
-            changeSorting(SortingType.SortByPriceToLow);
-            setIsOpen(!isOpen);
-          }}
-          className={`places__option ${sortingType === SortingType.SortByPriceToLow && `places__option--active`}`}
-          tabIndex={0}
-        >
-          Price: high to low
-        </li>
-
-        <li
-          onClick={() => {
-            changeSorting(SortingType.SortByRateToLow);
-            setIsOpen(!isOpen);
-          }}
-          className={`places__option ${sortingType === SortingType.SortByRateToLow && `places__option--active`}`}
-          tabIndex={0}
-        >
-          Top rated first
-        </li>
+        {Object.values(SortingType).map((name, i) => 
+          <li
+            onClick={() => {
+              changeSorting(name);
+              setIsOpen(!isOpen);
+            }}
+            className={`places__option ${sortingType === name && `places__option--active`}`}
+            tabIndex={0}
+            key={name+i}
+          >
+            {name}
+          </li>
+        )}
 
       </ul>
     </form>

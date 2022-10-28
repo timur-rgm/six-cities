@@ -1,5 +1,5 @@
-import {OfferType, OffersType} from './mocks/offers';
-import {SortingType} from './types/offers';
+import {SortingType} from './const';
+import {OfferType, OffersType} from './types/offers';
 
 export function adaptToClient(offer: any): OfferType {
   const adaptedOffer = {

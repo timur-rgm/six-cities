@@ -1,6 +1,5 @@
-import {MouseEvent, useState, Fragment} from 'react';
 import {Link} from 'react-router-dom';
-import {OfferType} from '../../mocks/offers';
+import {OfferType} from '../../types/offers';
 
 type OtherPlaceType = {
   offer: OfferType,
@@ -9,7 +8,7 @@ type OtherPlaceType = {
 
 export default function OtherPlace(props: OtherPlaceType): JSX.Element {
   const {offer, onArticleCLick} = props;
-  const {image, title, isPremium, type, price, rate} = offer;
+  const {image, title, type, price, rate} = offer;
 
   return (
     <article

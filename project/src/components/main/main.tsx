@@ -1,14 +1,13 @@
 import {connect, ConnectedProps} from 'react-redux';
 import {bindActionCreators, Dispatch} from 'redux';
 import {changeCity} from '../../store/action';
-import {Actions} from '../../types/action';
-import {State} from '../../types/state';
-import Sorting from '../sorting/sorting';
 import CitiesList from '../cities-list/cities-list';
+import Sorting from '../sorting/sorting';
 import CardsList from '../cards-list/cards-list';
 import Map from '../map/map';
 import {Cities} from '../../const';
-import {sortOffers} from '../../utils';
+import {Actions} from '../../types/action';
+import {State} from '../../types/state';
 
 const mapStateToProps = ({city, offers}: State) => ({
   currentCity: city,

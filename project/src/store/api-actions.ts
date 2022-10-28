@@ -1,7 +1,7 @@
-import {ThunkActionResultType} from '../types/action';
 import {loadOffers} from '../store/action';
-import {OfferType} from '../mocks/offers';
 import {adaptToClient} from '../utils';
+import {ThunkActionResultType} from '../types/action';
+import {OfferType} from '../types/offers';
 
 export function fetchOffersAction(): ThunkActionResultType {
   return async (dispatch, _getState, api): Promise<void> => {

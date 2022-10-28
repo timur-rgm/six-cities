@@ -1,4 +1,4 @@
-import { ReviewType } from "../../mocks/reviews"
+import {ReviewType} from "../../types/reviews"
 
 type OneReviewType = {
   review: ReviewType,

@@ -1,6 +1,6 @@
 import {useState, ChangeEvent} from "react"
-import {ReviewsType} from '../../mocks/reviews';
 import Review from "../review/review";
+import {ReviewsType} from '../../types/reviews';
 
 type ReviewListType = {
   reviews: ReviewsType;

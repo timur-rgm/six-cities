@@ -1,9 +1,8 @@
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {OffersType} from '../mocks/offers';
-import {AuthorizationStatus} from '../const';
-import {State} from './state';
 import {AxiosInstance} from 'axios';
-import {SortingType} from './offers';
+import {State} from './state';
+import {AuthorizationStatus, SortingType} from '../const';
+import {OffersType} from './offers';
 
 export enum ActionType {
   SetActiveOfferId = 'setActiveOfferId',

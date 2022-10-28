@@ -1,3 +1,4 @@
+import {AuthorizationStatus, SortingType} from '../const';
 import {
   ActionType,
   ChangeCityActionType,
@@ -7,9 +8,7 @@ import {
   RequireAuthorizationType,
   RequireLogoutType,
 } from '../types/action';
-import {OffersType} from '../mocks/offers';
-import {AuthorizationStatus} from '../const';
-import { SortingType } from '../types/offers';
+import {OffersType} from '../types/offers';
 
 
 export const setActiveOfferId = (id: number): SetActiveOfferIdType => ({
