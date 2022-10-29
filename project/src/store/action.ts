@@ -31,11 +31,11 @@ export const loadOffers = (offers: OffersType): LoadOffersType => ({
   payload: offers,
 })
 
-export const RequireAuthorization = (authStatus: AuthorizationStatus): RequireAuthorizationType => ({
+export const requireAuthorization = (authStatus: AuthorizationStatus): RequireAuthorizationType => ({
   type: ActionType.RequireAuthorization,
   payload: authStatus,
 })
 
-export const RequireLogout = (): RequireLogoutType => ({
+export const requireLogout = (): RequireLogoutType => ({
   type: ActionType.RequireLogout,
 })

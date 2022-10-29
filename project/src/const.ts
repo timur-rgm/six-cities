@@ -18,6 +18,12 @@ export enum SortingType {
   SortByRateToLow = 'Top rated first',
 };
 
+export enum ApiRoute {
+  Hotels = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 type CityType = {
   name: string,
   coordinates: {

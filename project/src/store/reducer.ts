@@ -5,9 +5,9 @@ import {State} from '../types/state';
 const initialState = {
   city: 'Paris',
   offers: [],
-  sortingType: SortingType.Popular,
   isOffersLoaded: false,
   activeOfferId: 0,
+  sortingType: SortingType.Popular,
   authorizationStatus: AuthorizationStatus.Unknown,
 }
 
