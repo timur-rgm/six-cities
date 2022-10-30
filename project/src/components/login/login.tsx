@@ -6,13 +6,13 @@ import {ThunkAppDispatchType} from "../../types/action";
 import {AuthDataType} from "../../types/auth-data";
 import {AppRoute} from "../../const";
 
-const mapStateToProps = (dispatch: ThunkAppDispatchType) => ({
+const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({
   onSubmit(authdata: AuthDataType) {
-    dispatch(loginAction(authdata))
+    dispatch(loginAction(authdata));
   },
 })
 
-const connector = connect(mapStateToProps);
+const connector = connect(null, mapDispatchToProps);
 
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 
