@@ -24,8 +24,8 @@ export const store = createStore(
   ),
 );
 
+(store.dispatch as ThunkAppDispatchType)(checkAuthAction());
 (store.dispatch as ThunkAppDispatchType)(fetchOffersAction());
-// (store.dispatch as ThunkAppDispatchType)(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

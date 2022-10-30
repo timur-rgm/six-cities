@@ -1,4 +1,40 @@
-export default function Login(): JSX.Element {
+import {useRef, FormEvent} from "react";
+import {useHistory} from "react-router-dom";
+import {connect, ConnectedProps} from 'react-redux';
+import {loginAction} from '../../store/api-actions';
+import {ThunkAppDispatchType} from "../../types/action";
+import {AuthDataType} from "../../types/auth-data";
+import {AppRoute} from "../../const";
+
+const mapStateToProps = (dispatch: ThunkAppDispatchType) => ({
+  onSubmit(authdata: AuthDataType) {
+    dispatch(loginAction(authdata))
+  },
+})
+
+const connector = connect(mapStateToProps);
+
+type PropsFromReduxType = ConnectedProps<typeof connector>;
+
+function Login(props: PropsFromReduxType): JSX.Element {
+  const {onSubmit} = props;
+
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const history = useHistory();
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      onSubmit({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+    };
+  }
+
   return (
     <div className="page page--gray page--login">
       <header className="header">
@@ -16,14 +52,14 @@ export default function Login(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email" required />
+                <input ref={loginRef} className="login__input form__input" type="email" name="email" placeholder="Email" required />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required />
+                <input ref={passwordRef} className="login__input form__input" type="password" name="password" placeholder="Password" required />
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
@@ -40,3 +76,5 @@ export default function Login(): JSX.Element {
     </div>
   );
 }
+
+export default connector(Login);
