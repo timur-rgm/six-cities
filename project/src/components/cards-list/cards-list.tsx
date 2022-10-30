@@ -10,7 +10,7 @@ import {State} from '../../types/state';
 const mapStateToProps = ({city, offers, sortingType, activeOfferId}: State) => ({
   currentCity: city,
   offers: offers,
-  sortingType: sortingType,
+  sortingType,
   activeOfferId: activeOfferId,
 })
 

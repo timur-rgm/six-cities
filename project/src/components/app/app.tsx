@@ -53,7 +53,6 @@ function App({offers, reviews, isOffersLoaded}: ConnectedComponentPropsType): JS
           exact
           path={AppRoute.Favorites}
           render={() => <Favorites offers={offers} />}
-          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
         <Route component={Error} />

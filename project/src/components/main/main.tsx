@@ -9,9 +9,22 @@ import {Cities} from '../../const';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
 
+const mapStateToProps = ({city, offers}: State) => ({
+  currentCity: city,
+  offers: offers,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
+  onCityChange: changeCity,
+}, dispatch);
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromReduxType = ConnectedProps<typeof connector>;
+
 function Main(props: PropsFromReduxType): JSX.Element {
   const {currentCity, offers} = props;
-
+  
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -72,18 +85,5 @@ function Main(props: PropsFromReduxType): JSX.Element {
     </div>
   );
 };
-
-const mapStateToProps = ({city, offers}: State) => ({
-  currentCity: city,
-  offers: offers,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
-  onCityChange: changeCity,
-}, dispatch);
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromReduxType = ConnectedProps<typeof connector>;
 
 export default connector(Main);
