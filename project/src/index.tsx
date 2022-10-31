@@ -1,20 +1,20 @@
 import ReactDOM from 'react-dom/client';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import {reducer} from './store/reducer';
-import {composeWithDevTools} from 'redux-devtools-extension';
-import {RequireAuthorization} from './store/action';
+import {requireAuthorization} from './store/action';
 import App from './components/app/app';
 import {createApi} from './services/api';
+import {fetchOffersAction, checkAuthAction} from './store/api-actions';
+import {AuthorizationStatus} from './const';
 import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
-import {AuthorizationStatus} from './const';
 import {ThunkAppDispatchType} from './types/action';
-import {fetchOffersAction} from './store/api-actions';
 
 const api = createApi(
-  () => store.dispatch(RequireAuthorization(AuthorizationStatus.NoAuth))
+  () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth))
 );
 
 export const store = createStore(
@@ -24,7 +24,8 @@ export const store = createStore(
   ),
 );
 
-(store.dispatch as ThunkAppDispatchType)(fetchOffersAction())
+(store.dispatch as ThunkAppDispatchType)(checkAuthAction());
+(store.dispatch as ThunkAppDispatchType)(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

@@ -1,10 +1,10 @@
-import {OffersType} from '../../mocks/offers';
-import {ReviewsType} from '../../mocks/reviews';
-import ReviewList from '../review-list/review-list';
+import {Link} from 'react-router-dom';
 import Map from '../map/map';
+import ReviewList from '../review-list/review-list';
 import OtherPlacesList from '../other-places-list/other-places-list';
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import {AppRoute} from '../../const';
+import {OffersType} from '../../types/offers';
+import {ReviewsType} from '../../types/reviews';
 
 type OfferTypes = {
   offers: OffersType,

@@ -1,37 +1,31 @@
-import {OfferType, OffersType} from './mocks/offers';
-import {SortingType} from './types/offers';
+import {SortingType} from './const';
+import {OfferType, OffersType, UnadaptedOfferType} from './types/offers';
 
-export function adaptToClient(offer: any): OfferType {
+export function adaptToClient(offer: UnadaptedOfferType): OfferType {
   const adaptedOffer = {
-    ...offer,
+    id: offer.id,
     image: offer.preview_image,
+    title: offer.title,
+    description: offer.description,
     isPremium: offer.is_premium,
+    type: offer.type,
+    price: offer.price,
     isFavourite: offer.is_favorite,
     rate: offer.rating,
+    bedrooms: offer.bedrooms,
     maxAdults: offer.max_adults,
     features: offer.goods,
     owner: {
-      id: offer.host.id,
       avatar: offer.host.avatar_url,
-      name: offer.host.is_pro,
-      isPro: offer.host.name,
+      name: offer.host.name,
+      isPro: offer.host.is_pro,
     },
     coordinates: {
       lat: offer.location.latitude,
       lng: offer.location.longitude,
-      zoom: offer.location.zoom,
     },
     city: offer.city.name,
   }
-
-  delete adaptedOffer.preview_image;
-  delete adaptedOffer.is_premium;
-  delete adaptedOffer.is_favorite;
-  delete adaptedOffer.rating;
-  delete adaptedOffer.max_adults;
-  delete adaptedOffer.goods;
-  delete adaptedOffer.host;
-  delete adaptedOffer.location;
 
   return adaptedOffer;
 }

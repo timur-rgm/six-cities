@@ -1,12 +1,10 @@
+import {Link} from 'react-router-dom';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {changeCity, loadOffers} from '../../store/action';
-import {Actions, ThunkAppDispatchType} from '../../types/action';
 import {State} from '../../types/state';
-import {Link} from 'react-router-dom';
 import {CitiesType} from '../../const';
-import { fetchOffersAction } from '../../store/api-actions';
-import { store } from '../..';
+import {Actions} from '../../types/action';
 
 const mapStateToProps = ({city, offers}: State) => ({
   currentCity: city,
@@ -28,7 +26,7 @@ type CitiesListType = {
 }
 
 function CitiesList(props: ConnectedComponentPropsType): JSX.Element {
-  const {cities, currentCity, offers, onCityChange, loadOffers} = props;
+  const {cities, currentCity, onCityChange} = props;
 
   return (
     <ul className="locations__list tabs__list">

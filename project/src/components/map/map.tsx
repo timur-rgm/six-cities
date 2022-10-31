@@ -1,15 +1,13 @@
-import {useEffect, useRef, useState, MutableRefObject} from 'react';
+import {useEffect, useRef, MutableRefObject} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {Cities} from '../../const';
-import {sortOffers} from '../../utils';
 import {State} from '../../types/state';
 import L, { Icon, Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const mapStateToProps = ({city, offers, sortingType, activeOfferId}: State) => ({
+const mapStateToProps = ({city, offers, activeOfferId}: State) => ({
   currentCity: city,
   offers: offers,
-  sortingType: sortingType,
   activeOfferId: activeOfferId,
 })
 
@@ -18,7 +16,7 @@ const connector = connect(mapStateToProps);
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 
 function CityMap(props: PropsFromReduxType): JSX.Element {
-  const {currentCity, offers, sortingType, activeOfferId} = props;
+  const {currentCity, offers, activeOfferId} = props;
 
   const map: MutableRefObject<Map | null > = useRef(null);
   const mapRef = useRef(null);
@@ -70,11 +68,8 @@ function CityMap(props: PropsFromReduxType): JSX.Element {
         iconSize: [40, 40],
       });
 
-      
-
       offers.filter((offer) => offer.city === currentCity).forEach((offer) => {
         const offerMarker = L.marker([offer.coordinates.lat, offer.coordinates.lng]);
-        // console.log(offer.coordinates.lng);
         offerMarker.setIcon(offer.id === activeOfferId ? iconActive : iconDefault).addTo(markersGroup);
       })
     }

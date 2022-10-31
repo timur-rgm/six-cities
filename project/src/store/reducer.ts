@@ -1,14 +1,13 @@
+import {AuthorizationStatus, SortingType} from '../const';
 import {ActionType, Actions} from '../types/action';
 import {State} from '../types/state';
-import {AuthorizationStatus} from '../const';
-import {SortingType} from '../types/offers';
 
 const initialState = {
   city: 'Paris',
   offers: [],
-  sortingType: SortingType.Popular,
   isOffersLoaded: false,
   activeOfferId: 0,
+  sortingType: SortingType.Popular,
   authorizationStatus: AuthorizationStatus.Unknown,
 }
 

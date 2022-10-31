@@ -1,17 +1,17 @@
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
-
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {connect, ConnectedProps} from 'react-redux';
+import {Router as BrowserRouter, Switch, Route} from 'react-router-dom'
+import PrivateRoute from '../private-route/private-route';
+import browserHistory from '../../browser-history';
 import Main from '../main/main';
 import Favorites from '../favorites/favorites';
 import Login from '../login/login';
 import Offer from '../offer/offer';
 import Error from '../error/error';
 import LoadingScreen from '../loading-screen/loading-screen';
+import {AppRoute} from '../../const';
 import {State} from '../../types/state';
-import PrivateRoute from '../private-route/private-route';
-import {OffersType} from '../../mocks/offers';
-import {ReviewsType} from '../../mocks/reviews';
-import {connect, ConnectedProps} from 'react-redux';
+import {OffersType} from '../../types/offers';
+import {ReviewsType} from '../../types/reviews';
 
 const mapStateToProps = ({isOffersLoaded}: State) => ({
   isOffersLoaded: isOffersLoaded,
@@ -36,7 +36,7 @@ function App({offers, reviews, isOffersLoaded}: ConnectedComponentPropsType): JS
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.Root}>
           <Main />
@@ -54,7 +54,6 @@ function App({offers, reviews, isOffersLoaded}: ConnectedComponentPropsType): JS
           exact
           path={AppRoute.Favorites}
           render={() => <Favorites offers={offers} />}
-          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
         <Route component={Error} />

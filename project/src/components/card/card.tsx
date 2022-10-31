@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {SetActiveOfferIdType} from '../../types/action';
-import {OfferType} from '../../mocks/offers';
+import {OfferType} from '../../types/offers';
 
 type CardType = {
   offer: OfferType,

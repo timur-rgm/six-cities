@@ -2,15 +2,15 @@ import {useHistory} from 'react-router-dom';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {setActiveOfferId} from '../../store/action';
+import Card from '../card/card';
+import {sortOffers} from '../../utils';
 import {Actions} from '../../types/action';
 import {State} from '../../types/state';
-import Card from '../card/card';
-import { sortOffers } from '../../utils';
 
 const mapStateToProps = ({city, offers, sortingType, activeOfferId}: State) => ({
   currentCity: city,
   offers: offers,
-  sortingType: sortingType,
+  sortingType,
   activeOfferId: activeOfferId,
 })
 

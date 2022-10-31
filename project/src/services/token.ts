@@ -1,6 +1,6 @@
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
-type TokenType = string;
+export type TokenType = string;
 
 export function getToken(): TokenType {
   const token = localStorage.getItem(AUTH_TOKEN_KEY_NAME);

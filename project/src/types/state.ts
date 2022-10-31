@@ -1,6 +1,5 @@
-import {OffersType} from '../mocks/offers';
-import {AuthorizationStatus} from '../const';
-import {SortingType} from './offers';
+import {AuthorizationStatus, SortingType} from '../const';
+import {OffersType} from './offers';
 
 export type State = {
   city: string,

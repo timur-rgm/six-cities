@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import {OffersType} from '../../mocks/offers';
+import {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import OtherPlace from '../other-place/other-place';
+import {OffersType} from '../../types/offers';
 
 type OtherPlacesType = {
   offers: OffersType,
