@@ -1,4 +1,4 @@
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {setActiveOfferId} from '../../store/action';
@@ -27,7 +27,7 @@ type ConnectedComponentPropsType = PropsFromReduxType & CardsListType;
 function CardsList(props: ConnectedComponentPropsType): JSX.Element {
   const {currentCity, offers, sortingType, setActiveOfferId} = props;
 
-  let history = useHistory();
+  let navigate = useNavigate();
   
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -35,7 +35,7 @@ function CardsList(props: ConnectedComponentPropsType): JSX.Element {
         <Card
           offer={offer}
           key={offer.id}
-          onArticleCLick={() => history.push(`/offer/${offer.id}`)}
+          onArticleCLick={() => navigate(`/offer/${offer.id}`)}
           setActiveOfferId={setActiveOfferId}
         />
       )}

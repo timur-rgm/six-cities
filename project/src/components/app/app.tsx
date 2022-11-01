@@ -1,5 +1,5 @@
 import {connect, ConnectedProps} from 'react-redux';
-import {Router as BrowserRouter, Switch, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Routes, Link} from 'react-router-dom'
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 import Main from '../main/main';
@@ -36,28 +36,18 @@ function App({offers, reviews, isOffersLoaded}: ConnectedComponentPropsType): JS
   }
 
   return (
-    <BrowserRouter history={browserHistory}>
-      <Switch>
-        <Route exact path={AppRoute.Root}>
-          <Main />
-        </Route>
-        <Route exact path={AppRoute.Login}>
-          <Login />
-        </Route>
-        <Route exact path="/offer/:1">
-          <Offer 
-            offers={offers}
-            reviews={reviews}
-          />
-        </Route>
-        <PrivateRoute
-          exact
-          path={AppRoute.Favorites}
-          render={() => <Favorites offers={offers} />}
-        >
-        </PrivateRoute>
-        <Route component={Error} />
-      </Switch>
+    <BrowserRouter>
+      <Routes>
+        <Route path={AppRoute.Root} element={<Main />} />
+        <Route path={AppRoute.Login} element={<Login />} />
+        <Route path="/offer/:1" element={<Offer offers={offers} reviews={reviews}/>} />
+        <Route path={AppRoute.Favorites} element={
+          <PrivateRoute>
+            <Favorites offers={offers} />
+          </PrivateRoute>
+        } />
+        <Route path="*" element={<Error />} />
+      </Routes>
     </BrowserRouter>
   );
 }
