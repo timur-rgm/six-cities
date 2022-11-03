@@ -1,7 +1,7 @@
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {AxiosInstance} from 'axios';
 import {State} from './state';
-import {AuthorizationStatus, SortingType} from '../const';
+import {AuthorizationStatus, SortingType, AppRoute} from '../const';
 import {OffersType} from './offers';
 
 export enum ActionType {
@@ -11,6 +11,7 @@ export enum ActionType {
   LoadOffers = 'loadOffers',
   RequireAuthorization = 'requireAuthorization',
   RequireLogout = 'requireLogout',
+  RedirectToRoute = 'redirectToRoute',
 }
 
 export type SetActiveOfferIdType = {
@@ -42,13 +43,19 @@ export type RequireLogoutType = {
   type: ActionType.RequireLogout,
 }
 
+export type RedirectToRouteType = {
+  type: ActionType.RedirectToRoute,
+  payload: AppRoute,
+}
+
 export type Actions =
   | SetActiveOfferIdType
   | ChangeCityActionType
   | ChangeSortingType
   | LoadOffersType
   | RequireAuthorizationType
-  | RequireLogoutType;
+  | RequireLogoutType
+  | RedirectToRouteType;
 
 export type ThunkActionResultType<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 

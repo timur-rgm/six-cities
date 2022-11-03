@@ -1,4 +1,4 @@
-import {Route, RouteProps, Navigate, NavigateProps} from 'react-router-dom';
+import {RouteProps, Navigate} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
 import {State} from '../../types/state';
 import {AppRoute, AuthorizationStatus} from '../../const';
