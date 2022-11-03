@@ -1,6 +1,6 @@
 import {connect, ConnectedProps} from 'react-redux';
 import {Route, Routes} from 'react-router-dom'
-import HistoryRouter from '../../components/history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 import Main from '../main/main';
@@ -41,7 +41,7 @@ function App({offers, reviews, isOffersLoaded}: ConnectedComponentPropsType): JS
       <Routes>
         <Route path={AppRoute.Root} element={<Main />} />
         <Route path={AppRoute.Login} element={<Login />} />
-        <Route path="/offer/:1" element={<Offer offers={offers} reviews={reviews}/>} />
+        <Route path="/offer/:id" element={<Offer offers={offers} reviews={reviews}/>} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute>
             <Favorites offers={offers} />
