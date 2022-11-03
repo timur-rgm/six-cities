@@ -13,8 +13,6 @@ import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
 import {ThunkAppDispatchType} from './types/action';
 import {redirect} from './store/redirect';
-import HistoryRouter from './components/history-route/history-route';
-import browserHistory from './browser-history';
 
 const api = createApi(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth))
@@ -37,11 +35,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Provider store={store}>
-    <HistoryRouter history={browserHistory}>
-      <App
-        offers={offers}
-        reviews={reviews}
-      />
-    </HistoryRouter>
+    <App
+      offers={offers}
+      reviews={reviews}
+    />
   </Provider>
 );
