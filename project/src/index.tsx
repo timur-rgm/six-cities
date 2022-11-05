@@ -7,9 +7,8 @@ import {reducer} from './store/reducer';
 import {requireAuthorization} from './store/action';
 import App from './components/app/app';
 import {createApi} from './services/api';
-import {fetchOffersAction, checkAuthAction} from './store/api-actions';
+import {fetchOffersAction, checkAuthAction, fetchReviewByIdAction} from './store/api-actions';
 import {AuthorizationStatus} from './const';
-import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
 import {ThunkAppDispatchType} from './types/action';
 import {redirect} from './store/redirect';
@@ -28,6 +27,7 @@ export const store = createStore(
 
 (store.dispatch as ThunkAppDispatchType)(checkAuthAction());
 (store.dispatch as ThunkAppDispatchType)(fetchOffersAction());
+// (store.dispatch as ThunkAppDispatchType)(fetchReviewByIdAction(5));
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -36,7 +36,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <App
-      offers={offers}
       reviews={reviews}
     />
   </Provider>

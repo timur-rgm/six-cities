@@ -11,10 +11,11 @@ import {Cities, AuthorizationStatus} from '../../const';
 import {ThunkAppDispatchType} from '../../types/action';
 import {State} from '../../types/state';
 
-const mapStateToProps = ({city, offers, authorizationStatus}: State) => ({
+const mapStateToProps = ({city, offers, authorizationStatus, user}: State) => ({
   currentCity: city,
   offers: offers,
   authorizationStatus,
+  user,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => bindActionCreators({
@@ -29,7 +30,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 
 function Main(props: PropsFromReduxType): JSX.Element {
-  const {currentCity, offers, logout, authorizationStatus} = props;
+  const {currentCity, offers, logout, authorizationStatus, user} = props;
   
   return (
     <div className="page page--gray page--main">
@@ -48,7 +49,7 @@ function Main(props: PropsFromReduxType): JSX.Element {
                       <a className="header__nav-link header__nav-link--profile" href="#">
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
-                        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                        <span className="header__user-name user__name">{user.email}</span>
                       </a>
                     </li>
                     <li className="header__nav-item">
@@ -63,7 +64,7 @@ function Main(props: PropsFromReduxType): JSX.Element {
                   </ul>
                 
                 : <Link to="/login" className="header__nav-link">
-                    <span className="header__signout">Login</span>
+                    <span className="header__signout">Sign in</span>
                   </Link>
               }
             </nav>

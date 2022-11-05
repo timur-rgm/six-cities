@@ -16,7 +16,7 @@ export default function Card(props: CardType): JSX.Element {
     <article
       onClick={onArticleCLick}
       onMouseEnter={() => setActiveOfferId(id)}
-      onMouseOut={() => setActiveOfferId(0)}
+      // onMouseOut={() => setActiveOfferId(0)}
       className="cities__place-card place-card"
     >
       {

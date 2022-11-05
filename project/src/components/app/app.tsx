@@ -14,14 +14,14 @@ import {State} from '../../types/state';
 import {OffersType} from '../../types/offers';
 import {ReviewsType} from '../../types/reviews';
 
-const mapStateToProps = ({isOffersLoaded}: State) => ({
+const mapStateToProps = ({offers, isOffersLoaded}: State) => ({
+  offers,
   isOffersLoaded: isOffersLoaded,
 })
 
 const connector = connect(mapStateToProps);
 
 type AppProps = {
-  offers: OffersType,
   reviews: ReviewsType,
 }
 
@@ -41,7 +41,7 @@ function App({offers, reviews, isOffersLoaded}: ConnectedComponentPropsType): JS
       <Routes>
         <Route path={AppRoute.Root} element={<Main />} />
         <Route path={AppRoute.Login} element={<Login />} />
-        <Route path="/offer/:id" element={<Offer offers={offers} reviews={reviews}/>} />
+        <Route path="/offer/:id" element={<Offer />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute>
             <Favorites offers={offers} />

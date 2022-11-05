@@ -1,10 +1,8 @@
 import {useRef, FormEvent} from "react";
-import {useNavigate} from "react-router-dom";
 import {connect, ConnectedProps} from 'react-redux';
 import {loginAction} from '../../store/api-actions';
 import {ThunkAppDispatchType} from "../../types/action";
 import {AuthDataType} from "../../types/auth-data";
-import {AppRoute} from "../../const";
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({
   onSubmit(authdata: AuthDataType) {
