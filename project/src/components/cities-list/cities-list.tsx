@@ -37,7 +37,7 @@ function CitiesList(props: ConnectedComponentPropsType): JSX.Element {
         >
           <Link
             to="/"
-            className={name === currentCity ? "locations__item-link tabs__item tabs__item--active" : "locations__item-link tabs__item"} href="#"
+            className={name === currentCity ? "locations__item-link tabs__item tabs__item--active" : "locations__item-link tabs__item"}
             onClick={() => onCityChange(name)}
           >
             <span>{name}</span>

@@ -1,5 +1,6 @@
 import {connect, ConnectedProps} from 'react-redux';
-import {Router as BrowserRouter, Switch, Route} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
+import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 import Main from '../main/main';
@@ -13,14 +14,14 @@ import {State} from '../../types/state';
 import {OffersType} from '../../types/offers';
 import {ReviewsType} from '../../types/reviews';
 
-const mapStateToProps = ({isOffersLoaded}: State) => ({
+const mapStateToProps = ({offers, isOffersLoaded}: State) => ({
+  offers,
   isOffersLoaded: isOffersLoaded,
 })
 
 const connector = connect(mapStateToProps);
 
 type AppProps = {
-  offers: OffersType,
   reviews: ReviewsType,
 }
 
@@ -36,29 +37,19 @@ function App({offers, reviews, isOffersLoaded}: ConnectedComponentPropsType): JS
   }
 
   return (
-    <BrowserRouter history={browserHistory}>
-      <Switch>
-        <Route exact path={AppRoute.Root}>
-          <Main />
-        </Route>
-        <Route exact path={AppRoute.Login}>
-          <Login />
-        </Route>
-        <Route exact path="/offer/:1">
-          <Offer 
-            offers={offers}
-            reviews={reviews}
-          />
-        </Route>
-        <PrivateRoute
-          exact
-          path={AppRoute.Favorites}
-          render={() => <Favorites offers={offers} />}
-        >
-        </PrivateRoute>
-        <Route component={Error} />
-      </Switch>
-    </BrowserRouter>
+    <HistoryRouter history={browserHistory}>
+      <Routes>
+        <Route path={AppRoute.Root} element={<Main />} />
+        <Route path={AppRoute.Login} element={<Login />} />
+        <Route path="/offer/:id" element={<Offer />} />
+        <Route path={AppRoute.Favorites} element={
+          <PrivateRoute>
+            <Favorites offers={offers} />
+          </PrivateRoute>
+        } />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </HistoryRouter>
   );
 }
 

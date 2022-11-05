@@ -1,14 +1,19 @@
-import {AuthorizationStatus, SortingType} from '../const';
+import {AuthorizationStatus, SortingType, AppRoute} from '../const';
 import {
   ActionType,
   ChangeCityActionType,
   ChangeSortingType,
   SetActiveOfferIdType,
   LoadOffersType,
+  LoadReviewsByIdType,
+  SendReviewType,
   RequireAuthorizationType,
   RequireLogoutType,
+  RedirectToRouteType,
+  SetUserDataType,
 } from '../types/action';
 import {OffersType} from '../types/offers';
+import {ReviewsType, SentReviewType} from '../types/reviews';
 
 
 export const setActiveOfferId = (id: number): SetActiveOfferIdType => ({
@@ -31,6 +36,16 @@ export const loadOffers = (offers: OffersType): LoadOffersType => ({
   payload: offers,
 })
 
+export const loadReviewsById = (reviews: ReviewsType): LoadReviewsByIdType => ({
+  type: ActionType.LoadReviewsById,
+  payload: reviews,
+})
+
+export const sendReview = (review: SentReviewType): SendReviewType => ({
+  type: ActionType.SendReview,
+  payload: review,
+})
+
 export const requireAuthorization = (authStatus: AuthorizationStatus): RequireAuthorizationType => ({
   type: ActionType.RequireAuthorization,
   payload: authStatus,
@@ -39,3 +54,14 @@ export const requireAuthorization = (authStatus: AuthorizationStatus): RequireAu
 export const requireLogout = (): RequireLogoutType => ({
   type: ActionType.RequireLogout,
 })
+
+export const redirectToRoute = (url: AppRoute): RedirectToRouteType => ({
+  type: ActionType.RedirectToRoute,
+  payload: url,
+});
+
+export const setUserData = (userData: {email: string}): SetUserDataType => ({
+  type: ActionType.SetUserData,
+  payload: userData,
+});
+

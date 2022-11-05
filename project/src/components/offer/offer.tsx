@@ -1,19 +1,46 @@
 import {Link} from 'react-router-dom';
+import {connect, ConnectedProps} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {logoutAction} from '../../store/api-actions';
 import Map from '../map/map';
 import ReviewList from '../review-list/review-list';
 import OtherPlacesList from '../other-places-list/other-places-list';
-import {AppRoute} from '../../const';
-import {OffersType} from '../../types/offers';
-import {ReviewsType} from '../../types/reviews';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {State} from '../../types/state';
 
-type OfferTypes = {
-  offers: OffersType,
-  reviews: ReviewsType,
-}
+import {ThunkAppDispatchType} from '../../types/action';
 
-export default function Offer(props: OfferTypes): JSX.Element {
-  const {offers, reviews} = props;
-  const {title, description, isPremium, type, price, rate, bedrooms, maxAdults, features, owner: {avatar, name, isPro}} = offers[0];
+const mapStateToProps = ({offers, activeOfferId, authorizationStatus, user}: State) => ({
+  offers,
+  activeOfferId,
+  authorizationStatus,
+  user,
+})
+
+const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => bindActionCreators({
+  logout() {
+    dispatch(logoutAction())
+  },
+}, dispatch);
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromReduxType = ConnectedProps<typeof connector>;
+
+function Offer(props: PropsFromReduxType): JSX.Element {
+  const {offers, activeOfferId, logout, authorizationStatus, user,} = props;
+  const {
+    title,
+    description,
+    isPremium,
+    type,
+    price,
+    rate,
+    bedrooms,
+    maxAdults,
+    features,
+    owner: {avatar, name, isPro}
+  } = offers[activeOfferId - 1];
 
   return (
     <div className="page">
@@ -26,20 +53,30 @@ export default function Offer(props: OfferTypes): JSX.Element {
               </Link>
             </div>
             <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
+            {authorizationStatus === AuthorizationStatus.Auth 
+                ? <ul className="header__nav-list">
+                    <li className="header__nav-item user">
+                      <a className="header__nav-link header__nav-link--profile" href="#">
+                        <div className="header__avatar-wrapper user__avatar-wrapper">
+                        </div>
+                        <span className="header__user-name user__name">{user.email}</span>
+                      </a>
+                    </li>
+                    <li className="header__nav-item">
+                      <Link
+                        className="header__nav-link"
+                        onClick={logout}
+                        to="/"
+                      >
+                        <span className="header__signout">Sign out</span>
+                      </Link>
+                    </li>
+                  </ul>
+                
+                : <Link to="/login" className="header__nav-link">
+                    <span className="header__signout">Sign in</span>
+                  </Link>
+              }
             </nav>
           </div>
         </div>
@@ -142,9 +179,7 @@ export default function Offer(props: OfferTypes): JSX.Element {
                   </p>
                 </div>
               </div>
-              <ReviewList
-                reviews={reviews}
-              />
+              <ReviewList />
             </div>
           </div>
           <section className="property__map map">
@@ -155,7 +190,7 @@ export default function Offer(props: OfferTypes): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <OtherPlacesList
-              offers={offers}
+              offers={offers.slice(0, 3)}
             />
           </section>
         </div>
@@ -163,3 +198,5 @@ export default function Offer(props: OfferTypes): JSX.Element {
     </div>
   );
 }
+
+export default connector(Offer);

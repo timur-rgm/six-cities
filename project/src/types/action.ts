@@ -1,16 +1,21 @@
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {AxiosInstance} from 'axios';
 import {State} from './state';
-import {AuthorizationStatus, SortingType} from '../const';
+import {AuthorizationStatus, SortingType, AppRoute} from '../const';
 import {OffersType} from './offers';
+import {ReviewsType, SentReviewType} from './reviews';
 
 export enum ActionType {
   SetActiveOfferId = 'setActiveOfferId',
   ChangeCity = 'changeCity',
   ChangeSorting = 'changeSorting',
   LoadOffers = 'loadOffers',
+  LoadReviewsById = 'loadReviewsById',
+  SendReview = 'sendReview',
   RequireAuthorization = 'requireAuthorization',
   RequireLogout = 'requireLogout',
+  RedirectToRoute = 'redirectToRoute',
+  SetUserData = 'setUserData',
 }
 
 export type SetActiveOfferIdType = {
@@ -33,6 +38,16 @@ export type LoadOffersType = {
   payload: OffersType,
 }
 
+export type LoadReviewsByIdType = {
+  type: ActionType.LoadReviewsById,
+  payload: ReviewsType,
+}
+
+export type SendReviewType = {
+  type: ActionType.SendReview,
+  payload: SentReviewType,
+}
+
 export type RequireAuthorizationType = {
   type: ActionType.RequireAuthorization,
   payload: AuthorizationStatus,
@@ -42,13 +57,27 @@ export type RequireLogoutType = {
   type: ActionType.RequireLogout,
 }
 
+export type RedirectToRouteType = {
+  type: ActionType.RedirectToRoute,
+  payload: AppRoute,
+}
+
+export type SetUserDataType = {
+  type: ActionType.SetUserData,
+  payload: {email: string},
+}
+
 export type Actions =
   | SetActiveOfferIdType
   | ChangeCityActionType
   | ChangeSortingType
   | LoadOffersType
+  | LoadReviewsByIdType
+  | SendReviewType
   | RequireAuthorizationType
-  | RequireLogoutType;
+  | RequireLogoutType
+  | RedirectToRouteType
+  | SetUserDataType;
 
 export type ThunkActionResultType<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 

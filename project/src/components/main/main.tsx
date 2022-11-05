@@ -1,21 +1,28 @@
+import {Link} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
-import {bindActionCreators, Dispatch} from 'redux';
+import {bindActionCreators} from 'redux';
 import {changeCity} from '../../store/action';
+import {logoutAction} from '../../store/api-actions';
 import CitiesList from '../cities-list/cities-list';
 import Sorting from '../sorting/sorting';
 import CardsList from '../cards-list/cards-list';
 import Map from '../map/map';
-import {Cities} from '../../const';
-import {Actions} from '../../types/action';
+import {Cities, AuthorizationStatus} from '../../const';
+import {ThunkAppDispatchType} from '../../types/action';
 import {State} from '../../types/state';
 
-const mapStateToProps = ({city, offers}: State) => ({
+const mapStateToProps = ({city, offers, authorizationStatus, user}: State) => ({
   currentCity: city,
   offers: offers,
+  authorizationStatus,
+  user,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
+const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => bindActionCreators({
   onCityChange: changeCity,
+  logout() {
+    dispatch(logoutAction())
+  }
 }, dispatch);
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -23,7 +30,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 
 function Main(props: PropsFromReduxType): JSX.Element {
-  const {currentCity, offers} = props;
+  const {currentCity, offers, logout, authorizationStatus, user} = props;
   
   return (
     <div className="page page--gray page--main">
@@ -36,20 +43,30 @@ function Main(props: PropsFromReduxType): JSX.Element {
               </a>
             </div>
             <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
+              {authorizationStatus === AuthorizationStatus.Auth 
+                ? <ul className="header__nav-list">
+                    <li className="header__nav-item user">
+                      <a className="header__nav-link header__nav-link--profile" href="#">
+                        <div className="header__avatar-wrapper user__avatar-wrapper">
+                        </div>
+                        <span className="header__user-name user__name">{user.email}</span>
+                      </a>
+                    </li>
+                    <li className="header__nav-item">
+                      <Link
+                        className="header__nav-link"
+                        onClick={logout}
+                        to="/"
+                      >
+                        <span className="header__signout">Sign out</span>
+                      </Link>
+                    </li>
+                  </ul>
+                
+                : <Link to="/login" className="header__nav-link">
+                    <span className="header__signout">Sign in</span>
+                  </Link>
+              }
             </nav>
           </div>
         </div>

@@ -1,10 +1,8 @@
 import {useRef, FormEvent} from "react";
-import {useHistory} from "react-router-dom";
 import {connect, ConnectedProps} from 'react-redux';
 import {loginAction} from '../../store/api-actions';
 import {ThunkAppDispatchType} from "../../types/action";
 import {AuthDataType} from "../../types/auth-data";
-import {AppRoute} from "../../const";
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({
   onSubmit(authdata: AuthDataType) {
@@ -21,8 +19,6 @@ function Login(props: PropsFromReduxType): JSX.Element {
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  const history = useHistory();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

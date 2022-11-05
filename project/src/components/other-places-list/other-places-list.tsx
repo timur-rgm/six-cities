@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import OtherPlace from '../other-place/other-place';
 import {OffersType} from '../../types/offers';
 
@@ -11,7 +11,7 @@ export default function OtherPlacesList(props: OtherPlacesType) {
   const {offers} = props;
   const [offerId, setOfferId] = useState(1);
 
-  let history = useHistory();
+  let navigate = useNavigate();
   
   return (
     <div className="near-places__list places__list">
@@ -20,7 +20,7 @@ export default function OtherPlacesList(props: OtherPlacesType) {
           offer={offer}
           key={offer.id}
           onArticleCLick={() => {
-            history.push(`/offer/${offer.id}`);
+            navigate(`/offer/${offer.id}`);
           }}
         />
       )}

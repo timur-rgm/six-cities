@@ -1,7 +1,8 @@
 import {SortingType} from './const';
 import {OfferType, OffersType, UnadaptedOfferType} from './types/offers';
+import {ReviewType, UnadaptedReviewType} from './types/reviews';
 
-export function adaptToClient(offer: UnadaptedOfferType): OfferType {
+export function adaptOfferToClient(offer: UnadaptedOfferType): OfferType {
   const adaptedOffer = {
     id: offer.id,
     image: offer.preview_image,
@@ -28,6 +29,18 @@ export function adaptToClient(offer: UnadaptedOfferType): OfferType {
   }
 
   return adaptedOffer;
+}
+
+export function adaptReviewToClient(review: UnadaptedReviewType): ReviewType {
+  const adaptedReview = {
+    avatarSrc: review.user.avatar_url,
+    userName: review.user.name,
+    reviewRate: review.rating,
+    reviewDate: review.date,
+    reviewText: review.comment,
+  }
+
+  return adaptedReview;
 }
 
 export function sortOffers(offers: OffersType, sortingType: SortingType) {
