@@ -24,7 +24,7 @@ function reviewForm(props: PropsFromReduxType) {
   const [comment, setComment] = useState({review: '', rating: ``});
   const {review, rating} = comment;
 
-  const RATING_VALUES = [5, 4, 3, 2, 1];
+  const RATING_VALUES = ['5', '4', '3', '2', '1'];
   const MIN_COMMENT_LENGTH = 20;
 
   const isSubmitButtonDisabled = () => {
@@ -40,6 +40,8 @@ function reviewForm(props: PropsFromReduxType) {
         rating: rating,
       }, activeOfferId);
     };
+
+    setComment({review: '', rating: ''});
   };
 
   const handleFieldChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -65,6 +67,7 @@ function reviewForm(props: PropsFromReduxType) {
                 className="form__rating-input visually-hidden"
                 name="rating"
                 value={value}
+                checked={value === rating}
                 id={`${value}-stars`}
                 type="radio"
                 onChange={handleFieldChange}
@@ -83,6 +86,7 @@ function reviewForm(props: PropsFromReduxType) {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        value={review}
         onChange={handleFieldChange}
       >
       </textarea>
