@@ -10,6 +10,7 @@ export enum ActionType {
   ChangeCity = 'changeCity',
   ChangeSorting = 'changeSorting',
   LoadOffers = 'loadOffers',
+  LoadOtherPlacesById = 'loadOtherPlacesById',
   LoadReviewsById = 'loadReviewsById',
   SendReview = 'sendReview',
   RequireAuthorization = 'requireAuthorization',
@@ -35,6 +36,11 @@ export type ChangeSortingType = {
 
 export type LoadOffersType = {
   type: ActionType.LoadOffers,
+  payload: OffersType,
+}
+
+export type LoadOtherPlacesByIdType = {
+  type: ActionType.LoadOtherPlacesById,
   payload: OffersType,
 }
 
@@ -72,6 +78,7 @@ export type Actions =
   | ChangeCityActionType
   | ChangeSortingType
   | LoadOffersType
+  | LoadOtherPlacesByIdType
   | LoadReviewsByIdType
   | SendReviewType
   | RequireAuthorizationType

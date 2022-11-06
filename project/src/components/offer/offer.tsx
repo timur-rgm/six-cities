@@ -189,9 +189,7 @@ function Offer(props: PropsFromReduxType): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OtherPlacesList
-              offers={offers.slice(0, 3)}
-            />
+            <OtherPlacesList />
           </section>
         </div>
       </main>

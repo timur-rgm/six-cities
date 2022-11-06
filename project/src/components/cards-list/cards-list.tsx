@@ -9,9 +9,9 @@ import {State} from '../../types/state';
 
 const mapStateToProps = ({city, offers, sortingType, activeOfferId}: State) => ({
   currentCity: city,
-  offers: offers,
+  offers,
   sortingType,
-  activeOfferId: activeOfferId,
+  activeOfferId,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({

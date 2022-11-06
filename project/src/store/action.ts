@@ -5,6 +5,7 @@ import {
   ChangeSortingType,
   SetActiveOfferIdType,
   LoadOffersType,
+  LoadOtherPlacesByIdType,
   LoadReviewsByIdType,
   SendReviewType,
   RequireAuthorizationType,
@@ -33,6 +34,11 @@ export const changeSorting = (sortingType: SortingType): ChangeSortingType => ({
 
 export const loadOffers = (offers: OffersType): LoadOffersType => ({
   type: ActionType.LoadOffers,
+  payload: offers,
+})
+
+export const loadOtherPlacesById = (offers: OffersType): LoadOtherPlacesByIdType => ({
+  type: ActionType.LoadOtherPlacesById,
   payload: offers,
 })
 

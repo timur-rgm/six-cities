@@ -8,6 +8,8 @@ export type State = {
   sortingType: SortingType,
   isOffersLoaded: boolean,
   activeOfferId: number,
+  otherPlaces: OffersType,
+  isOtherPlacesLoaded: boolean,
   reviews: ReviewsType,
   isReviewsLoaded: boolean,
   authorizationStatus: AuthorizationStatus,

@@ -7,6 +7,8 @@ const initialState = {
   offers: [],
   isOffersLoaded: false,
   activeOfferId: 0,
+  otherPlaces: [],
+  isOtherPlacesLoaded: false,
   reviews: [],
   isReviewsLoaded: false,
   sortingType: SortingType.Popular,
@@ -18,6 +20,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
     case ActionType.LoadOffers:
       return {...state, offers: action.payload, isOffersLoaded: true};
+    case ActionType.LoadOtherPlacesById:
+      return {...state, otherPlaces: action.payload, isOtherPlacesLoaded: true};
     case ActionType.LoadReviewsById:
       return {...state, reviews: action.payload, isReviewsLoaded: true};
     case ActionType.SetActiveOfferId:

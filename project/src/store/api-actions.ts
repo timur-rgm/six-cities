@@ -1,5 +1,6 @@
 import {
   loadOffers,
+  loadOtherPlacesById,
   loadReviewsById,
   requireAuthorization,
   requireLogout,
@@ -18,6 +19,13 @@ export function fetchOffersAction(): ThunkActionResultType {
   return async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<UnadaptedOfferType[]>(ApiRoute.Hotels);
     dispatch(loadOffers(data.map(adaptOfferToClient)));
+  }
+}
+
+export function getOtherPlacesByIdAction(id: number): ThunkActionResultType {
+  return async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<UnadaptedOfferType[]>(`${ApiRoute.Hotels}/${id}/nearby`);
+    dispatch(loadOtherPlacesById(data.map(adaptOfferToClient)));
   }
 }
 
