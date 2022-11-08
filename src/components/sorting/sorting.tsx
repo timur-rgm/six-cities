@@ -4,12 +4,12 @@ import {connect, ConnectedProps} from 'react-redux';
 import {changeSorting} from '../../store/action';
 import {SortingType} from '../../const';
 import {Actions} from '../../types/action';
-import {State} from '../../types/state';
+import {RootStateType} from '../../store/root-reducer';
  
-const mapStateToProps = ({city, offers, sortingType}: State) => ({
-  currentCity: city,
-  offers: offers,
-  sortingType: sortingType,
+const mapStateToProps = ({DATA, PROCESS}: RootStateType) => ({
+  offers: DATA.offers,
+  currentCity: PROCESS.currentCity,
+  sortingType: PROCESS.currentSortingType,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({

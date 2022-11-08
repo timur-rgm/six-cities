@@ -3,7 +3,6 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import {reducer} from './store/reducer';
 import {rootReducer} from './store/root-reducer';
 import {requireAuthorization} from './store/action';
 import App from './components/app/app';

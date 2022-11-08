@@ -5,15 +5,15 @@ import ReviewForm from "../review-form/review-form";
 import LoadingScreen from "../loading-screen/loading-screen";
 import {fetchReviewByIdAction} from "../../store/api-actions";
 import {ThunkAppDispatchType} from '../../types/action';
-import {State} from "../../types/state";
+import {RootStateType} from "../../store/root-reducer";
 import {AuthorizationStatus} from '../../const';
 
-const mapStateToProps = ({activeOfferId, authorizationStatus, user, reviews, isReviewsLoaded,}: State) => ({
-  reviews,
-  isReviewsLoaded,
-  activeOfferId,
-  authorizationStatus,
-  user,
+const mapStateToProps = ({DATA, PROCESS, USER}: RootStateType) => ({
+  reviews: DATA.reviews,
+  isReviewsLoaded: DATA.isReviewsLoaded,
+  activeOfferId: PROCESS.activeOfferId,
+  authorizationStatus: USER.authorizationStatus,
+  user: USER.user,
 })
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({

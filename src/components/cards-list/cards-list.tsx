@@ -5,13 +5,13 @@ import {setActiveOfferId} from '../../store/action';
 import Card from '../card/card';
 import {sortOffers} from '../../utils';
 import {Actions} from '../../types/action';
-import {State} from '../../types/state';
+import {RootStateType} from '../../store/root-reducer';
 
-const mapStateToProps = ({city, offers, sortingType, activeOfferId}: State) => ({
-  currentCity: city,
-  offers,
-  sortingType,
-  activeOfferId,
+const mapStateToProps = ({DATA, PROCESS}: RootStateType) => ({
+  offers: DATA.offers,
+  currentCity: PROCESS.currentCity,
+  activeOfferId: PROCESS.activeOfferId,
+  sortingType: PROCESS.currentSortingType,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({

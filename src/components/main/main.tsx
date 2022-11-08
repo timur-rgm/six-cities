@@ -9,13 +9,13 @@ import CardsList from '../cards-list/cards-list';
 import Map from '../map/map';
 import {Cities, AuthorizationStatus} from '../../const';
 import {ThunkAppDispatchType} from '../../types/action';
-import {State} from '../../types/state';
+import {RootStateType} from '../../store/root-reducer';
 
-const mapStateToProps = ({city, offers, authorizationStatus, user}: State) => ({
-  currentCity: city,
-  offers: offers,
-  authorizationStatus,
-  user,
+const mapStateToProps = ({DATA, PROCESS, USER}: RootStateType) => ({
+  offers: DATA.offers,
+  currentCity: PROCESS.currentCity,
+  authorizationStatus: USER.authorizationStatus,
+  user: USER.user,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => bindActionCreators({

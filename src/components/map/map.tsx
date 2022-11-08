@@ -1,14 +1,14 @@
 import {useEffect, useRef, MutableRefObject} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {Cities} from '../../const';
-import {State} from '../../types/state';
+import {RootStateType} from '../../store/root-reducer';
 import L, { Icon, Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const mapStateToProps = ({city, offers, activeOfferId}: State) => ({
-  currentCity: city,
-  offers: offers,
-  activeOfferId: activeOfferId,
+const mapStateToProps = ({DATA, PROCESS}: RootStateType) => ({
+  offers: DATA.offers,
+  currentCity: PROCESS.currentCity,
+  activeOfferId: PROCESS.activeOfferId,
 })
 
 const connector = connect(mapStateToProps);

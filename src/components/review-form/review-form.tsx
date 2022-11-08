@@ -3,10 +3,10 @@ import {connect, ConnectedProps} from "react-redux";
 import {postReviewAction} from '../../store/api-actions';
 import {ThunkAppDispatchType} from "../../types/action";
 import {SentReviewType} from "../../types/reviews";
-import {State} from "../../types/state";
+import {RootStateType} from "../../store/root-reducer";
 
-const mapStateToProps = ({activeOfferId}: State) => ({
-  activeOfferId,
+const mapStateToProps = ({PROCESS}: RootStateType) => ({
+  activeOfferId: PROCESS.activeOfferId,
 })
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({

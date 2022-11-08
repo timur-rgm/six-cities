@@ -5,13 +5,13 @@ import {getOtherPlacesByIdAction} from "../../store/api-actions";
 import OtherPlace from '../other-place/other-place';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {ThunkAppDispatchType} from '../../types/action';
-import {State} from "../../types/state";
+import {RootStateType} from "../../store/root-reducer";
 import {OfferType} from '../../types/offers';
 
-const mapStateToProps = ({otherPlaces, isOtherPlacesLoaded, activeOfferId}: State) => ({
-  otherPlaces,
-  isOtherPlacesLoaded,
-  activeOfferId,
+const mapStateToProps = ({DATA, PROCESS}: RootStateType) => ({
+  otherPlaces: DATA.otherPlaces,
+  isOtherPlacesLoaded: DATA.isOtherPlacesLoaded,
+  activeOfferId: PROCESS.activeOfferId,
 })
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({

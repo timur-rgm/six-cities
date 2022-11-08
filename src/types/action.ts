@@ -1,6 +1,6 @@
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {AxiosInstance} from 'axios';
-import {State} from './state';
+import {RootStateType} from '../store/root-reducer';
 import {AuthorizationStatus, SortingType, AppRoute} from '../const';
 import {OffersType} from './offers';
 import {ReviewsType, SentReviewType} from './reviews';
@@ -86,6 +86,6 @@ export type Actions =
   | RedirectToRouteType
   | SetUserDataType;
 
-export type ThunkActionResultType<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
+export type ThunkActionResultType<R = Promise<void>> = ThunkAction<R, RootStateType, AxiosInstance, Actions>;
 
-export type ThunkAppDispatchType = ThunkDispatch<State, AxiosInstance, Actions>;
+export type ThunkAppDispatchType = ThunkDispatch<RootStateType, AxiosInstance, Actions>;

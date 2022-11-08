@@ -1,14 +1,14 @@
 import {RouteProps, Navigate} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
-import {State} from '../../types/state';
+import {RootStateType} from '../../store/root-reducer';
 import {AppRoute, AuthorizationStatus} from '../../const';
 
 type PrivateRouteProps = RouteProps & {
   children: JSX.Element,
 }
 
-const mapStateToProps = ({authorizationStatus}: State) => ({
-  authorizationStatus,
+const mapStateToProps = ({USER}: RootStateType) => ({
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const connector = connect(mapStateToProps);

@@ -10,13 +10,12 @@ import Offer from '../offer/offer';
 import Error from '../error/error';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {AppRoute} from '../../const';
-import {State} from '../../types/state';
-import {OffersType} from '../../types/offers';
+import {RootStateType} from '../../store/root-reducer';
 import {ReviewsType} from '../../types/reviews';
 
-const mapStateToProps = ({offers, isOffersLoaded}: State) => ({
-  offers,
-  isOffersLoaded: isOffersLoaded,
+const mapStateToProps = ({DATA}: RootStateType) => ({
+  offers: DATA.offers,
+  isOffersLoaded: DATA.isOffersLoaded,
 })
 
 const connector = connect(mapStateToProps);
@@ -28,7 +27,7 @@ type AppProps = {
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 type ConnectedComponentPropsType = PropsFromReduxType & AppProps;
 
-function App({offers, reviews, isOffersLoaded}: ConnectedComponentPropsType): JSX.Element {
+function App({offers, isOffersLoaded}: ConnectedComponentPropsType): JSX.Element {
 
   if (!isOffersLoaded) {
     return (

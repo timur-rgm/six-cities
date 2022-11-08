@@ -2,13 +2,13 @@ import {Link} from 'react-router-dom';
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {changeCity, loadOffers} from '../../store/action';
-import {State} from '../../types/state';
+import {RootStateType} from '../../store/root-reducer';
 import {CitiesType} from '../../const';
 import {Actions} from '../../types/action';
 
-const mapStateToProps = ({city, offers}: State) => ({
-  currentCity: city,
-  offers: offers,
+const mapStateToProps = ({DATA, PROCESS}: RootStateType) => ({
+  offers: DATA.offers,
+  currentCity: PROCESS.currentCity,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
