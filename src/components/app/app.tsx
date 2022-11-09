@@ -12,10 +12,13 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {AppRoute} from '../../const';
 import {RootStateType} from '../../store/root-reducer';
 import {ReviewsType} from '../../types/reviews';
+import {getOffers, getLoadedOffersStatus} from '../../store/data/selectors';
+import {getActiveOfferId} from '../../store/process/selectors';
 
-const mapStateToProps = ({DATA}: RootStateType) => ({
-  offers: DATA.offers,
-  isOffersLoaded: DATA.isOffersLoaded,
+const mapStateToProps = (state: RootStateType) => ({
+  offers: getOffers(state),
+  isOffersLoaded: getLoadedOffersStatus(state),
+  activeOfferId: getActiveOfferId(state),
 })
 
 const connector = connect(mapStateToProps);
@@ -27,7 +30,7 @@ type AppProps = {
 type PropsFromReduxType = ConnectedProps<typeof connector>;
 type ConnectedComponentPropsType = PropsFromReduxType & AppProps;
 
-function App({offers, isOffersLoaded}: ConnectedComponentPropsType): JSX.Element {
+function App({offers, isOffersLoaded, activeOfferId}: ConnectedComponentPropsType): JSX.Element {
 
   if (!isOffersLoaded) {
     return (
@@ -40,7 +43,7 @@ function App({offers, isOffersLoaded}: ConnectedComponentPropsType): JSX.Element
       <Routes>
         <Route path={AppRoute.Root} element={<Main />} />
         <Route path={AppRoute.Login} element={<Login />} />
-        <Route path="/offer/:id" element={<Offer />} />
+        <Route path='/offer/:1' element={<Offer />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute>
             <Favorites offers={offers} />

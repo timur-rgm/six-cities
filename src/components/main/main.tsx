@@ -10,12 +10,15 @@ import Map from '../map/map';
 import {Cities, AuthorizationStatus} from '../../const';
 import {ThunkAppDispatchType} from '../../types/action';
 import {RootStateType} from '../../store/root-reducer';
+import {getOffers} from '../../store/data/selectors';
+import {getCurrentCity} from '../../store/process/selectors';
+import {getAuthorizationStatus, getUserData} from '../../store/user/selectors';
 
-const mapStateToProps = ({DATA, PROCESS, USER}: RootStateType) => ({
-  offers: DATA.offers,
-  currentCity: PROCESS.currentCity,
-  authorizationStatus: USER.authorizationStatus,
-  user: USER.user,
+const mapStateToProps = (state: RootStateType) => ({
+  offers: getOffers(state),
+  currentCity: getCurrentCity(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  user: getUserData(state),
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => bindActionCreators({

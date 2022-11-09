@@ -2,13 +2,15 @@ import {useEffect, useRef, MutableRefObject} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {Cities} from '../../const';
 import {RootStateType} from '../../store/root-reducer';
+import {getOffers} from '../../store/data/selectors';
+import {getCurrentCity, getActiveOfferId} from '../../store/process/selectors';
 import L, { Icon, Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const mapStateToProps = ({DATA, PROCESS}: RootStateType) => ({
-  offers: DATA.offers,
-  currentCity: PROCESS.currentCity,
-  activeOfferId: PROCESS.activeOfferId,
+const mapStateToProps = (state: RootStateType) => ({
+  offers: getOffers(state),
+  currentCity: getCurrentCity(state),
+  activeOfferId: getActiveOfferId(state),
 })
 
 const connector = connect(mapStateToProps);

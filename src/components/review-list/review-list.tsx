@@ -7,13 +7,16 @@ import {fetchReviewByIdAction} from "../../store/api-actions";
 import {ThunkAppDispatchType} from '../../types/action';
 import {RootStateType} from "../../store/root-reducer";
 import {AuthorizationStatus} from '../../const';
+import {getReviews, getLoadedReviewsStatus} from '../../store/data/selectors';
+import {getActiveOfferId} from '../../store/process/selectors';
+import {getAuthorizationStatus, getUserData} from '../../store/user/selectors';
 
-const mapStateToProps = ({DATA, PROCESS, USER}: RootStateType) => ({
-  reviews: DATA.reviews,
-  isReviewsLoaded: DATA.isReviewsLoaded,
-  activeOfferId: PROCESS.activeOfferId,
-  authorizationStatus: USER.authorizationStatus,
-  user: USER.user,
+const mapStateToProps = (state: RootStateType) => ({
+  reviews: getReviews(state),
+  isReviewsLoaded: getLoadedReviewsStatus(state),
+  activeOfferId: getActiveOfferId(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  user: getUserData(state),
 })
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({

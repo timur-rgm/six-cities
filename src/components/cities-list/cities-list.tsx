@@ -5,10 +5,12 @@ import {changeCity, loadOffers} from '../../store/action';
 import {RootStateType} from '../../store/root-reducer';
 import {CitiesType} from '../../const';
 import {Actions} from '../../types/action';
+import {getOffers} from '../../store/data/selectors';
+import {getCurrentCity} from '../../store/process/selectors';
 
-const mapStateToProps = ({DATA, PROCESS}: RootStateType) => ({
-  offers: DATA.offers,
-  currentCity: PROCESS.currentCity,
+const mapStateToProps = (state: RootStateType) => ({
+  offers: getOffers(state),
+  currentCity: getCurrentCity(state),
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({

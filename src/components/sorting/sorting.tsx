@@ -5,11 +5,13 @@ import {changeSorting} from '../../store/action';
 import {SortingType} from '../../const';
 import {Actions} from '../../types/action';
 import {RootStateType} from '../../store/root-reducer';
+import {getOffers} from '../../store/data/selectors';
+import {getCurrentCity, getCurrentSortingType} from '../../store/process/selectors';
  
-const mapStateToProps = ({DATA, PROCESS}: RootStateType) => ({
-  offers: DATA.offers,
-  currentCity: PROCESS.currentCity,
-  sortingType: PROCESS.currentSortingType,
+const mapStateToProps = (state: RootStateType) => ({
+  offers: getOffers(state),
+  currentCity: getCurrentCity(state),
+  sortingType: getCurrentSortingType(state),
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({

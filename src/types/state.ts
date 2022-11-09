@@ -1,6 +1,7 @@
 import {AuthorizationStatus, SortingType} from '../const';
 import {OffersType} from './offers';
 import {ReviewsType} from './reviews';
+import {UserDataType} from './user-data';
 
 export type DataStateType = {
   offers: OffersType,
@@ -19,7 +20,5 @@ export type ProcessStateType = {
 
 export type UserStateType = {
   authorizationStatus: AuthorizationStatus,
-  user: {
-    email?: string,
-  }
+  user: UserDataType,
 }

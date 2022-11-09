@@ -7,14 +7,16 @@ import ReviewList from '../review-list/review-list';
 import OtherPlacesList from '../other-places-list/other-places-list';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {RootStateType} from '../../store/root-reducer';
-
+import {getOffers} from '../../store/data/selectors';
+import {getActiveOfferId} from '../../store/process/selectors';
+import {getAuthorizationStatus, getUserData} from '../../store/user/selectors';
 import {ThunkAppDispatchType} from '../../types/action';
 
-const mapStateToProps = ({DATA, PROCESS, USER}: RootStateType) => ({
-  offers: DATA.offers,
-  activeOfferId: PROCESS.activeOfferId,
-  authorizationStatus: USER.authorizationStatus,
-  user: USER.user,
+const mapStateToProps = (state: RootStateType) => ({
+  offers: getOffers(state),
+  activeOfferId: getActiveOfferId(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  user: getUserData(state),
 })
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => bindActionCreators({

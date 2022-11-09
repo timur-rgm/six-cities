@@ -4,9 +4,10 @@ import {postReviewAction} from '../../store/api-actions';
 import {ThunkAppDispatchType} from "../../types/action";
 import {SentReviewType} from "../../types/reviews";
 import {RootStateType} from "../../store/root-reducer";
+import {getActiveOfferId} from '../../store/process/selectors';
 
-const mapStateToProps = ({PROCESS}: RootStateType) => ({
-  activeOfferId: PROCESS.activeOfferId,
+const mapStateToProps = (state: RootStateType) => ({
+  activeOfferId: getActiveOfferId(state),
 })
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({

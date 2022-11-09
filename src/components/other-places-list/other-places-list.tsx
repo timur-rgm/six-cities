@@ -7,11 +7,13 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {ThunkAppDispatchType} from '../../types/action';
 import {RootStateType} from "../../store/root-reducer";
 import {OfferType} from '../../types/offers';
+import {getOtherPlaces, getLoadedOtherPlacesStatus} from '../../store/data/selectors';
+import {getActiveOfferId} from '../../store/process/selectors';
 
-const mapStateToProps = ({DATA, PROCESS}: RootStateType) => ({
-  otherPlaces: DATA.otherPlaces,
-  isOtherPlacesLoaded: DATA.isOtherPlacesLoaded,
-  activeOfferId: PROCESS.activeOfferId,
+const mapStateToProps = (state: RootStateType) => ({
+  otherPlaces: getOtherPlaces(state),
+  isOtherPlacesLoaded: getLoadedOtherPlacesStatus(state),
+  activeOfferId: getActiveOfferId(state),
 })
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({
