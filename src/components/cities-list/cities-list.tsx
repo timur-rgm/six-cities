@@ -4,7 +4,6 @@ import {connect, ConnectedProps} from 'react-redux';
 import {changeCity, loadOffers} from '../../store/action';
 import {RootStateType} from '../../store/root-reducer';
 import {CitiesType} from '../../const';
-import {Actions} from '../../types/action';
 import {getOffers} from '../../store/data/selectors';
 import {getCurrentCity} from '../../store/process/selectors';
 

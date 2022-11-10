@@ -3,7 +3,6 @@ import {bindActionCreators, Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {changeSorting} from '../../store/action';
 import {SortingType} from '../../const';
-import {Actions} from '../../types/action';
 import {RootStateType} from '../../store/root-reducer';
 import {getOffers} from '../../store/data/selectors';
 import {getCurrentCity, getCurrentSortingType} from '../../store/process/selectors';
