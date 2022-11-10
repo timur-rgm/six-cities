@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
 import {rootReducer} from './store/root-reducer';
 import {requireAuthorization} from './store/action';
@@ -7,7 +7,6 @@ import App from './components/app/app';
 import {createApi} from './services/api';
 import {fetchOffersAction, checkAuthAction} from './store/api-actions';
 import {AuthorizationStatus} from './const';
-import {reviews} from './mocks/reviews';
 import {redirect} from './store/middlewares/redirect';
 
 const api = createApi(
@@ -33,6 +32,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Provider store={store}>
-    <App reviews={reviews} />
+    <App />
   </Provider>
 );

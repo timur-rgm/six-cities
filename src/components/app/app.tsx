@@ -1,4 +1,4 @@
-import {connect, ConnectedProps} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Route, Routes} from 'react-router-dom'
 import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from '../private-route/private-route';
@@ -10,27 +10,12 @@ import Offer from '../offer/offer';
 import Error from '../error/error';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {AppRoute} from '../../const';
-import {RootStateType} from '../../store/root-reducer';
-import {ReviewsType} from '../../types/reviews';
 import {getOffers, getLoadedOffersStatus} from '../../store/data/selectors';
-import {getActiveOfferId} from '../../store/process/selectors';
 
-const mapStateToProps = (state: RootStateType) => ({
-  offers: getOffers(state),
-  isOffersLoaded: getLoadedOffersStatus(state),
-  activeOfferId: getActiveOfferId(state),
-})
 
-const connector = connect(mapStateToProps);
-
-type AppProps = {
-  reviews: ReviewsType,
-}
-
-type PropsFromReduxType = ConnectedProps<typeof connector>;
-type ConnectedComponentPropsType = PropsFromReduxType & AppProps;
-
-function App({offers, isOffersLoaded, activeOfferId}: ConnectedComponentPropsType): JSX.Element {
+function App(): JSX.Element {
+  const offers = useSelector(getOffers);
+  const isOffersLoaded = useSelector(getLoadedOffersStatus);
 
   if (!isOffersLoaded) {
     return (
@@ -55,4 +40,4 @@ function App({offers, isOffersLoaded, activeOfferId}: ConnectedComponentPropsTyp
   );
 }
 
-export default connector(App);
+export default App;

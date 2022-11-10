@@ -1,11 +1,10 @@
-import {ActionCreatorWithPayload} from '@reduxjs/toolkit';
 import {Link} from 'react-router-dom';
 import {OfferType} from '../../types/offers';
 
 type CardType = {
   offer: OfferType,
   onArticleCLick: () => void,
-  setActiveOfferId: ActionCreatorWithPayload<number, string>,
+  setActiveOfferId: (id: number) => void,
 }
 
 export default function Card(props: CardType): JSX.Element {

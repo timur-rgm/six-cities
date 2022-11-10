@@ -1,34 +1,24 @@
+import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
-import {bindActionCreators, Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
 import {setActiveOfferId} from '../../store/action';
 import Card from '../card/card';
 import {sortOffers} from '../../utils';
-import {RootStateType} from '../../store/root-reducer';
 import {getOffers} from '../../store/data/selectors';
-import {getCurrentCity, getActiveOfferId, getCurrentSortingType} from '../../store/process/selectors';
+import {getCurrentCity, getCurrentSortingType} from '../../store/process/selectors';
+import {AppDispatch} from '../../types/state';
 
-const mapStateToProps = (state: RootStateType) => ({
-  offers: getOffers(state),
-  currentCity: getCurrentCity(state),
-  activeOfferId: getActiveOfferId(state),
-  sortingType: getCurrentSortingType(state),
-})
+function CardsList(): JSX.Element {
+  const offers = useSelector(getOffers);
+  const currentCity = useSelector(getCurrentCity);
+  const sortingType = useSelector(getCurrentSortingType);
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  setActiveOfferId: setActiveOfferId,
-}, dispatch)
+  const dispatch: AppDispatch = useDispatch();
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+  const onActiveOfferId = (id: number) => {
+    dispatch(setActiveOfferId(id));
+  }
 
-type CardsListType = {}
-type PropsFromReduxType = ConnectedProps<typeof connector>;
-type ConnectedComponentPropsType = PropsFromReduxType & CardsListType;
-
-function CardsList(props: ConnectedComponentPropsType): JSX.Element {
-  const {currentCity, offers, sortingType, setActiveOfferId} = props;
-
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -37,11 +27,11 @@ function CardsList(props: ConnectedComponentPropsType): JSX.Element {
           offer={offer}
           key={offer.id}
           onArticleCLick={() => navigate(`/offer/${offer.id}`)}
-          setActiveOfferId={setActiveOfferId}
+          setActiveOfferId={onActiveOfferId}
         />
       )}
     </div>
   )
 }
 
-export default connector(CardsList);
+export default CardsList;

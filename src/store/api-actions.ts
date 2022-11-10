@@ -62,7 +62,7 @@ export function loginAction({login: email, password}: AuthDataType): ThunkAction
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(setUserData({email: email}));
-    dispatch(redirectToRoute(AppRoute.Root))
+    dispatch(redirectToRoute(AppRoute.Root));
   }
 }
 

@@ -1,36 +1,23 @@
 import {Link} from 'react-router-dom';
-import {connect, ConnectedProps} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import {logoutAction} from '../../store/api-actions';
 import Map from '../map/map';
 import ReviewList from '../review-list/review-list';
 import OtherPlacesList from '../other-places-list/other-places-list';
+import {useSelector, useDispatch} from 'react-redux';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {RootStateType} from '../../store/root-reducer';
 import {getOffers} from '../../store/data/selectors';
 import {getActiveOfferId} from '../../store/process/selectors';
 import {getAuthorizationStatus, getUserData} from '../../store/user/selectors';
-import {ThunkAppDispatchType} from '../../types/action';
+import {AppDispatch} from '../../types/state';
 
-const mapStateToProps = (state: RootStateType) => ({
-  offers: getOffers(state),
-  activeOfferId: getActiveOfferId(state),
-  authorizationStatus: getAuthorizationStatus(state),
-  user: getUserData(state),
-})
+function Offer(): JSX.Element {
+  const offers = useSelector(getOffers);
+  const activeOfferId = useSelector(getActiveOfferId);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const user = useSelector(getUserData);
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => bindActionCreators({
-  logout() {
-    dispatch(logoutAction())
-  },
-}, dispatch);
+  const dispatch: AppDispatch = useDispatch();
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromReduxType = ConnectedProps<typeof connector>;
-
-function Offer(props: PropsFromReduxType): JSX.Element {
-  const {offers, activeOfferId, logout, authorizationStatus, user,} = props;
   const {
     title,
     description,
@@ -67,7 +54,7 @@ function Offer(props: PropsFromReduxType): JSX.Element {
                     <li className="header__nav-item">
                       <Link
                         className="header__nav-link"
-                        onClick={logout}
+                        onClick={() => dispatch(logoutAction())}
                         to="/"
                       >
                         <span className="header__signout">Sign out</span>
@@ -199,4 +186,4 @@ function Offer(props: PropsFromReduxType): JSX.Element {
   );
 }
 
-export default connector(Offer);
+export default Offer;
