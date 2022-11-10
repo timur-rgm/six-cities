@@ -13,7 +13,7 @@ const mapStateToProps = (state: RootStateType) => ({
   currentCity: getCurrentCity(state),
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   onCityChange: changeCity,
   loadOffers: loadOffers,
 }, dispatch)

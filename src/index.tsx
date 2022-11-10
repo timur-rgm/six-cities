@@ -8,7 +8,6 @@ import {createApi} from './services/api';
 import {fetchOffersAction, checkAuthAction} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 import {reviews} from './mocks/reviews';
-import {ThunkAppDispatchType} from './types/action';
 import {redirect} from './store/middlewares/redirect';
 
 const api = createApi(
@@ -25,8 +24,8 @@ export const store = configureStore({
     }).concat(redirect),
 });
 
-(store.dispatch as ThunkAppDispatchType)(checkAuthAction());
-(store.dispatch as ThunkAppDispatchType)(fetchOffersAction());
+store.dispatch(checkAuthAction());
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

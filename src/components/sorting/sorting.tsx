@@ -14,7 +14,7 @@ const mapStateToProps = (state: RootStateType) => ({
   sortingType: getCurrentSortingType(state),
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   changeSorting: changeSorting,
 }, dispatch)
 
