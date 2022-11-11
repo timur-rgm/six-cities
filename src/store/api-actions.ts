@@ -15,7 +15,7 @@ import {AuthDataType} from '../types/auth-data';
 import {UnadaptedOfferType} from '../types/offers';
 import {UnadaptedReviewType, SentReviewType} from '../types/reviews';
 
-export function fetchOffersAction(): ThunkActionResultType {
+export function getOffersAction(): ThunkActionResultType {
   return async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<UnadaptedOfferType[]>(ApiRoute.Hotels);
     dispatch(loadOffers(data.map(adaptOfferToClient)));
@@ -29,7 +29,7 @@ export function getOtherPlacesByIdAction(id: number): ThunkActionResultType {
   }
 }
 
-export function fetchReviewByIdAction(id: number): ThunkActionResultType {
+export function getReviewByIdAction(id: number): ThunkActionResultType {
   return async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<UnadaptedReviewType[]>(`${ApiRoute.Comments}/${id}`);
     dispatch(loadReviewsById(data.map((review) => adaptReviewToClient(review))));
@@ -62,7 +62,7 @@ export function loginAction({login: email, password}: AuthDataType): ThunkAction
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(setUserData({email: email}));
-    dispatch(redirectToRoute(AppRoute.Root))
+    dispatch(redirectToRoute(AppRoute.Root));
   }
 }
 

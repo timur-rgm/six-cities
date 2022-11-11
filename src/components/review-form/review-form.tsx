@@ -1,26 +1,14 @@
-import React, {useState, FormEvent, ChangeEvent} from "react"
-import {connect, ConnectedProps} from "react-redux";
+import React, {useState, FormEvent, ChangeEvent} from "react";
+import {useSelector, useDispatch} from 'react-redux';
 import {postReviewAction} from '../../store/api-actions';
-import {ThunkAppDispatchType} from "../../types/action";
-import {SentReviewType} from "../../types/reviews";
-import {State} from "../../types/state";
+import {getActiveOfferId} from '../../store/process/selectors';
+import {AppDispatch} from "../../types/state";
 
-const mapStateToProps = ({activeOfferId}: State) => ({
-  activeOfferId,
-})
+function reviewForm() {
+  const activeOfferId = useSelector(getActiveOfferId);
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({
-  onSubmit(review: SentReviewType, id: number) {
-    dispatch(postReviewAction(review, id));
-  },
-})
+  const dispatch: AppDispatch = useDispatch();
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromReduxType = ConnectedProps<typeof connector>;
-
-function reviewForm(props: PropsFromReduxType) {
-  const {activeOfferId, onSubmit} = props;
   const [comment, setComment] = useState({review: '', rating: ``});
   const {review, rating} = comment;
 
@@ -35,10 +23,10 @@ function reviewForm(props: PropsFromReduxType) {
     evt.preventDefault();
 
     if (review && rating) {
-      onSubmit({
+      dispatch(postReviewAction({
         comment: review,
         rating: rating,
-      }, activeOfferId);
+      }, activeOfferId))
     };
 
     setComment({review: '', rating: ''});
@@ -100,4 +88,4 @@ function reviewForm(props: PropsFromReduxType) {
   );
 }
 
-export default connector(reviewForm);
+export default reviewForm;

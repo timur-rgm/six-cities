@@ -1,36 +1,25 @@
 import {useEffect} from "react"
-import {connect, ConnectedProps} from 'react-redux';
+import {useSelector, useDispatch} from "react-redux";
 import Review from "../review/review";
 import ReviewForm from "../review-form/review-form";
 import LoadingScreen from "../loading-screen/loading-screen";
-import {fetchReviewByIdAction} from "../../store/api-actions";
-import {ThunkAppDispatchType} from '../../types/action';
-import {State} from "../../types/state";
+import {getReviewByIdAction} from "../../store/api-actions";
 import {AuthorizationStatus} from '../../const';
+import {getReviews, getLoadedReviewsStatus} from '../../store/data/selectors';
+import {getActiveOfferId} from '../../store/process/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {AppDispatch} from "../../types/state";
 
-const mapStateToProps = ({activeOfferId, authorizationStatus, user, reviews, isReviewsLoaded,}: State) => ({
-  reviews,
-  isReviewsLoaded,
-  activeOfferId,
-  authorizationStatus,
-  user,
-})
+function ReviewList(): JSX.Element {
+  const reviews = useSelector(getReviews);
+  const isReviewsLoaded = useSelector(getLoadedReviewsStatus);
+  const activeOfferId = useSelector(getActiveOfferId);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({
-  onloadReviews(id: number) {
-    dispatch(fetchReviewByIdAction(id));
-  },
-})
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromReduxType = ConnectedProps<typeof connector>;
-
-function ReviewList(props: PropsFromReduxType): JSX.Element {
-  const {activeOfferId, authorizationStatus, reviews, isReviewsLoaded, onloadReviews} = props;
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    onloadReviews(activeOfferId);
+    dispatch(getReviewByIdAction(activeOfferId))
   }, [])
 
   return(
@@ -52,4 +41,4 @@ function ReviewList(props: PropsFromReduxType): JSX.Element {
   )
 }
 
-export default connector(ReviewList);
+export default ReviewList;

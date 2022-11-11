@@ -1,22 +1,15 @@
 import {useEffect, useRef, MutableRefObject} from 'react';
-import {connect, ConnectedProps} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Cities} from '../../const';
-import {State} from '../../types/state';
+import {getOffers} from '../../store/data/selectors';
+import {getCurrentCity, getActiveOfferId} from '../../store/process/selectors';
 import L, { Icon, Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const mapStateToProps = ({city, offers, activeOfferId}: State) => ({
-  currentCity: city,
-  offers: offers,
-  activeOfferId: activeOfferId,
-})
-
-const connector = connect(mapStateToProps);
-
-type PropsFromReduxType = ConnectedProps<typeof connector>;
-
-function CityMap(props: PropsFromReduxType): JSX.Element {
-  const {currentCity, offers, activeOfferId} = props;
+function CityMap(): JSX.Element {
+  const offers = useSelector(getOffers);
+  const currentCity = useSelector(getCurrentCity);
+  const activeOfferId = useSelector(getActiveOfferId);
 
   const map: MutableRefObject<Map | null > = useRef(null);
   const mapRef = useRef(null);
@@ -78,4 +71,4 @@ function CityMap(props: PropsFromReduxType): JSX.Element {
   return <div style={{height: '100%'}} ref={mapRef}></div>
 }
 
-export default connector(CityMap);
+export default CityMap;

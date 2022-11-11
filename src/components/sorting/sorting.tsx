@@ -1,27 +1,15 @@
 import {useState} from 'react';
-import {bindActionCreators, Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
+import {useSelector, useDispatch} from "react-redux";
 import {changeSorting} from '../../store/action';
 import {SortingType} from '../../const';
-import {Actions} from '../../types/action';
-import {State} from '../../types/state';
- 
-const mapStateToProps = ({city, offers, sortingType}: State) => ({
-  currentCity: city,
-  offers: offers,
-  sortingType: sortingType,
-})
+import {getCurrentSortingType} from '../../store/process/selectors';
+import {AppDispatch} from '../../types/state';
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
-  changeSorting: changeSorting,
-}, dispatch)
+function Sorting(): JSX.Element {
+  const sortingType = useSelector(getCurrentSortingType);
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+  const dispatch: AppDispatch = useDispatch();
 
-type PropsFromReduxType = ConnectedProps<typeof connector>;
-
-function Sorting(props: PropsFromReduxType): JSX.Element {
-  const {sortingType, changeSorting} = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -45,7 +33,7 @@ function Sorting(props: PropsFromReduxType): JSX.Element {
         {Object.values(SortingType).map((name, i) => 
           <li
             onClick={() => {
-              changeSorting(name);
+              dispatch(changeSorting(name));
               setIsOpen(!isOpen);
             }}
             className={`places__option ${sortingType === name && `places__option--active`}`}
@@ -61,4 +49,4 @@ function Sorting(props: PropsFromReduxType): JSX.Element {
   )
 }
 
-export default connector(Sorting);
+export default Sorting;

@@ -1,36 +1,25 @@
 import {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
-import {connect, ConnectedProps} from 'react-redux';
 import {getOtherPlacesByIdAction} from "../../store/api-actions";
 import OtherPlace from '../other-place/other-place';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {ThunkAppDispatchType} from '../../types/action';
-import {State} from "../../types/state";
 import {OfferType} from '../../types/offers';
+import {getOtherPlaces, getLoadedOtherPlacesStatus} from '../../store/data/selectors';
+import {getActiveOfferId} from '../../store/process/selectors';
+import { AppDispatch } from '../../types/state';
 
-const mapStateToProps = ({otherPlaces, isOtherPlacesLoaded, activeOfferId}: State) => ({
-  otherPlaces,
-  isOtherPlacesLoaded,
-  activeOfferId,
-})
+function OtherPlacesList() {
+  const otherPlaces = useSelector(getOtherPlaces);
+  const isOtherPlacesLoaded = useSelector(getLoadedOtherPlacesStatus);
+  const activeOfferId = useSelector(getActiveOfferId);
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => ({
-  onloadOtherPlaces(activeOfferId: number) {
-    dispatch(getOtherPlacesByIdAction(activeOfferId));
-  },
-})
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromReduxType = ConnectedProps<typeof connector>;
-
-function OtherPlacesList(props: PropsFromReduxType) {
-  const {otherPlaces, isOtherPlacesLoaded, activeOfferId, onloadOtherPlaces} = props;
+  const dispatch: AppDispatch = useDispatch();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    onloadOtherPlaces(activeOfferId);
+    dispatch(getOtherPlacesByIdAction(activeOfferId))
   }, [])
   
   return (
@@ -50,4 +39,4 @@ function OtherPlacesList(props: PropsFromReduxType) {
   )
 }
 
-export default connector(OtherPlacesList);
+export default OtherPlacesList;

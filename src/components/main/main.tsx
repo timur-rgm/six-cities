@@ -1,36 +1,23 @@
-import {Link} from 'react-router-dom';
-import {connect, ConnectedProps} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {changeCity} from '../../store/action';
+import {useSelector, useDispatch} from 'react-redux';
+import {getOffersByCity} from '../../store/data/selectors';
+import {getCurrentCity} from '../../store/process/selectors';
+import {getAuthorizationStatus, getUserData} from '../../store/user/selectors';
 import {logoutAction} from '../../store/api-actions';
+import {AppDispatch} from '../../types/state';
+import {Link} from 'react-router-dom';
 import CitiesList from '../cities-list/cities-list';
 import Sorting from '../sorting/sorting';
 import CardsList from '../cards-list/cards-list';
 import Map from '../map/map';
 import {Cities, AuthorizationStatus} from '../../const';
-import {ThunkAppDispatchType} from '../../types/action';
-import {State} from '../../types/state';
 
-const mapStateToProps = ({city, offers, authorizationStatus, user}: State) => ({
-  currentCity: city,
-  offers: offers,
-  authorizationStatus,
-  user,
-});
+function Main(): JSX.Element {
+  const offers = useSelector(getOffersByCity);
+  const currentCity = useSelector(getCurrentCity);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const user = useSelector(getUserData);
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatchType) => bindActionCreators({
-  onCityChange: changeCity,
-  logout() {
-    dispatch(logoutAction())
-  }
-}, dispatch);
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromReduxType = ConnectedProps<typeof connector>;
-
-function Main(props: PropsFromReduxType): JSX.Element {
-  const {currentCity, offers, logout, authorizationStatus, user} = props;
+  const dispatch: AppDispatch = useDispatch();
   
   return (
     <div className="page page--gray page--main">
@@ -55,7 +42,7 @@ function Main(props: PropsFromReduxType): JSX.Element {
                     <li className="header__nav-item">
                       <Link
                         className="header__nav-link"
-                        onClick={logout}
+                        onClick={() => dispatch(logoutAction())}
                         to="/"
                       >
                         <span className="header__signout">Sign out</span>
@@ -87,7 +74,7 @@ function Main(props: PropsFromReduxType): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.filter((offer) => offer.city === currentCity).length} places to stay in {currentCity}</b>
+              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
               <Sorting />
               <CardsList />
             </section>
@@ -103,4 +90,4 @@ function Main(props: PropsFromReduxType): JSX.Element {
   );
 };
 
-export default connector(Main);
+export default Main;

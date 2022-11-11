@@ -1,5 +1,6 @@
+import {createReducer} from '@reduxjs/toolkit';
+import {changeCity, setActiveOfferId, changeSorting} from '../../store/action';
 import {SortingType} from '../../const';
-import {ActionType, Actions} from '../../types/action';
 import {ProcessStateType} from '../../types/state';
 
 const initialState: ProcessStateType = {
@@ -8,18 +9,17 @@ const initialState: ProcessStateType = {
   currentSortingType: SortingType.Popular,
 }
 
-const process = (state: ProcessStateType = initialState, action: Actions): ProcessStateType => {
-  switch (action.type) {
-    case ActionType.ChangeCity:
-      return {...state, currentCity: action.payload};
-    case ActionType.SetActiveOfferId:
-      return {...state, activeOfferId: action.payload};
-    case ActionType.ChangeSorting:
-      return {...state, currentSortingType: action.payload};
-    default:
-      return state;
-  }
-}
-
+const process = createReducer(initialState, (builder) => {
+  builder
+    .addCase(changeCity, (state, action) => {
+      state.currentCity = action.payload;
+    })
+    .addCase(setActiveOfferId, (state, action) => {
+      state.activeOfferId = action.payload;
+    })
+    .addCase(changeSorting, (state, action) => {
+      state.currentSortingType = action.payload;
+    })
+})
 
 export {process};

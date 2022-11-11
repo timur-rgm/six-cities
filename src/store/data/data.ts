@@ -1,4 +1,5 @@
-import {ActionType, Actions} from '../../types/action';
+import {createReducer} from '@reduxjs/toolkit';
+import {loadOffers, loadOtherPlacesById, loadReviewsById} from '../../store/action';
 import {DataStateType} from '../../types/state';
 
 const initialState: DataStateType = {
@@ -8,19 +9,23 @@ const initialState: DataStateType = {
   isOtherPlacesLoaded: false,
   reviews: [],
   isReviewsLoaded: false,
-}
+};
 
-const data = (state: DataStateType = initialState, action: Actions): DataStateType => {
-  switch (action.type) {
-    case ActionType.LoadOffers:
-      return {...state, offers: action.payload, isOffersLoaded: true};
-    case ActionType.LoadOtherPlacesById:
-      return {...state, otherPlaces: action.payload, isOtherPlacesLoaded: true};
-    case ActionType.LoadReviewsById:
-      return {...state, reviews: action.payload, isReviewsLoaded: true};
-    default:
-      return state;
+const data = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+      state.isOffersLoaded = true;
+    })
+    .addCase(loadOtherPlacesById, (state, action) => {
+      state.otherPlaces = action.payload;
+      state.isOtherPlacesLoaded = true;
+    })
+    .addCase(loadReviewsById, (state, action) => {
+      state.reviews = action.payload;
+      state.isReviewsLoaded = true;
+    })
   }
-}
+);
 
 export {data};

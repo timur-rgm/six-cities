@@ -1,11 +1,10 @@
 import {Link} from 'react-router-dom';
-import {SetActiveOfferIdType} from '../../types/action';
 import {OfferType} from '../../types/offers';
 
 type CardType = {
   offer: OfferType,
   onArticleCLick: () => void,
-  setActiveOfferId: (id: number) => SetActiveOfferIdType,
+  setActiveOfferId: (id: number) => void,
 }
 
 export default function Card(props: CardType): JSX.Element {
