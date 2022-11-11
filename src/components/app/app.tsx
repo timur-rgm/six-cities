@@ -10,7 +10,6 @@ import Favorites from '../favorites/favorites';
 import Login from '../login/login';
 import Offer from '../offer/offer';
 import Error from '../error/error';
-import LoadingScreen from '../loading-screen/loading-screen';
 import {AppRoute} from '../../const';
 
 function App(): JSX.Element {
@@ -18,9 +17,7 @@ function App(): JSX.Element {
   const isOffersLoaded = useSelector(getLoadedOffersStatus);
 
   if (!isOffersLoaded) {
-    return (
-      <MainEmpty />
-    )
+    return <MainEmpty />;
   }
 
   return (
@@ -31,7 +28,7 @@ function App(): JSX.Element {
         <Route path='/offer/:id' element={<Offer />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute>
-            <Favorites offers={offers} />
+            <Favorites />
           </PrivateRoute>
         } />
         <Route path="*" element={<Error />} />

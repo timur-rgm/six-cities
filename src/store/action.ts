@@ -18,6 +18,8 @@ export const loadReviewsById = createAction<ReviewsType>(ActionType.LoadReviewsB
 
 export const sendReview = createAction<SentReviewType>(ActionType.SendReview);
 
+export const loadFavorites = createAction<OffersType>(ActionType.LoadFavorites);
+
 export const requireAuthorization = createAction<AuthorizationStatus>(ActionType.RequireAuthorization);
 
 export const requireLogout = createAction(ActionType.RequireLogout);

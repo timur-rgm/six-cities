@@ -11,6 +11,8 @@ export type DataStateType = {
   isOtherPlacesLoaded: boolean,
   reviews: ReviewsType,
   isReviewsLoaded: boolean,
+  favorites: OffersType,
+  isFavoritesLoaded: boolean,
 }
 
 export type ProcessStateType = {

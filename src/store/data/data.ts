@@ -1,5 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {loadOffers, loadOtherPlacesById, loadReviewsById} from '../../store/action';
+import {
+  loadOffers,
+  loadOtherPlacesById,
+  loadReviewsById,
+  loadFavorites,
+} from '../../store/action';
 import {DataStateType} from '../../types/state';
 
 const initialState: DataStateType = {
@@ -9,6 +14,8 @@ const initialState: DataStateType = {
   isOtherPlacesLoaded: false,
   reviews: [],
   isReviewsLoaded: false,
+  favorites: [],
+  isFavoritesLoaded: false,
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -24,6 +31,10 @@ const data = createReducer(initialState, (builder) => {
     .addCase(loadReviewsById, (state, action) => {
       state.reviews = action.payload;
       state.isReviewsLoaded = true;
+    })
+    .addCase(loadFavorites, (state, action) => {
+      state.favorites = action.payload;
+      state.isFavoritesLoaded = true;
     })
   }
 );

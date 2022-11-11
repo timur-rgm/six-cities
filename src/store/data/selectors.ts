@@ -11,6 +11,8 @@ export const getOtherPlaces = (state: RootStateType): OffersType => state[NameSp
 export const getLoadedOtherPlacesStatus = (state: RootStateType): boolean => state[NameSpace.data].isOtherPlacesLoaded;
 export const getReviews = (state: RootStateType): ReviewsType => state[NameSpace.data].reviews;
 export const getLoadedReviewsStatus = (state: RootStateType): boolean => state[NameSpace.data].isReviewsLoaded;
+export const getFavorites = (state: RootStateType): OffersType => state[NameSpace.data].favorites;
+export const getLoadedFavoritesStatus = (state: RootStateType): boolean => state[NameSpace.data].isFavoritesLoaded;
 
 export const getOffersByCity = createSelector(
   [getOffers, getCurrentCity],

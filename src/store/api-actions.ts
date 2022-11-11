@@ -2,6 +2,7 @@ import {
   loadOffers,
   loadOtherPlacesById,
   loadReviewsById,
+  loadFavorites,
   requireAuthorization,
   requireLogout,
   redirectToRoute,
@@ -33,6 +34,13 @@ export function getReviewByIdAction(id: number): ThunkActionResultType {
   return async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<UnadaptedReviewType[]>(`${ApiRoute.Comments}/${id}`);
     dispatch(loadReviewsById(data.map((review) => adaptReviewToClient(review))));
+  }
+}
+
+export function getFavoritesAction(): ThunkActionResultType {
+  return async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<UnadaptedOfferType[]>(ApiRoute.Favorites);
+    dispatch(loadFavorites(data.map(adaptOfferToClient)));
   }
 }
 
