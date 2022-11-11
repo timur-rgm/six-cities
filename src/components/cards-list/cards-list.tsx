@@ -2,15 +2,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {setActiveOfferId} from '../../store/action';
 import Card from '../card/card';
-import {sortOffers} from '../../utils';
-import {getOffers} from '../../store/data/selectors';
-import {getCurrentCity, getCurrentSortingType} from '../../store/process/selectors';
+import {getOffersByCityAndSorting} from '../../store/data/selectors';
 import {AppDispatch} from '../../types/state';
 
 function CardsList(): JSX.Element {
-  const offers = useSelector(getOffers);
-  const currentCity = useSelector(getCurrentCity);
-  const sortingType = useSelector(getCurrentSortingType);
+  const offers = useSelector(getOffersByCityAndSorting);
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -22,7 +18,7 @@ function CardsList(): JSX.Element {
   
   return (
     <div className="cities__places-list places__list tabs__content">
-      {sortOffers(offers, sortingType).filter((offer) => offer.city === currentCity).map((offer) => 
+      {offers.map((offer) => 
         <Card
           offer={offer}
           key={offer.id}

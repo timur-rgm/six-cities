@@ -1,18 +1,18 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {getOffersByCity} from '../../store/data/selectors';
+import {getCurrentCity} from '../../store/process/selectors';
+import {getAuthorizationStatus, getUserData} from '../../store/user/selectors';
 import {logoutAction} from '../../store/api-actions';
+import {AppDispatch} from '../../types/state';
+import {Link} from 'react-router-dom';
 import CitiesList from '../cities-list/cities-list';
 import Sorting from '../sorting/sorting';
 import CardsList from '../cards-list/cards-list';
 import Map from '../map/map';
 import {Cities, AuthorizationStatus} from '../../const';
-import {getOffers} from '../../store/data/selectors';
-import {getCurrentCity} from '../../store/process/selectors';
-import {getAuthorizationStatus, getUserData} from '../../store/user/selectors';
-import { AppDispatch } from '../../types/state';
 
 function Main(): JSX.Element {
-  const offers = useSelector(getOffers);
+  const offers = useSelector(getOffersByCity);
   const currentCity = useSelector(getCurrentCity);
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const user = useSelector(getUserData);
@@ -74,7 +74,7 @@ function Main(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.filter((offer) => offer.city === currentCity).length} places to stay in {currentCity}</b>
+              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
               <Sorting />
               <CardsList />
             </section>

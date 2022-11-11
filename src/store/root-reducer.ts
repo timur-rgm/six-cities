@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import {combineReducers} from '@reduxjs/toolkit';
 import {data} from './data/data';
 import {process} from './process/process';
 import {user} from './user/user';

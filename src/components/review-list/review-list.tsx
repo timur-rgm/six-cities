@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import Review from "../review/review";
 import ReviewForm from "../review-form/review-form";
 import LoadingScreen from "../loading-screen/loading-screen";
-import {fetchReviewByIdAction} from "../../store/api-actions";
+import {getReviewByIdAction} from "../../store/api-actions";
 import {AuthorizationStatus} from '../../const';
 import {getReviews, getLoadedReviewsStatus} from '../../store/data/selectors';
 import {getActiveOfferId} from '../../store/process/selectors';
@@ -19,7 +19,7 @@ function ReviewList(): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchReviewByIdAction(activeOfferId))
+    dispatch(getReviewByIdAction(activeOfferId))
   }, [])
 
   return(
