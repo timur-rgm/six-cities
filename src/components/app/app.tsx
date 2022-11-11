@@ -5,6 +5,7 @@ import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 import Main from '../main/main';
+import MainEmpty from '../main-empty/main-empty';
 import Favorites from '../favorites/favorites';
 import Login from '../login/login';
 import Offer from '../offer/offer';
@@ -18,7 +19,7 @@ function App(): JSX.Element {
 
   if (!isOffersLoaded) {
     return (
-      <LoadingScreen />
+      <MainEmpty />
     )
   }
 
