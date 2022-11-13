@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getAuthorizationStatus, getUserData} from '../../store/user/selectors';
 import {logoutAction} from '../../store/api-actions';
 import {Link} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import {AppDispatch} from '../../types/state';
 
 function Header() {
@@ -16,9 +16,12 @@ function Header() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
+              <Link
+                className="header__logo-link header__logo-link--active"
+                to={AppRoute.Root}
+              >
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               {authorizationStatus === AuthorizationStatus.Auth 
