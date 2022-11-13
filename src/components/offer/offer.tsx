@@ -1,14 +1,14 @@
-import {Link} from 'react-router-dom';
-import {logoutAction} from '../../store/api-actions';
-import Map from '../map/map';
-import ReviewList from '../review-list/review-list';
-import OtherPlacesList from '../other-places-list/other-places-list';
 import {useSelector, useDispatch} from 'react-redux';
-import {AppRoute, AuthorizationStatus} from '../../const';
 import {getOffers} from '../../store/data/selectors';
 import {getActiveOfferId} from '../../store/process/selectors';
 import {getAuthorizationStatus, getUserData} from '../../store/user/selectors';
+import {logoutAction, updateFavoritesAction} from '../../store/api-actions';
 import {AppDispatch} from '../../types/state';
+import {Link} from 'react-router-dom';
+import Map from '../map/map';
+import ReviewList from '../review-list/review-list';
+import OtherPlacesList from '../other-places-list/other-places-list';
+import {AppRoute, AuthorizationStatus} from '../../const';
 
 function Offer(): JSX.Element {
   const offers = useSelector(getOffers);
@@ -19,9 +19,11 @@ function Offer(): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
 
   const {
+    id,
     title,
     description,
     isPremium,
+    isFavorite,
     type,
     price,
     rate,
@@ -45,11 +47,14 @@ function Offer(): JSX.Element {
             {authorizationStatus === AuthorizationStatus.Auth 
                 ? <ul className="header__nav-list">
                     <li className="header__nav-item user">
-                      <a className="header__nav-link header__nav-link--profile" href="#">
+                      <Link
+                        className="header__nav-link header__nav-link--profile"
+                        to="/favorites"
+                      >
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
                         <span className="header__user-name user__name">{user.email}</span>
-                      </a>
+                      </Link>
                     </li>
                     <li className="header__nav-item">
                       <Link
@@ -105,7 +110,11 @@ function Offer(): JSX.Element {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className={`property__bookmark-button button ${isFavorite && `property__bookmark-button--active`}`}
+                  type="button"
+                  onClick={() => dispatch(updateFavoritesAction(id, Number(!isFavorite)))}
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>

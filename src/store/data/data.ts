@@ -4,6 +4,7 @@ import {
   loadOtherPlacesById,
   loadReviewsById,
   loadFavorites,
+  updateFavorites,
 } from '../../store/action';
 import {DataStateType} from '../../types/state';
 
@@ -35,6 +36,9 @@ const data = createReducer(initialState, (builder) => {
     .addCase(loadFavorites, (state, action) => {
       state.favorites = action.payload;
       state.isFavoritesLoaded = true;
+    })
+    .addCase(updateFavorites, (state, action) => {
+      state.offers = state.offers.map((offer) => offer.id === action.payload.id ? action.payload : offer)
     })
   }
 );

@@ -6,7 +6,7 @@ export type OfferType = {
   isPremium: boolean,
   type: string,
   price: number,
-  isFavourite: boolean,
+  isFavorite: boolean,
   rate: number,
   bedrooms: number,
   maxAdults: number,

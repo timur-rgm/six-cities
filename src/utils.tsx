@@ -11,7 +11,7 @@ export function adaptOfferToClient(offer: UnadaptedOfferType): OfferType {
     isPremium: offer.is_premium,
     type: offer.type,
     price: offer.price,
-    isFavourite: offer.is_favorite,
+    isFavorite: offer.is_favorite,
     rate: offer.rating,
     bedrooms: offer.bedrooms,
     maxAdults: offer.max_adults,

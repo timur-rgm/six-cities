@@ -1,7 +1,7 @@
 import {createAction} from '@reduxjs/toolkit';
 import {AuthorizationStatus, SortingType, AppRoute} from '../const';
 import {ActionType} from '../types/action';
-import {OffersType} from '../types/offers';
+import {OfferType, OffersType} from '../types/offers';
 import {ReviewsType, SentReviewType} from '../types/reviews';
 
 export const setActiveOfferId = createAction<number>(ActionType.SetActiveOfferId);
@@ -19,6 +19,8 @@ export const loadReviewsById = createAction<ReviewsType>(ActionType.LoadReviewsB
 export const sendReview = createAction<SentReviewType>(ActionType.SendReview);
 
 export const loadFavorites = createAction<OffersType>(ActionType.LoadFavorites);
+
+export const updateFavorites = createAction<OfferType>(ActionType.UpdateFavorites);
 
 export const requireAuthorization = createAction<AuthorizationStatus>(ActionType.RequireAuthorization);
 

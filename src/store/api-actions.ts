@@ -3,6 +3,7 @@ import {
   loadOtherPlacesById,
   loadReviewsById,
   loadFavorites,
+  updateFavorites,
   requireAuthorization,
   requireLogout,
   redirectToRoute,
@@ -41,6 +42,14 @@ export function getFavoritesAction(): ThunkActionResultType {
   return async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<UnadaptedOfferType[]>(ApiRoute.Favorites);
     dispatch(loadFavorites(data.map(adaptOfferToClient)));
+  }
+}
+
+export function updateFavoritesAction(id: number, status: number): ThunkActionResultType {
+  return async (dispatch, _getState, api): Promise<void> => {
+    await api.post(`${ApiRoute.Favorites}/${id}/${status}`)
+      .then(({data}) => adaptOfferToClient(data))
+      .then((offer) => dispatch(updateFavorites(offer)));
   }
 }
 

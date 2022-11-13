@@ -12,6 +12,7 @@ export enum ActionType {
   LoadReviewsById = 'loadReviewsById',
   SendReview = 'sendReview',
   LoadFavorites = 'loadFavorites',
+  UpdateFavorites = 'updateFavorites',
   RequireAuthorization = 'requireAuthorization',
   RequireLogout = 'requireLogout',
   RedirectToRoute = 'redirectToRoute',

@@ -23,3 +23,18 @@ export const getOffersByCityAndSorting = createSelector(
   [getOffersByCity, getCurrentSortingType],
   (offers, currentSortingType) => sortOffers(offers, currentSortingType)
 );
+
+export const groupFavoritesByCity = createSelector(
+  [getFavorites],
+  (favorites) => {
+    const favoritesMap = new Map();
+    
+    favorites.forEach((favorite) => {
+      const city = favorite.city;
+      favoritesMap.set(city, favoritesMap.get(city) || []);
+      favoritesMap.get(city).push(favorite);
+    });
+
+    return favoritesMap;
+  }
+)
