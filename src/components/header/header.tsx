@@ -29,7 +29,7 @@ function Header() {
                     <li className="header__nav-item user">
                       <Link
                         className="header__nav-link header__nav-link--profile"
-                        to="/favorites"
+                        to={AppRoute.Favorites}
                       >
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
@@ -40,14 +40,17 @@ function Header() {
                       <Link
                         className="header__nav-link"
                         onClick={() => dispatch(logoutAction())}
-                        to="/"
+                        to={AppRoute.Root}
                       >
                         <span className="header__signout">Sign out</span>
                       </Link>
                     </li>
                   </ul>
                 
-                : <Link to="/login" className="header__nav-link">
+                : <Link
+                    className="header__nav-link"
+                    to={AppRoute.Login}
+                  >
                     <span className="header__signout">Sign in</span>
                   </Link>
               }

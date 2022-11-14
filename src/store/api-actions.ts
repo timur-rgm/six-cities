@@ -16,6 +16,7 @@ import {ThunkActionResultType} from '../types/action';
 import {AuthDataType} from '../types/auth-data';
 import {UnadaptedOfferType} from '../types/offers';
 import {UnadaptedReviewType, SentReviewType} from '../types/reviews';
+import browserHistory from '../browser-history';
 
 export function getOffersAction(): ThunkActionResultType {
   return async (dispatch, _getState, api): Promise<void> => {
@@ -49,7 +50,8 @@ export function updateFavoritesAction(id: number, status: number): ThunkActionRe
   return async (dispatch, _getState, api): Promise<void> => {
     await api.post(`${ApiRoute.Favorites}/${id}/${status}`)
       .then(({data}) => adaptOfferToClient(data))
-      .then((offer) => dispatch(updateFavorites(offer)));
+      .then((offer) => dispatch(updateFavorites(offer)))
+      .catch(() => browserHistory.push(ApiRoute.Login));
   }
 }
 
@@ -67,7 +69,8 @@ export function postReviewAction({comment, rating}: SentReviewType, id: number):
 export function checkAuthAction(): ThunkActionResultType {
   return async (dispatch, _getState, api): Promise<void> => {
     await api.get(ApiRoute.Login)
-      .then(() => {
+      .then(({data: {email}}) => {
+        dispatch(setUserData({email: email}));
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
       })
   }

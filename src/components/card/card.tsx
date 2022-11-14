@@ -40,8 +40,8 @@ export default function Card(props: CardType): JSX.Element {
           </div>
           <button
             className={`place-card__bookmark-button button ${isFavorite && `place-card__bookmark-button--active`}`}
-            type="button"
             onClick={() => dispatch(updateFavoritesAction(id, Number(!isFavorite)))}
+            type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -55,7 +55,10 @@ export default function Card(props: CardType): JSX.Element {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name" onClick={onArticleCLick}>
+        <h2
+          className="place-card__name"
+          onClick={onArticleCLick}
+        >
           <Link to="#">{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
