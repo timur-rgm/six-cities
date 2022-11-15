@@ -5,22 +5,26 @@ import {getOtherPlacesByIdAction} from "../../store/api-actions";
 import OtherPlace from '../other-place/other-place';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {OfferType} from '../../types/offers';
-import {getOtherPlaces, getLoadedOtherPlacesStatus} from '../../store/data/selectors';
+import {getOffers, getOtherPlaces, getLoadedOtherPlacesStatus} from '../../store/data/selectors';
 import {getActiveOfferId} from '../../store/process/selectors';
 import { AppDispatch } from '../../types/state';
 
-function OtherPlacesList() {
+type OtherPlacesListType = {
+  id: number,
+};
+
+function OtherPlacesList({id}: OtherPlacesListType) {
+  const offers = useSelector(getOffers);
   const otherPlaces = useSelector(getOtherPlaces);
   const isOtherPlacesLoaded = useSelector(getLoadedOtherPlacesStatus);
-  const activeOfferId = useSelector(getActiveOfferId);
 
   const dispatch: AppDispatch = useDispatch();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getOtherPlacesByIdAction(activeOfferId))
-  }, [])
+    dispatch(getOtherPlacesByIdAction(id))
+  }, [offers])
   
   return (
     <div className="near-places__list places__list">

@@ -23,6 +23,7 @@ export enum ApiRoute {
   Login = '/login',
   Logout = '/logout',
   Comments = '/comments',
+  Favorites = '/favorite',
 }
 
 type CityType = {

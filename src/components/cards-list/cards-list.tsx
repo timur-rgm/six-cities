@@ -7,13 +7,7 @@ import {AppDispatch} from '../../types/state';
 
 function CardsList(): JSX.Element {
   const offers = useSelector(getOffersByCityAndSorting);
-
   const dispatch: AppDispatch = useDispatch();
-
-  const onActiveOfferId = (id: number) => {
-    dispatch(setActiveOfferId(id));
-  }
-
   const navigate = useNavigate();
   
   return (
@@ -21,9 +15,9 @@ function CardsList(): JSX.Element {
       {offers.map((offer) => 
         <Card
           offer={offer}
-          key={offer.id}
           onArticleCLick={() => navigate(`/offer/${offer.id}`)}
-          setActiveOfferId={onActiveOfferId}
+          setActiveOfferId={(id) => dispatch(setActiveOfferId(id))}
+          key={offer.id}
         />
       )}
     </div>

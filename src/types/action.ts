@@ -11,6 +11,8 @@ export enum ActionType {
   LoadOtherPlacesById = 'loadOtherPlacesById',
   LoadReviewsById = 'loadReviewsById',
   SendReview = 'sendReview',
+  LoadFavorites = 'loadFavorites',
+  UpdateFavorites = 'updateFavorites',
   RequireAuthorization = 'requireAuthorization',
   RequireLogout = 'requireLogout',
   RedirectToRoute = 'redirectToRoute',

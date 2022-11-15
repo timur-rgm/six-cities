@@ -5,21 +5,18 @@ import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 import Main from '../main/main';
-import Favorites from '../favorites/favorites';
+import MainEmpty from '../main-empty/main-empty';
+import FavoritesList from '../favorites-list/favorites-list';
 import Login from '../login/login';
 import Offer from '../offer/offer';
 import Error from '../error/error';
-import LoadingScreen from '../loading-screen/loading-screen';
 import {AppRoute} from '../../const';
 
 function App(): JSX.Element {
-  const offers = useSelector(getOffers);
   const isOffersLoaded = useSelector(getLoadedOffersStatus);
 
   if (!isOffersLoaded) {
-    return (
-      <LoadingScreen />
-    )
+    return <MainEmpty />;
   }
 
   return (
@@ -27,10 +24,10 @@ function App(): JSX.Element {
       <Routes>
         <Route path={AppRoute.Root} element={<Main />} />
         <Route path={AppRoute.Login} element={<Login />} />
-        <Route path='/offer/:id' element={<Offer />} />
+        <Route path='/offer/:offerId' element={<Offer />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute>
-            <Favorites offers={offers} />
+            <FavoritesList />
           </PrivateRoute>
         } />
         <Route path="*" element={<Error />} />

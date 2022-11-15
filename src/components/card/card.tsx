@@ -1,3 +1,6 @@
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../../types/state';
+import {updateFavoritesAction} from '../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {OfferType} from '../../types/offers';
 
@@ -9,14 +12,15 @@ type CardType = {
 
 export default function Card(props: CardType): JSX.Element {
   const {offer, onArticleCLick, setActiveOfferId} = props;
-  const {id, image, title, isPremium, type, price, rate} = offer;
+  const {id, image, title, isPremium, isFavorite, type, price, rate} = offer;
+
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <article
-      onClick={onArticleCLick}
-      onMouseEnter={() => setActiveOfferId(id)}
-      // onMouseOut={() => setActiveOfferId(0)}
       className="cities__place-card place-card"
+      onMouseEnter={() => setActiveOfferId(id)}
+      onMouseOut={() => setActiveOfferId(0)}
     >
       {
         isPremium &&
@@ -35,7 +39,11 @@ export default function Card(props: CardType): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            className={`place-card__bookmark-button button ${isFavorite && `place-card__bookmark-button--active`}`}
+            onClick={() => dispatch(updateFavoritesAction(id, Number(!isFavorite)))}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -48,7 +56,10 @@ export default function Card(props: CardType): JSX.Element {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
+        <h2
+          className="place-card__name"
+          onClick={onArticleCLick}
+        >
           <Link to="#">{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>

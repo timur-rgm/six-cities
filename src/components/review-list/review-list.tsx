@@ -6,20 +6,22 @@ import LoadingScreen from "../loading-screen/loading-screen";
 import {getReviewByIdAction} from "../../store/api-actions";
 import {AuthorizationStatus} from '../../const';
 import {getReviews, getLoadedReviewsStatus} from '../../store/data/selectors';
-import {getActiveOfferId} from '../../store/process/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {AppDispatch} from "../../types/state";
 
-function ReviewList(): JSX.Element {
+type ReviewListType = {
+  id: number,
+};
+
+function ReviewList({id}: ReviewListType): JSX.Element {
   const reviews = useSelector(getReviews);
   const isReviewsLoaded = useSelector(getLoadedReviewsStatus);
-  const activeOfferId = useSelector(getActiveOfferId);
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getReviewByIdAction(activeOfferId))
+    dispatch(getReviewByIdAction(id))
   }, [])
 
   return(
