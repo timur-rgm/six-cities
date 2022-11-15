@@ -13,7 +13,6 @@ import Error from '../error/error';
 import {AppRoute} from '../../const';
 
 function App(): JSX.Element {
-  const offers = useSelector(getOffers);
   const isOffersLoaded = useSelector(getLoadedOffersStatus);
 
   if (!isOffersLoaded) {
@@ -25,7 +24,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path={AppRoute.Root} element={<Main />} />
         <Route path={AppRoute.Login} element={<Login />} />
-        <Route path='/offer/:id' element={<Offer />} />
+        <Route path='/offer/:offerId' element={<Offer />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute>
             <FavoritesList />

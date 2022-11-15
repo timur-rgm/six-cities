@@ -1,11 +1,12 @@
 import {createSelector} from '@reduxjs/toolkit';
 import {NameSpace, RootStateType} from '../root-reducer';
 import {getCurrentCity, getCurrentSortingType} from '../process/selectors';
-import {OffersType} from '../../types/offers';
+import {OffersType, OfferType} from '../../types/offers';
 import {ReviewsType} from '../../types/reviews';
 import {sortOffers} from '../../utils';
 
 export const getOffers = (state: RootStateType): OffersType => state[NameSpace.data].offers;
+export const getOfferById = (id: number) => (state: RootStateType): OfferType => state[NameSpace.data].offers[id];
 export const getLoadedOffersStatus = (state: RootStateType): boolean => state[NameSpace.data].isOffersLoaded;
 export const getOtherPlaces = (state: RootStateType): OffersType => state[NameSpace.data].otherPlaces;
 export const getLoadedOtherPlacesStatus = (state: RootStateType): boolean => state[NameSpace.data].isOtherPlacesLoaded;

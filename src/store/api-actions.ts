@@ -70,8 +70,8 @@ export function checkAuthAction(): ThunkActionResultType {
   return async (dispatch, _getState, api): Promise<void> => {
     await api.get(ApiRoute.Login)
       .then(({data: {email}}) => {
-        dispatch(setUserData({email: email}));
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
+        dispatch(setUserData({email: email}));
       })
   }
 }

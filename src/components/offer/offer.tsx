@@ -1,19 +1,18 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {getOffers} from '../../store/data/selectors';
-import {getActiveOfferId} from '../../store/process/selectors';
+import {getOfferById} from '../../store/data/selectors';
 import {updateFavoritesAction} from '../../store/api-actions';
 import {AppDispatch} from '../../types/state';
 import Header from '../header/header';
 import Map from '../map/map';
 import ReviewList from '../review-list/review-list';
 import OtherPlacesList from '../other-places-list/other-places-list';
+import {useParams} from 'react-router-dom';
 
 function Offer(): JSX.Element {
-  const offers = useSelector(getOffers);
-  const activeOfferId = useSelector(getActiveOfferId);
-
+  const {offerId} = useParams();
+  const offer = useSelector(getOfferById(Number(offerId) - 1));
   const dispatch: AppDispatch = useDispatch();
-
+  
   const {
     id,
     title,
@@ -27,7 +26,7 @@ function Offer(): JSX.Element {
     maxAdults,
     features,
     owner: {avatar, name, isPro}
-  } = offers[activeOfferId - 1];
+  } = offer;
 
   return (
     <div className="page">
@@ -134,7 +133,7 @@ function Offer(): JSX.Element {
                   </p>
                 </div>
               </div>
-              <ReviewList />
+              <ReviewList id={Number(offerId) - 1}/>
             </div>
           </div>
           <section className="property__map map">
@@ -144,7 +143,7 @@ function Offer(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OtherPlacesList />
+            <OtherPlacesList id={Number(offerId) - 1}/>
           </section>
         </div>
       </main>
