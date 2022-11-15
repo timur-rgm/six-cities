@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {groupFavoritesByCity, getLoadedFavoritesStatus} from '../../store/data/selectors';
+import {getOffers, groupFavoritesByCity, getLoadedFavoritesStatus} from '../../store/data/selectors';
 import {getFavoritesAction} from '../../store/api-actions';
 import {AppDispatch} from '../../types/state';
 import {Link} from 'react-router-dom';
@@ -10,14 +10,15 @@ import Favorite from '../favorite/favorite';
 import {AppRoute} from '../../const';
 
 function FavoritesList(): JSX.Element {
+  const offers = useSelector(getOffers);
   const favorites = useSelector(groupFavoritesByCity);
   const isFavoritesLoaded = useSelector(getLoadedFavoritesStatus);
 
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFavoritesAction())
-  }, [favorites])
+    dispatch(getFavoritesAction());
+  }, [offers])
   
   if (!favorites.size || !isFavoritesLoaded) {
     return <FavoritesEmpty />

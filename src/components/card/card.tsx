@@ -20,6 +20,7 @@ export default function Card(props: CardType): JSX.Element {
     <article
       className="cities__place-card place-card"
       onMouseEnter={() => setActiveOfferId(id)}
+      onMouseOut={() => setActiveOfferId(0)}
     >
       {
         isPremium &&

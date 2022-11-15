@@ -3,6 +3,7 @@ import {AppDispatch} from '../../types/state';
 import {updateFavoritesAction} from '../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {OfferType} from '../../types/offers';
+import {AppRoute} from '../../const';
 
 type OtherPlaceType = {
   offer: OfferType,
@@ -20,7 +21,8 @@ export default function OtherPlace(props: OtherPlaceType): JSX.Element {
       className="near-places__card place-card"
     >
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <Link to="#">
+        <Link
+          to="#">
           <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
         </Link>
       </div>
@@ -51,7 +53,12 @@ export default function OtherPlace(props: OtherPlaceType): JSX.Element {
           className="place-card__name"
           onClick={onArticleCLick}
         >
-          <Link to="#">{title}</Link>
+          <Link
+            to={`${AppRoute.Offer}/${id}`}
+            preventScrollReset={false}
+          >
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

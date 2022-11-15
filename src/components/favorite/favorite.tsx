@@ -1,7 +1,9 @@
 import {useDispatch} from 'react-redux';
 import {updateFavoritesAction} from '../../store/api-actions';
+import {Link} from 'react-router-dom';
 import {AppDispatch} from '../../types/state';
 import {OffersType} from '../../types/offers';
+import {AppRoute} from '../../const';
 
 type FavoriteType = {
   favoritesByCity: OffersType;
@@ -43,7 +45,11 @@ function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
               </div>
             </div>
             <h2 className="place-card__name">
-              <a href="#">{title}</a>
+              <Link
+                to={`${AppRoute.Offer}/${id}`}
+              >
+                {title}
+              </Link>
             </h2>
             <p className="place-card__type">{type}</p>
           </div>

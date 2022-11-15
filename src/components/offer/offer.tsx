@@ -1,5 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {getOfferById} from '../../store/data/selectors';
+import {setActiveOfferId} from '../../store/action';
 import {updateFavoritesAction} from '../../store/api-actions';
 import {AppDispatch} from '../../types/state';
 import Header from '../header/header';
@@ -12,6 +13,8 @@ function Offer(): JSX.Element {
   const {offerId} = useParams();
   const offer = useSelector(getOfferById(Number(offerId) - 1));
   const dispatch: AppDispatch = useDispatch();
+  
+  dispatch(setActiveOfferId(Number(offerId)));
   
   const {
     id,
@@ -36,7 +39,7 @@ function Offer(): JSX.Element {
       <main className="page__main page__main--property">
         <section className="property">
 
-          <div className="property__gallery-container container">
+          <div className="property__gallery-container container" id="gallery-container">
             <div className="property__gallery">
               {images.slice(0, 6).map((image) => 
                 <div
