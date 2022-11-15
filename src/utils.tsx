@@ -8,6 +8,7 @@ export function adaptOfferToClient(offer: UnadaptedOfferType): OfferType {
     image: offer.preview_image,
     title: offer.title,
     description: offer.description,
+    images: offer.images,
     isPremium: offer.is_premium,
     type: offer.type,
     price: offer.price,

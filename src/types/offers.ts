@@ -3,6 +3,7 @@ export type OfferType = {
   image: string,
   title: string,
   description: string,
+  images: string[],
   isPremium: boolean,
   type: string,
   price: number,
