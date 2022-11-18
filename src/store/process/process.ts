@@ -1,5 +1,9 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, setActiveOfferId, changeSorting} from '../../store/action';
+import {
+  changeCity,
+  setActiveOfferId,
+  changeSorting
+} from '../../store/action';
 import {SortingType} from '../../const';
 import {ProcessStateType} from '../../types/state';
 

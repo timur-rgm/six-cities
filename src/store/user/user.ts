@@ -1,5 +1,9 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {requireAuthorization, requireLogout, setUserData} from '../../store/action';
+import {
+  requireAuthorization,
+  requireLogout,
+  setUserData
+} from '../../store/action';
 import {UserStateType} from '../../types/state';
 import {AuthorizationStatus} from '../../const';
 
