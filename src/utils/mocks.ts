@@ -21,7 +21,7 @@ export const makeFakeOffers = (): OffersType => {
       isPremium: datatype.boolean(),
       type: random.word(),
       price: datatype.number(300),
-      isFavorite: datatype.boolean(),
+      isFavorite: true,
       rate: datatype.number(5),
       bedrooms: datatype.number(5),
       maxAdults: datatype.number(5),

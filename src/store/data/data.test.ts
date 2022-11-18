@@ -53,6 +53,6 @@ describe('Reducer: data', () => {
   
   it('should update offers by update favorite', () => {
     expect(data({...state, offers}, updateFavorites({...offers[0], isFavorite: false})))
-      .toEqual({...state, offers});
+      .toEqual({...state, offers: [{...offers[0], isFavorite: false}]});
   });
 });
