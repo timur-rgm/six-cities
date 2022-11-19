@@ -21,6 +21,8 @@ export type UnadaptedReviewType = {
   }
 }
 
+export type UnadaptedReviewsType = UnadaptedReviewType[];
+
 export type SentReviewType = {
   comment: string,
   rating: string,
