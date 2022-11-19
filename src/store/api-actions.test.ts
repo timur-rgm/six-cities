@@ -5,12 +5,20 @@ import {createApi} from '../services/api';
 import {RootStateType} from './root-reducer';
 import {AnyAction} from '@reduxjs/toolkit';
 import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
-import {redirectToRoute, requireAuthorization, setUserData} from './action';
 import {
+  loadOffers,
+  redirectToRoute,
+  requireAuthorization,
+  setUserData
+} from './action';
+import {
+  getOffersAction,
   checkAuthAction,
   loginAction,
 } from './api-actions';
 import {AuthDataType} from '../types/auth-data';
+import {makeFakeUnadaptedOffers} from '../utils/mocks';
+import {adaptOfferToClient} from '../utils';
 
 describe('Api actions', () => {
   const onFakeAuthorized = jest.fn();
@@ -40,7 +48,7 @@ describe('Api actions', () => {
     ]);
   })
 
-  it('should dispatch RequriedAuthorization and RedirectToRoute when POST /login', async () => {
+  it('should dispatch requireAuthorization and redirectToRoute when POST /login', async () => {
     const fakeUser: AuthDataType = {login: 'test@test.com', password: '12345678'};
     const store = mockStore();
     Storage.prototype.setItem = jest.fn();
@@ -59,5 +67,19 @@ describe('Api actions', () => {
     expect(Storage.prototype.setItem).toBeCalledTimes(1);
     expect(Storage.prototype.setItem).toBeCalledWith('six-cities-token', 'secret');
   });
+
+  it('should dispatch getOffersAction when GET /hotels', async () => {
+    const fakeOffers = makeFakeUnadaptedOffers();
+    const store = mockStore();
+    mockApi
+      .onGet(ApiRoute.Hotels)
+      .reply(200, fakeOffers);
+
+    await store.dispatch(getOffersAction());
+
+    expect(store.getActions()).toEqual([
+      loadOffers(fakeOffers.map(adaptOfferToClient)),
+    ]);
+  })
 
 });

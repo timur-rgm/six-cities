@@ -60,3 +60,5 @@ export type UnadaptedOfferType = {
   title: string,
   type: string,
 }
+
+export type UnadaptedOffersType = UnadaptedOfferType[];

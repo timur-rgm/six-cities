@@ -7,7 +7,7 @@ import {
   random,
   date,
 } from 'faker';
-import {OffersType} from '../types/offers';
+import {OffersType, UnadaptedOffersType} from '../types/offers';
 import {ReviewsType} from '../types/reviews';
 
 export const makeFakeOffers = (): OffersType => {
@@ -36,6 +36,45 @@ export const makeFakeOffers = (): OffersType => {
         lng: datatype.number({max: 50, precision: 0.00001}),
       },
       city: address.city(),
+    },
+  ]
+};
+
+export const makeFakeUnadaptedOffers = (): UnadaptedOffersType => {
+  return [
+    {
+      bedrooms: datatype.number(5),
+      city: {
+        name: address.city(),
+        location: {
+          latitude: datatype.number({max: 50, precision: 0.00001}),
+          longitude: datatype.number({max: 50, precision: 0.00001}),
+          zoom: 12,
+        }
+      },
+      description: lorem.paragraph(),
+      goods: [random.word(), random.word(), random.word()],
+      host: {
+        avatar_url: image.avatar(),
+        id: datatype.number(100),
+        is_pro: datatype.boolean(),
+        name: name.findName(),
+      },
+      id: datatype.number(100),
+      images: [image.city(), image.city(), image.city()],
+      is_favorite: true,
+      is_premium: datatype.boolean(),
+      location: {
+        latitude: datatype.number({max: 50, precision: 0.00001}),
+        longitude: datatype.number({max: 50, precision: 0.00001}),
+        zoom: 12,
+      },
+      max_adults: datatype.number(5),
+      preview_image: image.city(),
+      price: datatype.number(300),
+      rating: datatype.number(5),
+      title: lorem.paragraph(),
+      type: random.word(),
     },
   ]
 };
