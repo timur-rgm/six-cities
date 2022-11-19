@@ -7,6 +7,7 @@ import {AnyAction} from '@reduxjs/toolkit';
 import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
 import {
   loadOffers,
+  loadOtherPlacesById,
   redirectToRoute,
   requireAuthorization,
   requireLogout,
@@ -17,6 +18,7 @@ import {
   checkAuthAction,
   loginAction,
   logoutAction,
+  getOtherPlacesByIdAction,
 } from './api-actions';
 import {AuthDataType} from '../types/auth-data';
 import {makeFakeUnadaptedOffers} from '../utils/mocks';
@@ -70,20 +72,6 @@ describe('Api actions', () => {
     expect(Storage.prototype.setItem).toBeCalledWith('six-cities-token', 'secret');
   });
 
-  it('should dispatch getOffersAction when GET /hotels', async () => {
-    const fakeOffers = makeFakeUnadaptedOffers();
-    const store = mockStore();
-    mockApi
-      .onGet(ApiRoute.Hotels)
-      .reply(200, fakeOffers);
-
-    await store.dispatch(getOffersAction());
-
-    expect(store.getActions()).toEqual([
-      loadOffers(fakeOffers.map(adaptOfferToClient)),
-    ]);
-  });
-
   it('should dispatch requireLogout when Delete /logout', async () => {
     const store = mockStore();
     Storage.prototype.removeItem = jest.fn();
@@ -101,4 +89,33 @@ describe('Api actions', () => {
     expect(Storage.prototype.removeItem).toBeCalledWith('six-cities-token');
   });
 
+  it('should dispatch getOffersAction when GET /hotels', async () => {
+    const fakeOffers = makeFakeUnadaptedOffers();
+    const store = mockStore();
+    mockApi
+      .onGet(ApiRoute.Hotels)
+      .reply(200, fakeOffers);
+
+    await store.dispatch(getOffersAction());
+
+    expect(store.getActions()).toEqual([
+      loadOffers(fakeOffers.map(adaptOfferToClient)),
+    ]);
+  });
+
+  it('should dispatch getOtherPlacesByIdAction when GET /hotels/id/nearby', async () => {
+    const fakeOtherPlaces = makeFakeUnadaptedOffers();
+    const store = mockStore();
+    mockApi
+      .onGet(`${ApiRoute.Hotels}/1/nearby`)
+      .reply(200, fakeOtherPlaces);
+
+    await store.dispatch(getOtherPlacesByIdAction(1));
+
+    expect(store.getActions()).toEqual([
+      loadOtherPlacesById(fakeOtherPlaces.map(adaptOfferToClient)),
+    ]);
+  });
+
+  
 });
