@@ -4,11 +4,13 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createApi} from '../services/api';
 import {RootStateType} from './root-reducer';
 import {AnyAction} from '@reduxjs/toolkit';
-import {ApiRoute, AuthorizationStatus} from '../const';
-import {requireAuthorization, setUserData} from './action';
+import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
+import {redirectToRoute, requireAuthorization, setUserData} from './action';
 import {
   checkAuthAction,
+  loginAction,
 } from './api-actions';
+import {AuthDataType} from '../types/auth-data';
 
 describe('Api actions', () => {
   const onFakeAuthorized = jest.fn();
@@ -38,8 +40,24 @@ describe('Api actions', () => {
     ]);
   })
 
-  // it('should dispatch RequriedAuthorization and RedirectToRoute when POST /login', async () => {
+  it('should dispatch RequriedAuthorization and RedirectToRoute when POST /login', async () => {
+    const fakeUser: AuthDataType = {login: 'test@test.com', password: '12345678'};
+    const store = mockStore();
+    Storage.prototype.setItem = jest.fn();
+    mockApi
+      .onPost(ApiRoute.Login)
+      .reply(200, {token: 'secret'});
 
-  // })
+    await store.dispatch(loginAction(fakeUser));
+
+    expect(store.getActions()).toEqual([
+      requireAuthorization(AuthorizationStatus.Auth),
+      setUserData({email: 'test@test.com'}),
+      redirectToRoute(AppRoute.Root),
+    ]);
+
+    expect(Storage.prototype.setItem).toBeCalledTimes(1);
+    expect(Storage.prototype.setItem).toBeCalledWith('six-cities-token', 'secret');
+  });
 
 });
