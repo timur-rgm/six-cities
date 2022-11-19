@@ -1,17 +1,17 @@
 import thunk, {ThunkDispatch} from 'redux-thunk';
-import MockAdapter from 'axios-mock-adapter';
-import {configureMockStore} from '@jedmao/redux-mock-store';
-import {createApi} from '../services/api';
-import {RootStateType} from './root-reducer';
 import {AnyAction} from '@reduxjs/toolkit';
-import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
+import {configureMockStore} from '@jedmao/redux-mock-store';
+import MockAdapter from 'axios-mock-adapter';
+import {createApi} from '../services/api';
 import {
   loadOffers,
   loadOtherPlacesById,
+  loadReviewsById,
   redirectToRoute,
   requireAuthorization,
   requireLogout,
-  setUserData
+  setUserData,
+  updateFavorites
 } from './action';
 import {
   getOffersAction,
@@ -19,21 +19,26 @@ import {
   loginAction,
   logoutAction,
   getOtherPlacesByIdAction,
+  getReviewByIdAction,
+  updateFavoritesAction,
+  postReviewAction,
 } from './api-actions';
+import {makeFakeUnadaptedOffer, makeFakeUnadaptedOffers, makeFakeUnadaptedReviews} from '../utils/mocks';
 import {AuthDataType} from '../types/auth-data';
-import {makeFakeUnadaptedOffers} from '../utils/mocks';
-import {adaptOfferToClient} from '../utils';
+import {RootStateType} from './root-reducer';
+import {adaptOfferToClient, adaptReviewToClient} from '../utils';
+import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
 
 describe('Api actions', () => {
   const onFakeAuthorized = jest.fn();
   const api = createApi(onFakeAuthorized());
   const mockApi = new MockAdapter(api);
   const middlewares = [thunk.withExtraArgument(api)];
-
+  
   const mockStore = configureMockStore<
-    RootStateType,
-    AnyAction,
-    ThunkDispatch<RootStateType, typeof api, AnyAction>
+  RootStateType,
+  AnyAction,
+  ThunkDispatch<RootStateType, typeof api, AnyAction>
   >(middlewares);
 
   it('should authorization status is «auth» when server return 200', async () => {
@@ -81,41 +86,74 @@ describe('Api actions', () => {
 
     await store.dispatch(logoutAction());
 
-    expect(store.getActions()).toEqual([
-      requireLogout(),
-    ]);
+    expect(store.getActions()).toEqual([requireLogout()]);
     
     expect(Storage.prototype.removeItem).toBeCalledTimes(1);
     expect(Storage.prototype.removeItem).toBeCalledWith('six-cities-token');
   });
 
   it('should dispatch getOffersAction when GET /hotels', async () => {
-    const fakeOffers = makeFakeUnadaptedOffers();
+    const fakeUnadaptedOffers = makeFakeUnadaptedOffers();
     const store = mockStore();
     mockApi
       .onGet(ApiRoute.Hotels)
-      .reply(200, fakeOffers);
+      .reply(200, fakeUnadaptedOffers);
 
     await store.dispatch(getOffersAction());
 
-    expect(store.getActions()).toEqual([
-      loadOffers(fakeOffers.map(adaptOfferToClient)),
-    ]);
+    expect(store.getActions()).toEqual([loadOffers(fakeUnadaptedOffers.map(adaptOfferToClient))]);
   });
 
   it('should dispatch getOtherPlacesByIdAction when GET /hotels/id/nearby', async () => {
-    const fakeOtherPlaces = makeFakeUnadaptedOffers();
+    const fakeUnadaptedOtherPlaces = makeFakeUnadaptedOffers();
     const store = mockStore();
     mockApi
       .onGet(`${ApiRoute.Hotels}/1/nearby`)
-      .reply(200, fakeOtherPlaces);
+      .reply(200, fakeUnadaptedOtherPlaces);
 
     await store.dispatch(getOtherPlacesByIdAction(1));
 
-    expect(store.getActions()).toEqual([
-      loadOtherPlacesById(fakeOtherPlaces.map(adaptOfferToClient)),
-    ]);
+    expect(store.getActions()).toEqual([loadOtherPlacesById(fakeUnadaptedOtherPlaces.map(adaptOfferToClient))]);
+  });
+  
+  it('should dispatch getReviewByIdAction when GET /comments/id', async () => {
+    const fakeUnadaptedReviews = makeFakeUnadaptedReviews();
+    const store = mockStore();
+    mockApi
+      .onGet(`${ApiRoute.Comments}/1`)
+      .reply(200, fakeUnadaptedReviews);
+
+    await store.dispatch(getReviewByIdAction(1));
+
+    expect(store.getActions()).toEqual([loadReviewsById(fakeUnadaptedReviews.map(adaptReviewToClient))]);
+  });
+  
+  it('should dispatch updateFavoritesAction when POST /favorite/id/status', async () => {
+    const fakeUnadaptedOffer = makeFakeUnadaptedOffer();
+    const store = mockStore();
+    mockApi
+      .onPost(`${ApiRoute.Favorites}/1/1`)
+      .reply(200, fakeUnadaptedOffer);
+
+    await store.dispatch(updateFavoritesAction(1, 1))
+      .then(() => adaptOfferToClient(fakeUnadaptedOffer))
+      .then((offer) => expect(store.getActions()).toEqual([updateFavorites(offer)]));
   });
 
-  
+  it('should dispatch postReviewAction when POST /comments/id', async () => {
+    const fakeUnadaptedReviews = makeFakeUnadaptedReviews();
+    const fakeComment = {
+      comment: 'text',
+      rating: '5',
+    };
+
+    const store = mockStore();
+    mockApi
+      .onPost(`${ApiRoute.Comments}/1`)
+      .reply(200, fakeUnadaptedReviews);
+
+    await store.dispatch(postReviewAction(fakeComment, 1))
+      .then(() => fakeUnadaptedReviews.map((review) => adaptReviewToClient(review)))
+      .then((reviews) => expect(store.getActions()).toEqual([loadReviewsById(reviews)]));
+  });
 });
