@@ -9,12 +9,14 @@ import {
   loadOffers,
   redirectToRoute,
   requireAuthorization,
+  requireLogout,
   setUserData
 } from './action';
 import {
   getOffersAction,
   checkAuthAction,
   loginAction,
+  logoutAction,
 } from './api-actions';
 import {AuthDataType} from '../types/auth-data';
 import {makeFakeUnadaptedOffers} from '../utils/mocks';
@@ -80,6 +82,23 @@ describe('Api actions', () => {
     expect(store.getActions()).toEqual([
       loadOffers(fakeOffers.map(adaptOfferToClient)),
     ]);
-  })
+  });
+
+  it('should dispatch requireLogout when Delete /logout', async () => {
+    const store = mockStore();
+    Storage.prototype.removeItem = jest.fn();
+    mockApi
+      .onDelete(ApiRoute.Logout)
+      .reply(204);
+
+    await store.dispatch(logoutAction());
+
+    expect(store.getActions()).toEqual([
+      requireLogout(),
+    ]);
+    
+    expect(Storage.prototype.removeItem).toBeCalledTimes(1);
+    expect(Storage.prototype.removeItem).toBeCalledWith('six-cities-token');
+  });
 
 });
