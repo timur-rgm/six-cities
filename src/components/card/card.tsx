@@ -45,12 +45,9 @@ export default function Card({offer, onArticleCLick, setActiveOfferId}: CardType
           </div>
 
           <button
-            className={
-              `place-card__bookmark-button button ${isFavorite &&
-              `place-card__bookmark-button--active`}`
-            }
-            type="button"
             onClick={() => dispatch(updateFavoritesAction(id, Number(!isFavorite)))}
+            className={`place-card__bookmark-button button ${isFavorite && `place-card__bookmark-button--active`}`}
+            type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>

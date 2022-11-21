@@ -10,11 +10,12 @@ export default function CitiesList(): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
 
   return (
-    <ul className="locations__list tabs__list">
+    <ul className="locations__list tabs__list" data-testid="cities-list">
       {Object.keys(Cities).map((name, i) => 
         <li
           className="locations__item"
           key={name+i}
+          data-testid="cities-item"
         >
           <Link
             to="/"
@@ -26,5 +27,5 @@ export default function CitiesList(): JSX.Element {
         </li>
       )}
     </ul>
-  )
-}
+  );
+};

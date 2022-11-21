@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import Header from '../header/header';
 import CitiesList from '../cities-list/cities-list';
+import {AppRoute} from '../../const';
 
 export default function Error() {
   return (
@@ -21,7 +22,7 @@ export default function Error() {
               <div className="cities__status-wrapper tabs__content">
                 <b className="cities__status">404</b>
                 <p className="cities__status-description">Sorry, the page not found</p>
-                <Link to="/">To main page</Link>
+                <Link to={AppRoute.Root} data-testid="link">To main page</Link>
               </div>
             </section>
             <div className="cities__right-section"></div>
