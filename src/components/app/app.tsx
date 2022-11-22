@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux';
 import {getOffers, getLoadedOffersStatus} from '../../store/data/selectors';
 import {Route, Routes} from 'react-router-dom'
-import HistoryRouter from '../history-router/history-router';
+
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 import Main from '../main/main';
@@ -20,19 +20,17 @@ function App(): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route path={AppRoute.Root} element={<Main />} />
-        <Route path={AppRoute.Login} element={<Login />} />
-        <Route path='/offer/:offerId' element={<Offer />} />
-        <Route path={AppRoute.Favorites} element={
-          <PrivateRoute>
-            <FavoritesList />
-          </PrivateRoute>
-        } />
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </HistoryRouter>
+    <Routes>
+      <Route path={AppRoute.Root} element={<Main />} />
+      <Route path={AppRoute.Login} element={<Login />} />
+      <Route path='/offer/:offerId' element={<Offer />} />
+      <Route path={AppRoute.Favorites} element={
+        <PrivateRoute>
+          <FavoritesList />
+        </PrivateRoute>
+      } />
+      <Route path="*" element={<Error />} />
+    </Routes>
   );
 }
 
