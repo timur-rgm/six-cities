@@ -3,8 +3,6 @@ import {useRef, FormEvent} from "react";
 import {loginAction} from '../../store/api-actions';
 import {AppDispatch} from '../../types/state';
 
-
-
 function Login(): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
 

@@ -8,7 +8,6 @@ import {AppDispatch} from '../../types/state';
 function Header() {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const user = useSelector(getUserData);
-
   const dispatch: AppDispatch = useDispatch();
   
   return (
@@ -23,7 +22,7 @@ function Header() {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
-            <nav className="header__nav">
+            <nav className="header__nav" data-testid="header-nav">
               {authorizationStatus === AuthorizationStatus.Auth 
                 ? <ul className="header__nav-list">
                     <li className="header__nav-item user">

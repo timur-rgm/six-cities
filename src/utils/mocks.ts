@@ -8,7 +8,7 @@ import {
   date,
 } from 'faker';
 import {OffersType, OfferType, UnadaptedOffersType, UnadaptedOfferType} from '../types/offers';
-import {ReviewsType, UnadaptedReviewsType, UnadaptedReviewType} from '../types/reviews';
+import {ReviewType, ReviewsType, UnadaptedReviewsType, UnadaptedReviewType} from '../types/reviews';
 
 export const makeFakeOffer = (): OfferType => {
   return {
@@ -156,6 +156,16 @@ export const makeFakeUnadaptedReview = (): UnadaptedReviewType => {
       is_pro: datatype.boolean(),
       name: name.firstName(),
     }
+  }
+};
+
+export const makeFakeReview = (): ReviewType => {
+  return {
+    avatarSrc: image.avatar(),
+    userName: name.firstName(),
+    reviewRate: datatype.number(5),
+    reviewDate: date.future.toString(),
+    reviewText: lorem.paragraph(),
   }
 };
 
