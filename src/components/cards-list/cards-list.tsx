@@ -11,7 +11,7 @@ function CardsList(): JSX.Element {
   const navigate = useNavigate();
   
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="cities__places-list places__list tabs__content" data-testid="places-list">
       {offers.map((offer) => 
         <Card
           offer={offer}

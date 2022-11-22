@@ -3,8 +3,6 @@ import {useRef, FormEvent} from "react";
 import {loginAction} from '../../store/api-actions';
 import {AppDispatch} from '../../types/state';
 
-
-
 function Login(): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
 
@@ -35,7 +33,7 @@ function Login(): JSX.Element {
           </div>
         </div>
       </header>
-      <main className="page__main page__main--login">
+      <main className="page__main page__main--login" data-testid="login">
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>

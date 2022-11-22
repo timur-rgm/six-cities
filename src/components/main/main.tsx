@@ -5,24 +5,21 @@ import CitiesList from '../cities-list/cities-list';
 import Sorting from '../sorting/sorting';
 import CardsList from '../cards-list/cards-list';
 import Map from '../map/map';
-import {Cities} from '../../const';
 import Header from '../header/header';
 
-function Main(): JSX.Element {
+export default function Main(): JSX.Element {
   const offers = useSelector(getOffersByCity);
   const currentCity = useSelector(getCurrentCity);
   
   return (
     <div className="page page--gray page--main">
       <Header />
-      <main className="page__main page__main--index">
+      <main className="page__main page__main--index" data-testid="main">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <CitiesList
-                cities={Cities}
-              />
+              <CitiesList />
             </ul>
           </section>
         </div>
@@ -45,5 +42,3 @@ function Main(): JSX.Element {
     </div>
   );
 };
-
-export default Main;

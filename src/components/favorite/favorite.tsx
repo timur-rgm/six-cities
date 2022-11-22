@@ -9,13 +9,13 @@ type FavoriteType = {
   favoritesByCity: OffersType;
 }
 
-function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
+export default function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
 
   return (
-    <div className="favorites__places">
+    <div className="favorites__places" data-testid="favorites-places">
       {favoritesByCity.map(({id, image, price, isFavorite, rate, title, type}) => 
-        <article className="favorites__card place-card" key={id}>
+        <article className="favorites__card place-card" key={id} data-testid="favorite-card">
           <div className="favorites__image-wrapper place-card__image-wrapper">
             <a href="#">
               <img className="place-card__image" src={image} width="150" height="110" alt="Place image" />
@@ -56,7 +56,5 @@ function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
         </article>
       )}
     </div>
-  )
+  );
 };
-
-export default Favorite;
