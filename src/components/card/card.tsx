@@ -3,14 +3,14 @@ import {AppDispatch} from '../../types/state';
 import {updateFavoritesAction} from '../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {OfferType} from '../../types/offers';
+import {AppRoute} from '../../const';
 
 type CardType = {
   offer: OfferType,
-  onArticleCLick: () => void,
   setActiveOfferId: (id: number) => void,
 }
 
-export default function Card({offer, onArticleCLick, setActiveOfferId}: CardType): JSX.Element {
+function Card({offer, setActiveOfferId}: CardType): JSX.Element {
   const {id, image, title, isPremium, isFavorite, type, price, rate} = offer;
   const dispatch: AppDispatch = useDispatch();
 
@@ -19,6 +19,7 @@ export default function Card({offer, onArticleCLick, setActiveOfferId}: CardType
       className="cities__place-card place-card"
       onMouseEnter={() => setActiveOfferId(id)}
       onMouseOut={() => setActiveOfferId(0)}
+      data-testid="card-article"
     >
       {isPremium &&
       <div className="place-card__mark">
@@ -63,12 +64,18 @@ export default function Card({offer, onArticleCLick, setActiveOfferId}: CardType
           </div>
         </div>
 
-        <h2 className="place-card__name" onClick={onArticleCLick}>
-          <Link to="#">{title}</Link>
-        </h2>
+        <Link
+          to={`${AppRoute.Offer}/${id}`}
+          className="place-card__name"
+          data-testid="card-title"
+        >
+          {title}
+        </Link>
         
         <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
 };
+
+export default Card;
