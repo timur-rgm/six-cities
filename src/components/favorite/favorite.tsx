@@ -9,7 +9,7 @@ type FavoriteType = {
   favoritesByCity: OffersType;
 }
 
-export default function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
+function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
 
   return (
@@ -47,6 +47,7 @@ export default function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
             <h2 className="place-card__name">
               <Link
                 to={`${AppRoute.Offer}/${id}`}
+                data-testid="favorite-card-link"
               >
                 {title}
               </Link>
@@ -58,3 +59,5 @@ export default function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
     </div>
   );
 };
+
+export default Favorite;

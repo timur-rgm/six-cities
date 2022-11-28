@@ -1,4 +1,6 @@
+import {Link} from 'react-router-dom';
 import Header from '../header/header';
+import {AppRoute} from '../../const';
 
 function FavoritesEmpty() {
   return (
@@ -16,9 +18,9 @@ function FavoritesEmpty() {
         </div>
       </main>
       <footer className="footer">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to={AppRoute.Root} data-testid="logo-link">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        </Link>
       </footer>
     </div>
   )

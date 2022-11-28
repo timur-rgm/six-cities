@@ -29,6 +29,7 @@ function Header() {
                       <Link
                         className="header__nav-link header__nav-link--profile"
                         to={AppRoute.Favorites}
+                        data-testid="header-user-link"
                       >
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
@@ -38,8 +39,9 @@ function Header() {
                     <li className="header__nav-item">
                       <Link
                         className="header__nav-link"
-                        onClick={() => dispatch(logoutAction())}
+                        data-testid="header-signout-link"
                         to={AppRoute.Root}
+                        onClick={() => dispatch(logoutAction())}
                       >
                         <span className="header__signout">Sign out</span>
                       </Link>
@@ -49,6 +51,7 @@ function Header() {
                 : <Link
                     className="header__nav-link"
                     to={AppRoute.Login}
+                    data-testid="header-signin-link"
                   >
                     <span className="header__signout">Sign in</span>
                   </Link>

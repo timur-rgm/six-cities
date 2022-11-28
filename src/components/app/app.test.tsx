@@ -1,3 +1,4 @@
+import React from 'react';
 import {render, screen} from '@testing-library/react';
 import HistoryRouter from '../history-router/history-router';
 import {createMemoryHistory} from 'history';
@@ -39,11 +40,19 @@ const fakeApp = (
 );
 
 describe('Aplication routing', () => {
+  beforeAll(() => {
+    jest.spyOn(React, 'useEffect').mockImplementation((f) => f());
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should render Main when user navigate to "/"', () => {
     history.push(AppRoute.Root)
     render(fakeApp);
     
-    expect(screen.getByTestId('main')).toBeInTheDocument();
+    expect(screen.getByTestId('main-container')).toBeInTheDocument();
   });
   
   it('should render Login when user navigate to "/login"', () => {
@@ -53,21 +62,19 @@ describe('Aplication routing', () => {
     expect(screen.getByTestId('login')).toBeInTheDocument();
   });
 
-  // TypeError: Actions must be plain objects. Use custom middleware for async actions.
-  // it('should render Offer when user navigate to "/offer/:offerId"', () => {
-  //   history.push(`${AppRoute.Offer}/1`)
-  //   render(fakeApp);
+  it('should render Offer when user navigate to "/offer/:offerId"', () => {
+    history.push(`${AppRoute.Offer}/1`)
+    render(fakeApp);
     
-  //   expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
-  // });
+    expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
+  });
 
-  // TypeError: Actions must be plain objects. Use custom middleware for async actions.
-  // it('should render Favorites when user navigate to "/favorites"', () => {
-    //   history.push(AppRoute.Favorites)
-    //   render(fakeApp);
+  it('should render Favorites when user navigate to "/favorites"', () => {
+      history.push(AppRoute.Favorites)
+      render(fakeApp);
     
-    //   expect(screen.getByText(/Saved listing/i)).toBeInTheDocument();
-    // });
+      expect(screen.getByText(/Saved listing/i)).toBeInTheDocument();
+    });
     
     it('should render Error when user navigate to non-existent route', () => {
       history.push('/non-existent-route')

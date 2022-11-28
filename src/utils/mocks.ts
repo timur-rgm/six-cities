@@ -12,7 +12,7 @@ import {ReviewType, ReviewsType, UnadaptedReviewsType, UnadaptedReviewType} from
 
 export const makeFakeOffer = (): OfferType => {
   return {
-    id: datatype.number(100),
+    id: 1,
     image: image.city(),
     title: lorem.paragraph(),
     description: lorem.paragraph(),
@@ -78,11 +78,11 @@ export const makeFakeUnadaptedOffer = (): UnadaptedOfferType => {
 export const makeFakeOffers = (): OffersType => {
   return [
     {
-      id: datatype.number(100),
+      id: 1,
       image: image.city(),
       title: lorem.paragraph(),
       description: lorem.paragraph(),
-      images: [image.city(), image.city(), image.city()],
+      images: [image.city(), image.city(), image.city(), image.city(), image.city(), image.city()],
       isPremium: datatype.boolean(),
       type: random.word(),
       price: datatype.number(300),
@@ -100,7 +100,7 @@ export const makeFakeOffers = (): OffersType => {
         lat: datatype.number({max: 50, precision: 0.00001}),
         lng: datatype.number({max: 50, precision: 0.00001}),
       },
-      city: address.city(),
+      city: 'Paris',
     },
   ]
 };

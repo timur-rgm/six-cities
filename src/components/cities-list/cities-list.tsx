@@ -21,6 +21,7 @@ export default function CitiesList(): JSX.Element {
             to="/"
             onClick={() => dispatch(changeCity(name))}
             className={`locations__item-link tabs__item ${name === currentCity && `tabs__item--active`}`}
+            data-testid={`cities-list-link-${name.toLowerCase()}`}
           >
             <span>{name}</span>
           </Link>
