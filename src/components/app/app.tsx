@@ -1,9 +1,7 @@
 import {useSelector} from 'react-redux';
-import {getOffers, getLoadedOffersStatus} from '../../store/data/selectors';
+import {getLoadedOffersStatus} from '../../store/data/selectors';
 import {Route, Routes} from 'react-router-dom'
-
 import PrivateRoute from '../private-route/private-route';
-import browserHistory from '../../browser-history';
 import Main from '../main/main';
 import MainEmpty from '../main-empty/main-empty';
 import FavoritesList from '../favorites-list/favorites-list';

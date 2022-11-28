@@ -4,9 +4,8 @@ import {postReviewAction} from '../../store/api-actions';
 import {getActiveOfferId} from '../../store/process/selectors';
 import {AppDispatch} from "../../types/state";
 
-function reviewForm() {
+function ReviewForm() {
   const activeOfferId = useSelector(getActiveOfferId);
-
   const dispatch: AppDispatch = useDispatch();
 
   const [comment, setComment] = useState({review: '', rating: ``});
@@ -45,6 +44,7 @@ function reviewForm() {
         evt.preventDefault();
         handleSubmit(evt);
       }}
+      data-testid="reviews-form"
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -59,8 +59,9 @@ function reviewForm() {
                 id={`${value}-stars`}
                 type="radio"
                 onChange={handleFieldChange}
+                data-testid={`review-form-input-${value}`}
               />
-              <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
+              <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title="perfect" data-testid={`star-image-${value}`}>
                 <svg className="form__star-image" width="37" height="33">
                   <use xlinkHref="#icon-star"></use>
                 </svg>
@@ -88,4 +89,4 @@ function reviewForm() {
   );
 }
 
-export default reviewForm;
+export default ReviewForm;

@@ -64,13 +64,11 @@ function Card({offer, setActiveOfferId}: CardType): JSX.Element {
           </div>
         </div>
 
-        <Link
-          to={`${AppRoute.Offer}/${id}`}
-          className="place-card__name"
-          data-testid="card-title"
-        >
-          {title}
-        </Link>
+        <h2 className="place-card__name">
+          <Link to={`${AppRoute.Offer}/${id}`} data-testid="card-title">
+            {title}
+          </Link>
+        </h2>
         
         <p className="place-card__type">{type}</p>
       </div>

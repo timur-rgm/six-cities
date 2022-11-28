@@ -7,18 +7,23 @@ import {AppDispatch} from '../../types/state';
 
 function Sorting(): JSX.Element {
   const sortingType = useSelector(getCurrentSortingType);
-
   const dispatch: AppDispatch = useDispatch();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form
+      className="places__sorting"
+      action="#"
+      method="get"
+      data-testid="sorting-form"
+    >
       <span className="places__sorting-caption">Sort by</span>
       <span
         onClick={() => setIsOpen(!isOpen)}
         className="places__sorting-type"
         tabIndex={0}
+        data-testid="sorting-type"
       >
         {sortingType}
         <svg className="places__sorting-arrow" width="7" height="4">
@@ -27,9 +32,11 @@ function Sorting(): JSX.Element {
       </span>
 
       <ul
-        className={`places__options places__options--custom ${isOpen && `places__options--opened`}`}
+        className={
+          `places__options places__options--custom
+          ${isOpen && `places__options--opened`}`
+        }
       >
-
         {Object.values(SortingType).map((name, i) => 
           <li
             onClick={() => {
@@ -39,14 +46,14 @@ function Sorting(): JSX.Element {
             className={`places__option ${sortingType === name && `places__option--active`}`}
             tabIndex={0}
             key={name+i}
+            data-testid="sorting-list-item"
           >
             {name}
           </li>
         )}
-
       </ul>
     </form>
-  )
-}
+  );
+};
 
 export default Sorting;

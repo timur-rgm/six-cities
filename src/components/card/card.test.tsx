@@ -7,7 +7,6 @@ import Card from './card';
 import {makeFakeOffer} from '../../utils/mocks';
 import {AppRoute} from '../../const';
 import {Route, Routes} from 'react-router-dom';
-import {setActiveOfferId} from '../../store/action';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
@@ -15,10 +14,6 @@ const mockStore = configureMockStore();
 const fakeOffer = makeFakeOffer();
 
 describe('Component: Card', () => {
-  beforeEach(() => {
-    history.push(AppRoute.Root);
-  });
-
   it('should render correctly', () => {
     render(
       <Provider store={mockStore({})}>
@@ -34,7 +29,9 @@ describe('Component: Card', () => {
     expect(screen.getByAltText(/Place image/i)).toBeInTheDocument();
   });
 
-  it('when user click on article title should redirect', () => {
+  it('should redirect to "/offer/id" when user click on article title', () => {
+    history.push(AppRoute.Root);
+
     render(
       <Provider store={mockStore({})}>
         <HistoryRouter history={history}>
@@ -45,32 +42,22 @@ describe('Component: Card', () => {
                 setActiveOfferId={jest.fn()}
               />
             } />
-            <Route path={`${AppRoute.Offer}/${fakeOffer.id}`} element={
-              <h1>Offer page</h1>
-            } />
+            <Route path={`${AppRoute.Offer}/${fakeOffer.id}`} element={<h1>This is Offer page</h1>} />
           </Routes>
-          
         </HistoryRouter>
       </Provider>
     );
 
+    expect(screen.queryByText(/This is Offer page/i)).not.toBeInTheDocument();
     fireEvent.click(screen.getByTestId('card-title'));
-    expect(screen.getByText(/Offer page/i)).toBeInTheDocument();
+    expect(screen.getByText(/This is Offer page/i)).toBeInTheDocument();
   });
 
-  it('should dispatch setActiveOfferId when user enter mouse on article', () => {
-    const store = mockStore({
-      PROCESS: {
-        activeOfferId: 0,
-      }
-    });
-
-    const articleMouseEnterHandle = jest.fn(
-      () => store.dispatch(setActiveOfferId(1))
-    );
+  it('should set activeOfferId when user enter mouse on article', () => {
+    const articleMouseEnterHandle = jest.fn();
 
     render(
-      <Provider store={store}>
+      <Provider store={mockStore({})}>
         <HistoryRouter history={history}>
           <Card 
             offer={fakeOffer}
@@ -82,6 +69,5 @@ describe('Component: Card', () => {
 
     fireEvent.mouseEnter(screen.getByTestId('card-article'));
     expect(articleMouseEnterHandle).toBeCalled();
-    expect(store.getActions()).toEqual([setActiveOfferId(1)]);
   });
 });

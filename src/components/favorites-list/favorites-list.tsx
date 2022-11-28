@@ -44,6 +44,7 @@ function FavoritesList(): JSX.Element {
                       <Link
                         className="locations__item-link"
                         to={AppRoute.Root}
+                        data-testid={`favorites-list-link`}
                       >
                         <span>{city}</span>
                       </Link>

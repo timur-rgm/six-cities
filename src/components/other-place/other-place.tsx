@@ -7,11 +7,10 @@ import {AppRoute} from '../../const';
 
 type OtherPlaceType = {
   offer: OfferType,
-  onArticleCLick: () => void;
 }
 
 export default function OtherPlace(props: OtherPlaceType): JSX.Element {
-  const {offer, onArticleCLick} = props;
+  const {offer} = props;
   const {id, image, title, type, isFavorite, price, rate} = offer;
 
   const dispatch: AppDispatch = useDispatch();
@@ -21,8 +20,7 @@ export default function OtherPlace(props: OtherPlaceType): JSX.Element {
       className="near-places__card place-card"
     >
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <Link
-          to="#">
+        <Link to="#">
           <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
         </Link>
       </div>
@@ -49,13 +47,11 @@ export default function OtherPlace(props: OtherPlaceType): JSX.Element {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2
-          className="place-card__name"
-          onClick={onArticleCLick}
-        >
+        
+        <h2 className="place-card__name">
           <Link
             to={`${AppRoute.Offer}/${id}`}
-            preventScrollReset={false}
+            data-testid="other-place-title-link"
           >
             {title}
           </Link>
