@@ -30,7 +30,7 @@ export function adaptOfferToClient(offer: UnadaptedOfferType): OfferType {
   }
 
   return adaptedOffer;
-}
+};
 
 export function adaptReviewToClient(review: UnadaptedReviewType): ReviewType {
   const adaptedReview = {
@@ -42,7 +42,7 @@ export function adaptReviewToClient(review: UnadaptedReviewType): ReviewType {
   }
 
   return adaptedReview;
-}
+};
 
 export function sortOffers(offers: OffersType, sortingType: SortingType) {
   switch (sortingType) {
@@ -55,4 +55,11 @@ export function sortOffers(offers: OffersType, sortingType: SortingType) {
     default:
       return offers;
   }
-}
+};
+
+export function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = date.toLocaleString(`en-us`, {month: `long`});
+  return month + ` ` + year;
+};
