@@ -10,6 +10,7 @@ import App from './components/app/app';
 import {createApi} from './services/api';
 import {AuthorizationStatus} from './const';
 import {redirect} from './store/middlewares/redirect';
+import ScrollToTop from './helpers/scroll-to-top';
 
 const api = createApi(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth))
@@ -35,6 +36,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <HistoryRouter history={browserHistory}>
+      <ScrollToTop />
       <App />
     </HistoryRouter>
   </Provider>

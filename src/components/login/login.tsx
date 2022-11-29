@@ -1,7 +1,11 @@
-import {useDispatch} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {useRef, FormEvent} from "react";
+import {useDispatch} from 'react-redux';
 import {loginAction} from '../../store/api-actions';
 import {AppDispatch} from '../../types/state';
+import {AppRoute, Cities} from '../../const';
+import {getRandomCity} from '../../utils/utils';
+import { changeCity } from '../../store/action';
 
 function Login(): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
@@ -20,15 +24,17 @@ function Login(): JSX.Element {
     };
   }
 
+  const randomCity = getRandomCity(Cities);
+
   return (
     <div className="page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to={AppRoute.Root}>
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -72,9 +78,13 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link
+                to={AppRoute.Root}
+                className="locations__item-link"
+                onClick={() => dispatch(changeCity(randomCity))}
+              >
+                <span>{randomCity}</span>
+              </Link>
             </div>
           </section>
         </div>

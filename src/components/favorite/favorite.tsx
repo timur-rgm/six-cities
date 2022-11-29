@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {AppDispatch} from '../../types/state';
 import {OffersType} from '../../types/offers';
 import {AppRoute} from '../../const';
+import {toUpperCaseFirstLetter} from '../../utils/utils';
 
 type FavoriteType = {
   favoritesByCity: OffersType;
@@ -17,9 +18,9 @@ function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
       {favoritesByCity.map(({id, image, price, isFavorite, rate, title, type}) => 
         <article className="favorites__card place-card" key={id} data-testid="favorite-card">
           <div className="favorites__image-wrapper place-card__image-wrapper">
-            <a href="#">
+            <Link to={`${AppRoute.Offer}/${id}`}>
               <img className="place-card__image" src={image} width="150" height="110" alt="Place image" />
-            </a>
+            </Link>
           </div>
           <div className="favorites__card-info place-card__info">
             <div className="place-card__price-wrapper">
@@ -52,7 +53,7 @@ function Favorite({favoritesByCity}: FavoriteType): JSX.Element {
                 {title}
               </Link>
             </h2>
-            <p className="place-card__type">{type}</p>
+            <p className="place-card__type">{toUpperCaseFirstLetter(type)}</p>
           </div>
         </article>
       )}

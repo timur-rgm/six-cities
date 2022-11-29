@@ -5,7 +5,7 @@ import ReviewForm from "../review-form/review-form";
 import LoadingScreen from "../loading-screen/loading-screen";
 import {getReviewByIdAction} from "../../store/api-actions";
 import {AuthorizationStatus} from '../../const';
-import {getReviews, getLoadedReviewsStatus} from '../../store/data/selectors';
+import {getLoadedReviewsStatus, getSortedByDateReviews} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {AppDispatch} from "../../types/state";
 
@@ -14,7 +14,7 @@ type ReviewListType = {
 };
 
 function ReviewList({id}: ReviewListType): JSX.Element {
-  const reviews = useSelector(getReviews);
+  const reviews = useSelector(getSortedByDateReviews);
   const isReviewsLoaded = useSelector(getLoadedReviewsStatus);
   const authorizationStatus = useSelector(getAuthorizationStatus);
 

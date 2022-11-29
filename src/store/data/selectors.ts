@@ -3,10 +3,10 @@ import {NameSpace, RootStateType} from '../root-reducer';
 import {getCurrentCity, getCurrentSortingType} from '../process/selectors';
 import {OffersType, OfferType} from '../../types/offers';
 import {ReviewsType} from '../../types/reviews';
-import {sortOffers} from '../../utils';
+import {sortOffers, convertDateStringToNumber, } from '../../utils/utils';
 
 export const getOffers = (state: RootStateType): OffersType => state[NameSpace.data].offers;
-export const getOfferById = (id: number) => (state: RootStateType): OfferType => state[NameSpace.data].offers[id];
+export const getOfferById = (id: number) => (state: RootStateType): OfferType => state[NameSpace.data].offers[id - 1];
 export const getLoadedOffersStatus = (state: RootStateType): boolean => state[NameSpace.data].isOffersLoaded;
 export const getOtherPlaces = (state: RootStateType): OffersType => state[NameSpace.data].otherPlaces;
 export const getLoadedOtherPlacesStatus = (state: RootStateType): boolean => state[NameSpace.data].isOtherPlacesLoaded;
@@ -18,6 +18,11 @@ export const getLoadedFavoritesStatus = (state: RootStateType): boolean => state
 export const getOffersByCity = createSelector(
   [getOffers, getCurrentCity],
   (allOffers, currentCity) => allOffers.filter((offer) => offer.city === currentCity)
+);
+
+export const getSortedByDateReviews = createSelector(
+  [getReviews],
+  (reviews) => reviews.slice(0).sort((a, b) => convertDateStringToNumber(b.reviewDate) - convertDateStringToNumber(a.reviewDate))
 );
 
 export const getOffersByCityAndSorting = createSelector(

@@ -1,3 +1,4 @@
+import {useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {getOfferById} from '../../store/data/selectors';
 import {setActiveOfferId} from '../../store/action';
@@ -7,11 +8,11 @@ import Header from '../header/header';
 import Map from '../map/map';
 import ReviewList from '../review-list/review-list';
 import OtherPlacesList from '../other-places-list/other-places-list';
-import {useParams} from 'react-router-dom';
+import {toUpperCaseFirstLetter} from '../../utils/utils';
 
 function Offer(): JSX.Element {
   const {offerId} = useParams();
-  const offer = useSelector(getOfferById(Number(offerId) - 1));
+  const offer = useSelector(getOfferById(Number(offerId)));
   const dispatch: AppDispatch = useDispatch();
   
   dispatch(setActiveOfferId(Number(offerId)));
@@ -86,7 +87,7 @@ function Offer(): JSX.Element {
 
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {type}
+                  {toUpperCaseFirstLetter(type)}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} Bedrooms
@@ -139,7 +140,7 @@ function Offer(): JSX.Element {
                   </p>
                 </div>
               </div>
-              <ReviewList id={Number(offerId) - 1}/>
+              <ReviewList id={Number(offerId)}/>
             </div>
           </div>
 
@@ -151,7 +152,7 @@ function Offer(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OtherPlacesList id={Number(offerId) - 1}/>
+            <OtherPlacesList id={Number(offerId)}/>
           </section>
         </div>
       </main>

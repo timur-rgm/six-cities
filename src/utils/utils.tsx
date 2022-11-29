@@ -1,6 +1,6 @@
-import {SortingType} from './const';
-import {OfferType, OffersType, UnadaptedOfferType} from './types/offers';
-import {ReviewType, UnadaptedReviewType} from './types/reviews';
+import {CitiesType, SortingType} from '../const';
+import {OfferType, OffersType, UnadaptedOfferType} from '../types/offers';
+import {ReviewType, UnadaptedReviewType} from '../types/reviews';
 
 export function adaptOfferToClient(offer: UnadaptedOfferType): OfferType {
   const adaptedOffer = {
@@ -30,7 +30,7 @@ export function adaptOfferToClient(offer: UnadaptedOfferType): OfferType {
   }
 
   return adaptedOffer;
-}
+};
 
 export function adaptReviewToClient(review: UnadaptedReviewType): ReviewType {
   const adaptedReview = {
@@ -42,7 +42,7 @@ export function adaptReviewToClient(review: UnadaptedReviewType): ReviewType {
   }
 
   return adaptedReview;
-}
+};
 
 export function sortOffers(offers: OffersType, sortingType: SortingType) {
   switch (sortingType) {
@@ -55,4 +55,31 @@ export function sortOffers(offers: OffersType, sortingType: SortingType) {
     default:
       return offers;
   }
+};
+
+export function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = date.toLocaleString(`en-us`, {month: `long`});
+  return month + ` ` + year;
+};
+
+export const convertDateStringToNumber = (string: string) => {
+  const dateNumber = new Date(string)[Symbol.toPrimitive]('number');
+  return dateNumber;
+}
+
+export function toUpperCaseFirstLetter(string: string) {
+  return string[0].toUpperCase() + string.slice(1);
+};
+
+function getRandomIntegerInclusive(min: number, max: number) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+
+  return Number(Math.floor(Math.random() * (max - min + 1)) + min);
+};
+
+export function getRandomCity(cities: CitiesType) {
+  return Object.keys(cities)[getRandomIntegerInclusive(0, Object.keys(cities).length - 1)]
 }

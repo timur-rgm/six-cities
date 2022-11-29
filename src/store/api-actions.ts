@@ -11,7 +11,7 @@ import {
 } from '../store/action';
 import {saveToken, dropToken, TokenType} from '../services/token';
 import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
-import {adaptOfferToClient, adaptReviewToClient} from '../utils';
+import {adaptOfferToClient, adaptReviewToClient} from '../utils/utils';
 import {ThunkActionResultType} from '../types/action';
 import {AuthDataType} from '../types/auth-data';
 import {UnadaptedOfferType} from '../types/offers';

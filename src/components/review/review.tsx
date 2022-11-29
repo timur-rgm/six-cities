@@ -1,4 +1,5 @@
-import {ReviewType} from "../../types/reviews"
+import {ReviewType} from '../../types/reviews';
+import {formatDate} from '../../utils/utils';
 
 type OneReviewType = {
   review: ReviewType,
@@ -34,7 +35,7 @@ export default function Review(props: OneReviewType) {
         <p className="reviews__text">
           {reviewText}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{reviewDate}</time>
+        <time className="reviews__time" dateTime={reviewDate}>{formatDate(reviewDate)}</time>
       </div>
     </li>
   )
