@@ -3,7 +3,9 @@ import {useRef, FormEvent} from "react";
 import {useDispatch} from 'react-redux';
 import {loginAction} from '../../store/api-actions';
 import {AppDispatch} from '../../types/state';
-import {AppRoute} from '../../const';
+import {AppRoute, Cities} from '../../const';
+import {getRandomCity} from '../../utils/utils';
+import { changeCity } from '../../store/action';
 
 function Login(): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
@@ -21,6 +23,8 @@ function Login(): JSX.Element {
       }));
     };
   }
+
+  const randomCity = getRandomCity(Cities);
 
   return (
     <div className="page page--gray page--login">
@@ -74,9 +78,13 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link
+                to={AppRoute.Root}
+                className="locations__item-link"
+                onClick={() => dispatch(changeCity(randomCity))}
+              >
+                <span>{randomCity}</span>
+              </Link>
             </div>
           </section>
         </div>

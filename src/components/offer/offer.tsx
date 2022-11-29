@@ -12,7 +12,7 @@ import {toUpperCaseFirstLetter} from '../../utils/utils';
 
 function Offer(): JSX.Element {
   const {offerId} = useParams();
-  const offer = useSelector(getOfferById(Number(offerId) - 1));
+  const offer = useSelector(getOfferById(Number(offerId)));
   const dispatch: AppDispatch = useDispatch();
   
   dispatch(setActiveOfferId(Number(offerId)));
@@ -140,7 +140,7 @@ function Offer(): JSX.Element {
                   </p>
                 </div>
               </div>
-              <ReviewList id={Number(offerId) - 1}/>
+              <ReviewList id={Number(offerId)}/>
             </div>
           </div>
 
@@ -152,7 +152,7 @@ function Offer(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OtherPlacesList id={Number(offerId) - 1}/>
+            <OtherPlacesList id={Number(offerId)}/>
           </section>
         </div>
       </main>

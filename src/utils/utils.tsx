@@ -1,4 +1,4 @@
-import {SortingType} from '../const';
+import {CitiesType, SortingType} from '../const';
 import {OfferType, OffersType, UnadaptedOfferType} from '../types/offers';
 import {ReviewType, UnadaptedReviewType} from '../types/reviews';
 
@@ -64,6 +64,22 @@ export function formatDate(dateString: string) {
   return month + ` ` + year;
 };
 
+export const convertDateStringToNumber = (string: string) => {
+  const dateNumber = new Date(string)[Symbol.toPrimitive]('number');
+  return dateNumber;
+}
+
 export function toUpperCaseFirstLetter(string: string) {
   return string[0].toUpperCase() + string.slice(1);
 };
+
+function getRandomIntegerInclusive(min: number, max: number) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+
+  return Number(Math.floor(Math.random() * (max - min + 1)) + min);
+};
+
+export function getRandomCity(cities: CitiesType) {
+  return Object.keys(cities)[getRandomIntegerInclusive(0, Object.keys(cities).length - 1)]
+}
