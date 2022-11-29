@@ -1,3 +1,4 @@
+import {useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {getOfferById} from '../../store/data/selectors';
 import {setActiveOfferId} from '../../store/action';
@@ -7,7 +8,7 @@ import Header from '../header/header';
 import Map from '../map/map';
 import ReviewList from '../review-list/review-list';
 import OtherPlacesList from '../other-places-list/other-places-list';
-import {useParams} from 'react-router-dom';
+import {toUpperCaseFirstLetter} from '../../utils/utils';
 
 function Offer(): JSX.Element {
   const {offerId} = useParams();
@@ -86,7 +87,7 @@ function Offer(): JSX.Element {
 
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {type}
+                  {toUpperCaseFirstLetter(type)}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} Bedrooms

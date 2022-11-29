@@ -4,6 +4,7 @@ import {updateFavoritesAction} from '../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {OfferType} from '../../types/offers';
 import {AppRoute} from '../../const';
+import {toUpperCaseFirstLetter} from '../../utils/utils';
 
 type OtherPlaceType = {
   offer: OfferType,
@@ -56,7 +57,7 @@ export default function OtherPlace(props: OtherPlaceType): JSX.Element {
             {title}
           </Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{toUpperCaseFirstLetter(type)}</p>
       </div>
     </article>
   );

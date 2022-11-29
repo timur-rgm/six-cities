@@ -28,7 +28,7 @@ function App(): JSX.Element {
           url={AppRoute.Root}
           children={<Login />}
         />
-      } />
+      }/>
       <Route path='/offer/:offerId' element={<Offer />} />
       <Route path={AppRoute.Favorites} element={
         <PrivateRoute
@@ -36,7 +36,7 @@ function App(): JSX.Element {
           url={AppRoute.Login}
           children={<FavoritesList />}
         />
-      } />
+      }/>
       <Route path="*" element={<Error />} />
     </Routes>
   );

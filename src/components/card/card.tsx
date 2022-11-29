@@ -4,6 +4,7 @@ import {updateFavoritesAction} from '../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {OfferType} from '../../types/offers';
 import {AppRoute} from '../../const';
+import {toUpperCaseFirstLetter} from '../../utils/utils';
 
 type CardType = {
   offer: OfferType,
@@ -70,7 +71,7 @@ function Card({offer, setActiveOfferId}: CardType): JSX.Element {
           </Link>
         </h2>
         
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{toUpperCaseFirstLetter(type)}</p>
       </div>
     </article>
   );

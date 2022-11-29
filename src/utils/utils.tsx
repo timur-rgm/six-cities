@@ -63,3 +63,7 @@ export function formatDate(dateString: string) {
   const month = date.toLocaleString(`en-us`, {month: `long`});
   return month + ` ` + year;
 };
+
+export function toUpperCaseFirstLetter(string: string) {
+  return string[0].toUpperCase() + string.slice(1);
+};
