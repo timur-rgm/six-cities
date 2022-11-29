@@ -1,6 +1,6 @@
-import {SortingType} from './const';
-import {OfferType, OffersType, UnadaptedOfferType} from './types/offers';
-import {ReviewType, UnadaptedReviewType} from './types/reviews';
+import {SortingType} from '../const';
+import {OfferType, OffersType, UnadaptedOfferType} from '../types/offers';
+import {ReviewType, UnadaptedReviewType} from '../types/reviews';
 
 export function adaptOfferToClient(offer: UnadaptedOfferType): OfferType {
   const adaptedOffer = {

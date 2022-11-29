@@ -3,7 +3,7 @@ import {NameSpace, RootStateType} from '../root-reducer';
 import {getCurrentCity, getCurrentSortingType} from '../process/selectors';
 import {OffersType, OfferType} from '../../types/offers';
 import {ReviewsType} from '../../types/reviews';
-import {sortOffers} from '../../utils';
+import {sortOffers} from '../../utils/utils';
 
 export const getOffers = (state: RootStateType): OffersType => state[NameSpace.data].offers;
 export const getOfferById = (id: number) => (state: RootStateType): OfferType => state[NameSpace.data].offers[id];

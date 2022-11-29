@@ -1,5 +1,5 @@
 import {ReviewType} from '../../types/reviews';
-import {formatDate} from '../../utils';
+import {formatDate} from '../../utils/utils';
 
 type OneReviewType = {
   review: ReviewType,

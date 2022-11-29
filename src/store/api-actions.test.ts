@@ -26,7 +26,7 @@ import {
 import {makeFakeUnadaptedOffer, makeFakeUnadaptedOffers, makeFakeUnadaptedReviews} from '../utils/mocks';
 import {AuthDataType} from '../types/auth-data';
 import {RootStateType} from './root-reducer';
-import {adaptOfferToClient, adaptReviewToClient} from '../utils';
+import {adaptOfferToClient, adaptReviewToClient} from '../utils/utils';
 import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
 
 describe('Api actions', () => {
