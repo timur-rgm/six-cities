@@ -4,11 +4,13 @@ SPA-приложение по поиску жилья для путешеств�
 
 ## Стек технологий
 
-<li>
-
-* Пункт 1
-* Пункт 2
-* Пункт 3
+* React
+* TypeScript
+* Redux (Redux Toolkit, React Redux, Redux Thunk)
+* Axios
+* React Router
+* Leaflet
+* Jest, React Testing Library
 
 ---
 
