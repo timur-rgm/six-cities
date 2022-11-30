@@ -2,7 +2,7 @@
 
 SPA-приложение по поиску жилья для путешественников.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/5337091a-fa43-4041-9c74-c5fb2e783fbb/deploy-status)](https://app.netlify.com/sites/spa-six-cities/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5337091a-fa43-4041-9c74-c5fb2e783fbb/deploy-status)](https://spa-six-cities.netlify.app/)
 
 ## Стек технологий
 
