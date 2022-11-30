@@ -7,7 +7,7 @@ type OneReviewType = {
 
 export default function Review(props: OneReviewType) {
   const {review} = props;
-  const {avatarSrc, userName, reviewRate, reviewDate, reviewText} = review;
+  const {userName, reviewRate, reviewDate, reviewText} = review;
 
   return (
     <li className="reviews__item">
@@ -15,7 +15,7 @@ export default function Review(props: OneReviewType) {
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img
             className="reviews__avatar user__avatar"
-            src={avatarSrc}
+            src="/img/avatar-user.jpg"
             width="54"
             height="54"
             alt="Reviews avatar"

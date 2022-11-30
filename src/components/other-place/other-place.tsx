@@ -21,7 +21,7 @@ export default function OtherPlace(props: OtherPlaceType): JSX.Element {
       className="near-places__card place-card"
     >
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <Link to="#">
+        <Link to={`${AppRoute.Offer}/${id}`}>
           <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
         </Link>
       </div>
