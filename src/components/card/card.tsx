@@ -19,7 +19,7 @@ function Card({offer, setActiveOfferId}: CardType): JSX.Element {
     <article
       className="cities__place-card place-card"
       onMouseEnter={() => setActiveOfferId(id)}
-      onMouseOut={() => setActiveOfferId(0)}
+      onMouseLeave={() => setActiveOfferId(0)}
       data-testid="card-article"
     >
       {isPremium &&
@@ -28,7 +28,7 @@ function Card({offer, setActiveOfferId}: CardType): JSX.Element {
       </div>}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to="#">
+        <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
             src={image}
