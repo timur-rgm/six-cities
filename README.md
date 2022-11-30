@@ -1,7 +1,8 @@
 # Проект «Six cities»
 
 SPA-приложение по поиску жилья для путешественников.
-[![Netlify Status](https://api.netlify.com/api/v1/badges/da20b083-019f-4b32-b3a3-2091ebf6a5c2/deploy-status)](https://sixcitiesspa.netlify.app/)
+
+[![Netlify Status]()](https://sixcitiesspa.netlify.app/)
 
 ## Стек технологий
 
