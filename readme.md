@@ -2,6 +2,7 @@
 
 SPA-приложение по поиску жилья для путешественников.
 
+Демонстрация -
 [![Netlify Status](https://api.netlify.com/api/v1/badges/5337091a-fa43-4041-9c74-c5fb2e783fbb/deploy-status)](https://spa-six-cities.netlify.app/)
 
 ## Стек технологий
@@ -13,6 +14,8 @@ SPA-приложение по поиску жилья для путешеств�
 * React Router
 * Leaflet
 * Jest, React Testing Library
+
+![six-cities](https://user-images.githubusercontent.com/66139449/205214713-2bec07d9-24be-4901-9d5e-ddc0930b3a07.jpg)
 
 <!-- ---
 
